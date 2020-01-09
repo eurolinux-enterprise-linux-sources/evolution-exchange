@@ -1,0 +1,26 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c.no-offline-sync-gal-crash evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c.no-offline-sync-gal-crash	2013-09-18 17:12:04.708052199 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c	2013-09-18 17:12:04.765052199 +0200
+@@ -2001,6 +2001,8 @@ ebews_start_gal_sync (gpointer data)
+ 	cbews = (EBookBackendEws *) data;
+ 	priv = cbews->priv;
+ 
++	g_return_val_if_fail (priv->summary != NULL, FALSE);
++
+ 	esource = e_book_backend_get_source (E_BOOK_BACKEND (cbews));
+ 	timeout_str = e_source_get_property (esource, "timeout");
+ 
+@@ -2612,11 +2614,11 @@ delta_thread (gpointer data)
+ 	timeout.tv_usec = 0;
+ 
+ 	while (TRUE)	{
+-		gboolean succeeded;
++		gboolean succeeded = TRUE;
+ 
+ 		if (!priv->is_gal)
+ 			succeeded = ebews_start_sync (ebews);
+-		else
++		else if (priv->summary) /* NULL means the GAL is not marked for offline sync */
+ 			succeeded = ebews_start_gal_sync (ebews);
+ 
+ 		g_mutex_lock (priv->dlock->mutex);

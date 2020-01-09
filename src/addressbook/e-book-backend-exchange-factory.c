@@ -21,56 +21,35 @@
 #include <config.h>
 #endif
 
-#include <pthread.h>
 #include <string.h>
 
-#include "e-book-backend-exchange-factory.h"
+#include <camel/camel.h>
+#include <libebackend/e-data-server-module.h>
+#include <libedata-book/e-book-backend-factory.h>
+
 #include "e-book-backend-exchange.h"
+#include "e-book-backend-gal.h"
 
-static void
-e_book_backend_exchange_factory_instance_init (EBookBackendExchangeFactory *factory)
+E_BOOK_BACKEND_FACTORY_SIMPLE (exchange, Exchange, e_book_backend_exchange_new)
+E_BOOK_BACKEND_FACTORY_SIMPLE (gal, Gal, e_book_backend_gal_new)
+
+static GType exchange_types[2];
+
+void
+eds_module_initialize (GTypeModule *type_module)
+{
+	exchange_types[0] = _exchange_factory_get_type (type_module);
+	exchange_types[1] = _gal_factory_get_type (type_module);
+}
+
+void
+eds_module_shutdown (void)
 {
 }
 
-static const gchar *
-_get_protocol (EBookBackendFactory *factory)
+void
+eds_module_list_types (const GType **types, gint *num_types)
 {
-	return "exchange";
-}
-
-static EBookBackend*
-_new_backend (EBookBackendFactory *factory)
-{
-	return e_book_backend_exchange_new ();
-}
-
-static void
-e_book_backend_exchange_factory_class_init (EBookBackendExchangeFactoryClass *klass)
-{
-  E_BOOK_BACKEND_FACTORY_CLASS (klass)->get_protocol = _get_protocol;
-  E_BOOK_BACKEND_FACTORY_CLASS (klass)->new_backend = _new_backend;
-}
-
-GType
-e_book_backend_exchange_factory_get_type (void)
-{
-	static GType  type = 0;
-
-	if (!type) {
-		GTypeInfo info = {
-			sizeof (EBookBackendExchangeFactoryClass),
-			NULL, /* base_class_init */
-			NULL, /* base_class_finalize */
-			(GClassInitFunc)  e_book_backend_exchange_factory_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (EBookBackend),
-			0,    /* n_preallocs */
-			(GInstanceInitFunc) e_book_backend_exchange_factory_instance_init
-		};
-
-		type = g_type_register_static (E_TYPE_BOOK_BACKEND_FACTORY,
-					       "EBookBackendExchangeFactory", &info, 0);
-	}
-	return type;
+	*types = exchange_types;
+	*num_types = G_N_ELEMENTS (exchange_types);
 }

@@ -20,3 +20,38 @@ These functions are the main interface to the xntlm library.
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### FUNCTION xntlm_negotiate ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xntlm_parse_challenge ##### -->
+<para>
+
+</para>
+
+@challenge: 
+@len: 
+@nonce: 
+@nt_domain: 
+@w2k_domain: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xntlm_authenticate ##### -->
+<para>
+
+</para>
+
+@nonce: 
+@domain: 
+@user: 
+@password: 
+@workstation: 
+@Returns: 
+
+

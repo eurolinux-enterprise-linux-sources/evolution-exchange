@@ -1,0 +1,60 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.free-busy-fetch-and-crash evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.free-busy-fetch-and-crash	2013-10-14 08:36:51.459518865 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c	2013-10-14 08:36:51.464518865 +0200
+@@ -4387,10 +4387,22 @@ ews_cal_get_free_busy_cb (GObject *obj,
+ 	g_slist_free (free_busy_sl);
+ 
+ done:
++	convert_error_to_edc_error (&error);
++#if ! EDS_CHECK_VERSION (3,1,0)
++	{
++		GList *fb_data = NULL;
++		for (i = free_busy; i; i = i->next) {
++			fb_data = g_list_prepend (fb_data, i->data);
++		}
++		fb_data = g_list_reverse (fb_data);
++		e_data_cal_notify_free_busy (free_busy_data->cal, free_busy_data->context, error, fb_data);
++		g_list_free (fb_data);
++	}
++#else
+ 	if (free_busy)
+ 		e_data_cal_report_free_busy_data (free_busy_data->cal, free_busy);
+-	convert_error_to_edc_error (&error);
+ 	e_data_cal_respond_get_free_busy (free_busy_data->cal, free_busy_data->context, error);
++#endif	
+ 
+ 	/* FIXME free free_busy_sl ? */
+ 	g_slist_foreach (free_busy, (GFunc) g_free, NULL);
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c.free-busy-fetch-and-crash evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c.free-busy-fetch-and-crash	2013-10-14 08:36:51.440518865 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c	2013-10-14 08:36:51.462518865 +0200
+@@ -403,8 +403,16 @@ ewscal_add_availability_rrule (ESoapMess
+ {
+ 	struct icalrecurrencetype recur = icalproperty_get_rrule (prop);
+ 	gchar buffer[16];
++	gint dayorder;
+ 
+-	snprintf (buffer, 16, "%d", icalrecurrencetype_day_position (recur.by_day[0]));
++	dayorder = icalrecurrencetype_day_position (recur.by_day[0]);
++	dayorder = dayorder % 5;
++	if (dayorder < 0)
++		dayorder += 5;
++	dayorder += 1;
++
++	/* expected value is 1..5, inclusive */
++	snprintf (buffer, 16, "%d", dayorder);
+ 	e_ews_message_write_string_parameter (msg, "DayOrder", NULL, buffer);
+ 
+ 	snprintf (buffer, 16, "%d", recur.by_month[0]);
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/libedata-cal-compat.h.free-busy-fetch-and-crash evolution-ews-gnome-3-0.gitcc16df2/src/calendar/libedata-cal-compat.h
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/libedata-cal-compat.h.free-busy-fetch-and-crash	2013-10-14 08:36:51.333518865 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/libedata-cal-compat.h	2013-10-14 08:36:51.464518865 +0200
+@@ -44,8 +44,6 @@ void		e_data_cal_respond_send_objects			
+ void		e_data_cal_respond_discard_alarm		(EDataCal *cal, EServerMethodContext opid, GError *error);
+ void		e_data_cal_respond_get_timezone			(EDataCal *cal, EServerMethodContext opid, GError *error, const gchar *tzobject);
+ 
+-void		e_data_cal_respond_get_free_busy		(EDataCal *cal, EServerMethodContext opid, GError *error);
+-void		e_data_cal_report_free_busy_data		(EDataCal *cal, const GSList *freebusy);
+ void            e_data_cal_view_notify_complete                 (EDataCalView *view, const GError *error);
+ 
+ #define e_data_cal_view_get_sexp e_data_cal_view_get_object_sexp

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Folder Permissions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="Evolution Connector for Microsoft Exchange Programmer’s Reference Manual">
 <link rel="up" href="ch02.html" title="Implementation of Connector Features">
 <link rel="prev" href="ximian-connector-other-users.html" title="Other Users' Folders">
 <link rel="next" href="ximian-connector-mail-threading.html" title="Message Threading in Public Folders">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">Evolution Connector for Microsoft Exchange Programmer’s Reference Manual</th>
 <td><a accesskey="n" href="ximian-connector-mail-threading.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" lang="en">
+<div class="refentry" title="Folder Permissions">
 <a name="ximian-connector-permissions"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -28,8 +28,8 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsect2" lang="en">
-<a name="id327055"></a><h3>
+<div class="refsect2" title="Exchange Permissions">
+<a name="id2940428"></a><h3>
 <span class="application">Exchange</span> Permissions</h3>
 <p>
 Every object in the <span class="application">Exchange</span> database has a
@@ -57,8 +57,8 @@ to access the object.
 </p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
-<a name="id320272"></a><h3>SIDs and Security Descriptors</h3>
+<div class="refsect2" title="SIDs and Security Descriptors">
+<a name="id2968416"></a><h3>SIDs and Security Descriptors</h3>
 <p>
 This information mostly comes from <code class="filename">WinNT.h</code>
 (though I've changed the code samples to use
@@ -80,14 +80,14 @@ A SID (Security IDentifier) looks like:
 6
 7
 8</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">typedef</span> <span class="type">struct</span> {
-       guint8  Revision;
-       guint8  SubauthorityCount;
-       guint8  IdentifierAuthority[<span class="number">6</span>];
-       guint32 Subauthority[];
-} SID;
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">       </span><span class="usertype">guint8</span><span class="normal">  Revision</span><span class="symbol">;</span>
+<span class="normal">       </span><span class="usertype">guint8</span><span class="normal">  SubauthorityCount</span><span class="symbol">;</span>
+<span class="normal">       </span><span class="usertype">guint8</span><span class="normal">  IdentifierAuthority</span><span class="symbol">[</span><span class="number">6</span><span class="symbol">];</span>
+<span class="normal">       </span><span class="usertype">guint32</span><span class="normal"> Subauthority</span><span class="symbol">[];</span>
+<span class="cbracket">}</span><span class="normal"> SID</span><span class="symbol">;</span>
 
-<span class="preproc">#define SID_REVISION </span><span class="number">1</span></pre></td>
+<span class="preproc">#define</span><span class="normal"> SID_REVISION </span><span class="number">1</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -149,17 +149,17 @@ The security descriptor header looks like:
 9
 10
 11</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">typedef</span> <span class="type">struct</span> {
-        guint8   Revision;
-        guint8   Sbz1;
-        guint16  Control;
-        guint32  Owner;
-        guint32  Group;
-        guint32  Sacl;
-        guint32  Dacl;
-} SECURITY_DESCRIPTOR_RELATIVE;
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="usertype">guint8</span><span class="normal">   Revision</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint8</span><span class="normal">   Sbz1</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal">  Control</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal">  Owner</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal">  Group</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal">  Sacl</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal">  Dacl</span><span class="symbol">;</span>
+<span class="cbracket">}</span><span class="normal"> SECURITY_DESCRIPTOR_RELATIVE</span><span class="symbol">;</span>
 
-<span class="preproc">#define SECURITY_DESCRIPTOR_REVISION </span><span class="number">1</span></pre></td>
+<span class="preproc">#define</span><span class="normal"> SECURITY_DESCRIPTOR_REVISION </span><span class="number">1</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -195,20 +195,20 @@ sections (eg, the SACL) have <code class="constant">0</code> for their offset.
 12
 13
 14</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define SE_OWNER_DEFAULTED         </span><span class="number">0x0001</span>
-<span class="preproc">#define SE_GROUP_DEFAULTED         </span><span class="number">0x0002</span>
-<span class="preproc">#define SE_DACL_PRESENT            </span><span class="number">0x0004</span>
-<span class="preproc">#define SE_DACL_DEFAULTED          </span><span class="number">0x0008</span>
-<span class="preproc">#define SE_SACL_PRESENT            </span><span class="number">0x0010</span>
-<span class="preproc">#define SE_SACL_DEFAULTED          </span><span class="number">0x0020</span>
-<span class="preproc">#define SE_DACL_AUTO_INHERIT_REQ   </span><span class="number">0x0100</span>
-<span class="preproc">#define SE_SACL_AUTO_INHERIT_REQ   </span><span class="number">0x0200</span>
-<span class="preproc">#define SE_DACL_AUTO_INHERITED     </span><span class="number">0x0400</span>
-<span class="preproc">#define SE_SACL_AUTO_INHERITED     </span><span class="number">0x0800</span>
-<span class="preproc">#define SE_DACL_PROTECTED          </span><span class="number">0x1000</span>
-<span class="preproc">#define SE_SACL_PROTECTED          </span><span class="number">0x2000</span>
-<span class="preproc">#define SE_RM_CONTROL_VALID        </span><span class="number">0x4000</span>
-<span class="preproc">#define SE_SELF_RELATIVE           </span><span class="number">0x8000</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define</span><span class="normal"> SE_OWNER_DEFAULTED         </span><span class="number">0x0001</span>
+<span class="preproc">#define</span><span class="normal"> SE_GROUP_DEFAULTED         </span><span class="number">0x0002</span>
+<span class="preproc">#define</span><span class="normal"> SE_DACL_PRESENT            </span><span class="number">0x0004</span>
+<span class="preproc">#define</span><span class="normal"> SE_DACL_DEFAULTED          </span><span class="number">0x0008</span>
+<span class="preproc">#define</span><span class="normal"> SE_SACL_PRESENT            </span><span class="number">0x0010</span>
+<span class="preproc">#define</span><span class="normal"> SE_SACL_DEFAULTED          </span><span class="number">0x0020</span>
+<span class="preproc">#define</span><span class="normal"> SE_DACL_AUTO_INHERIT_REQ   </span><span class="number">0x0100</span>
+<span class="preproc">#define</span><span class="normal"> SE_SACL_AUTO_INHERIT_REQ   </span><span class="number">0x0200</span>
+<span class="preproc">#define</span><span class="normal"> SE_DACL_AUTO_INHERITED     </span><span class="number">0x0400</span>
+<span class="preproc">#define</span><span class="normal"> SE_SACL_AUTO_INHERITED     </span><span class="number">0x0800</span>
+<span class="preproc">#define</span><span class="normal"> SE_DACL_PROTECTED          </span><span class="number">0x1000</span>
+<span class="preproc">#define</span><span class="normal"> SE_SACL_PROTECTED          </span><span class="number">0x2000</span>
+<span class="preproc">#define</span><span class="normal"> SE_RM_CONTROL_VALID        </span><span class="number">0x4000</span>
+<span class="preproc">#define</span><span class="normal"> SE_SELF_RELATIVE           </span><span class="number">0x8000</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -275,16 +275,16 @@ Each ACL header looks like:
 8
 9
 10</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">typedef</span> <span class="type">struct</span> {
-        guint8  AclRevision;
-        guint8  Sbz1;
-        guint16 AclSize;
-        guint16 AceCount;
-        guint16 Sbz2;
-} ACL;
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="usertype">guint8</span><span class="normal">  AclRevision</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint8</span><span class="normal">  Sbz1</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal"> AclSize</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal"> AceCount</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal"> Sbz2</span><span class="symbol">;</span>
+<span class="cbracket">}</span><span class="normal"> ACL</span><span class="symbol">;</span>
 
-<span class="preproc">#define ACL_REVISION     (</span><span class="number">2</span><span class="preproc">)</span>
-<span class="preproc">#define ACL_REVISION_DS  (</span><span class="number">4</span><span class="preproc">)</span></pre></td>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">ACL_REVISION</span><span class="normal">     </span><span class="symbol">(</span><span class="number">2</span><span class="symbol">)</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">ACL_REVISION_DS</span><span class="normal">  </span><span class="symbol">(</span><span class="number">4</span><span class="symbol">)</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -331,24 +331,24 @@ Each ACE looks like:
 16
 17
 18</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">typedef</span> <span class="type">struct</span> {
-        guint8  AceType;
-        guint8  AceFlags;
-        guint16 AceSize;
-        guint32 Mask;
-        SID     Sid;
-} ACE;
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="usertype">guint8</span><span class="normal">  AceType</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint8</span><span class="normal">  AceFlags</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal"> AceSize</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> Mask</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">SID</span><span class="normal">     Sid</span><span class="symbol">;</span>
+<span class="cbracket">}</span><span class="normal"> ACE</span><span class="symbol">;</span>
 
-<span class="comment">/*</span><span class="comment"> type </span><span class="comment">*/</span>
-<span class="preproc">#define ACCESS_ALLOWED_ACE_TYPE  (</span><span class="number">0x00</span><span class="preproc">)</span>
-<span class="preproc">#define ACCESS_DENIED_ACE_TYPE   (</span><span class="number">0x01</span><span class="preproc">)</span>
+<span class="comment">/* type */</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">ACCESS_ALLOWED_ACE_TYPE</span><span class="normal">  </span><span class="symbol">(</span><span class="number">0x00</span><span class="symbol">)</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">ACCESS_DENIED_ACE_TYPE</span><span class="normal">   </span><span class="symbol">(</span><span class="number">0x01</span><span class="symbol">)</span>
 
-<span class="comment">/*</span><span class="comment"> flags </span><span class="comment">*/</span>
-<span class="preproc">#define OBJECT_INHERIT_ACE       (</span><span class="number">0x01</span><span class="preproc">)</span>
-<span class="preproc">#define CONTAINER_INHERIT_ACE    (</span><span class="number">0x02</span><span class="preproc">)</span>
-<span class="preproc">#define NO_PROPAGATE_INHERIT_ACE (</span><span class="number">0x04</span><span class="preproc">)</span>
-<span class="preproc">#define INHERIT_ONLY_ACE         (</span><span class="number">0x08</span><span class="preproc">)</span>
-<span class="preproc">#define INHERITED_ACE            (</span><span class="number">0x10</span><span class="preproc">)</span></pre></td>
+<span class="comment">/* flags */</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">OBJECT_INHERIT_ACE</span><span class="normal">       </span><span class="symbol">(</span><span class="number">0x01</span><span class="symbol">)</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">CONTAINER_INHERIT_ACE</span><span class="normal">    </span><span class="symbol">(</span><span class="number">0x02</span><span class="symbol">)</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">NO_PROPAGATE_INHERIT_ACE</span><span class="normal"> </span><span class="symbol">(</span><span class="number">0x04</span><span class="symbol">)</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">INHERIT_ONLY_ACE</span><span class="normal">         </span><span class="symbol">(</span><span class="number">0x08</span><span class="symbol">)</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">INHERITED_ACE</span><span class="normal">            </span><span class="symbol">(</span><span class="number">0x10</span><span class="symbol">)</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -381,8 +381,8 @@ denied NT permissions according to rules from the WSS SDK.
 </p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
-<a name="id359733"></a><h3>Order of ACEs</h3>
+<div class="refsect2" title="Order of ACEs">
+<a name="id2950645"></a><h3>Order of ACEs</h3>
 <p>
 The ACEs <span class="emphasis"><em>must</em></span> appear in a specific order. This is
 at least partly determined by how security descriptors work, and how
@@ -402,12 +402,12 @@ ACL is something like this:
 4
 5
 6</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="keyword">for</span> each ACE in the ACL {
-        <span class="keyword">if</span> ((ACE.Mask covers the attempted_action) &amp;&amp;
-            (ACE.Sid is in CurrentUserSidList))
-                <span class="keyword">return</span> (ACE.AceType == ACCESS_ALLOWED_ACE);
-}
-<span class="keyword">return</span> FALSE;</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">for</span><span class="normal"> each ACE in </span><span class="usertype">the</span><span class="normal"> ACL </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">((</span><span class="normal">ACE</span><span class="symbol">.</span><span class="normal">Mask covers </span><span class="usertype">the</span><span class="normal"> attempted_action</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&amp;&amp;</span>
+<span class="normal">        </span><span class="symbol">(</span><span class="normal">ACE</span><span class="symbol">.</span><span class="normal">Sid is </span><span class="usertype">in</span><span class="normal"> CurrentUserSidList</span><span class="symbol">))</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">ACE</span><span class="symbol">.</span><span class="normal">AceType </span><span class="symbol">==</span><span class="normal"> ACCESS_ALLOWED_ACE</span><span class="symbol">);</span>
+<span class="cbracket">}</span>
+<span class="keyword">return</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -417,17 +417,17 @@ ACL is something like this:
 In <span class="application">Outlook</span>'s permissions model, there are
 three possibilities:
 </p>
-<div class="itemizedlist"><ul type="disc">
-<li><p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>
 	If the user is specified explicitly in the ACL, he gets
 	exactly the rights he's specified to have, and nothing more
     </p></li>
-<li><p>
+<li class="listitem"><p>
 	If the user isn't specified, but is a member of at least
 	one group that is specified, he has the superset of all
 	the rights granted to those groups.
     </p></li>
-<li><p>
+<li class="listitem"><p>
 	Otherwise, the user has the rights granted to "Default"
     </p></li>
 </ul></div>
@@ -465,7 +465,7 @@ model, we have to put the ACEs in a specific order, and add explicit
 <p>
 So, the ordering is:
 </p>
-<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Caution</h3>
 <p>
 While this is what we implement in
@@ -474,29 +474,29 @@ it is known to be wrong. Some folders' ACLs (especially public
 folders) don't obey this order. Further investigation is needed.
 </p>
 </div>
-<div class="orderedlist"><ol type="1">
-<li><p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>
     Object-level ACEs for real users, in allow/deny pairs
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Container-level ACEs for real users, in allow/deny pairs
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Object-level ACEs for Anonymous, in allow/deny pairs
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Container-level ACEs for Anonymous, in allow/deny pairs
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Container-level ACEs for groups, first all the allows, then all denies
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Container-level ACEs for Default (allow only)
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Object-level ACEs for groups, first allows, then denies
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Object-level ACEs for Default (allow only)
     </p></li>
 </ol></div>
@@ -516,6 +516,6 @@ the same way.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

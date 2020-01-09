@@ -1,0 +1,12 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c.account-type-check evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c.account-type-check	2013-07-08 16:39:42.582840048 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c	2013-07-08 16:39:42.626840048 +0200
+@@ -503,7 +503,7 @@ org_gnome_exchange_ews_check_options(EPl
+ 
+ 	url = camel_url_new (e_account_get_string(get_modified_account (target), E_ACCOUNT_SOURCE_URL), NULL);
+ 
+-	if (url && url->protocol && g_ascii_strcasecmp (url->protocol, "ews") != 0)
++	if (!url || !url->protocol || g_ascii_strcasecmp (url->protocol, "ews") != 0)
+ 		goto exit;
+ 
+ 	/* FIXME pageid is not set while editing an account */

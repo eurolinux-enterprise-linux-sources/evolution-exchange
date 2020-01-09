@@ -1,0 +1,12 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c.multiple-contacts-remove evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c.multiple-contacts-remove	2013-05-17 14:36:16.000000000 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c	2013-07-24 07:37:00.570435469 +0200
+@@ -748,7 +748,7 @@ e_book_backend_sqlitedb_remove_contacts 
+ 	sqlite3_free (tmp);
+ 
+ 	for (l = uids; l != NULL; l = g_slist_next (l)) {
+-		gchar *uid = (gchar *) uids->data;
++		gchar *uid = (gchar *) l->data;
+ 
+ 		tmp = sqlite3_mprintf ("%Q", uid);
+ 		g_string_append_printf (str, " %s ,", tmp);

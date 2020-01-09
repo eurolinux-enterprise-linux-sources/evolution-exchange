@@ -1,0 +1,212 @@
+diff -up evolution-exchange-2.32.3/calendar/e-cal-backend-exchange.c.covscan-issues-eex evolution-exchange-2.32.3/calendar/e-cal-backend-exchange.c
+--- evolution-exchange-2.32.3/calendar/e-cal-backend-exchange.c.covscan-issues-eex	2011-04-21 21:35:55.000000000 +0200
++++ evolution-exchange-2.32.3/calendar/e-cal-backend-exchange.c	2013-08-14 15:26:30.033879263 +0200
+@@ -1981,6 +1981,11 @@ receive_attachments (ECalBackendExchange
+ 				attach_file = g_build_filename (cbex->priv->local_attachment_store, uid, base_name, NULL);
+ 				g_free (base_name);
+ 			}
++
++			if (!fname) {
++				g_free (attach_file);
++				continue;
++			}
+ 		} else {
+ 			const gchar *filename;
+ 
+diff -up evolution-exchange-2.32.3/calendar/e-cal-backend-exchange-tasks.c.covscan-issues-eex evolution-exchange-2.32.3/calendar/e-cal-backend-exchange-tasks.c
+--- evolution-exchange-2.32.3/calendar/e-cal-backend-exchange-tasks.c.covscan-issues-eex	2011-04-21 21:35:55.000000000 +0200
++++ evolution-exchange-2.32.3/calendar/e-cal-backend-exchange-tasks.c	2013-08-14 15:26:30.033879263 +0200
+@@ -1370,7 +1370,7 @@ receive_task_objects (ECalBackendSync *b
+ 
+ 	for (l = comps; l; l = l->next) {
+                 const gchar *uid;
+-                gchar *calobj, *rid = NULL;
++                gchar *rid = NULL;
+ 
+                 subcomp = l->data;
+ 
+@@ -1403,20 +1403,20 @@ receive_task_objects (ECalBackendSync *b
+                         e_cal_backend_notify_object_modified (E_CAL_BACKEND (backend), old_object, calobj);
+ 			g_free (old_object);
+                 } else {
+-                        gchar *returned_uid;
++                        gchar *returned_uid, *calobj2;
+ 
+ 			e_cal_backend_exchange_cache_unlock (cbex);
+-			calobj = (gchar *) icalcomponent_as_ical_string_r (subcomp);
+-			create_task_object (backend, cal, &calobj, &returned_uid, &err);
++			calobj2 = (gchar *) icalcomponent_as_ical_string_r (subcomp);
++			create_task_object (backend, cal, &calobj2, &returned_uid, &err);
+                         if (err) {
+-				g_free (calobj);
++				g_free (calobj2);
+ 				g_free (rid);
+ 				g_propagate_error (error, err);
+                                 return;
+ 			}
+ 
+-                        e_cal_backend_notify_object_created (E_CAL_BACKEND (backend), calobj);
+-			g_free (calobj);
++                        e_cal_backend_notify_object_created (E_CAL_BACKEND (backend), calobj2);
++			g_free (calobj2);
+                 }
+ 		g_free (rid);
+         }
+diff -up evolution-exchange-2.32.3/camel/camel-exchange-utils.c.covscan-issues-eex evolution-exchange-2.32.3/camel/camel-exchange-utils.c
+--- evolution-exchange-2.32.3/camel/camel-exchange-utils.c.covscan-issues-eex	2011-04-21 21:35:56.000000000 +0200
++++ evolution-exchange-2.32.3/camel/camel-exchange-utils.c	2013-08-14 15:26:30.034879263 +0200
+@@ -1359,6 +1359,7 @@ process_flags (gpointer user_data)
+ 		if (!mmsg->href) {
+ 			d(g_print ("%s:%s:%d: mfld = [%s], type=[%d]\n", __FILE__, G_STRFUNC,
+ 				   __LINE__, mfld->name, mfld->type));
++			continue;
+ 		}
+ 
+ 		if (mmsg->change_mask & CAMEL_MESSAGE_SEEN) {
+diff -up evolution-exchange-2.32.3/eplugin/exchange-calendar.c.covscan-issues-eex evolution-exchange-2.32.3/eplugin/exchange-calendar.c
+--- evolution-exchange-2.32.3/eplugin/exchange-calendar.c.covscan-issues-eex	2011-04-21 21:35:56.000000000 +0200
++++ evolution-exchange-2.32.3/eplugin/exchange-calendar.c	2013-08-14 15:26:30.034879263 +0200
+@@ -77,7 +77,7 @@ e_exchange_calendar_get_calendars (ECalS
+ 	}
+ 	else {
+ 		/* FIXME: Would this ever happen? If so, handle it wisely */
+-		tstring = NULL;
++		return NULL;
+ 	}
+ 
+ 	account = exchange_operations_get_exchange_account ();
+@@ -93,7 +93,7 @@ e_exchange_calendar_get_calendars (ECalS
+ 	exchange_account_rescan_tree (account);
+ 	folder_array = exchange_account_get_folders (account);
+ 
+-	for (i=0; i<folder_array->len; ++i) {
++	for (i = 0; folder_array && i < folder_array->len; ++i) {
+ 		folder = g_ptr_array_index (folder_array, i);
+ 		type = (gchar *)e_folder_get_type_string (folder);
+ 
+diff -up evolution-exchange-2.32.3/eplugin/exchange-contacts.c.covscan-issues-eex evolution-exchange-2.32.3/eplugin/exchange-contacts.c
+--- evolution-exchange-2.32.3/eplugin/exchange-contacts.c.covscan-issues-eex	2011-04-21 21:35:56.000000000 +0200
++++ evolution-exchange-2.32.3/eplugin/exchange-contacts.c	2013-08-14 15:26:30.034879263 +0200
+@@ -80,7 +80,7 @@ e_exchange_contacts_get_contacts (void)
+ 	exchange_account_rescan_tree (account);
+ 	folder_array = exchange_account_get_folders (account);
+ 
+-	for (i=0; i<folder_array->len; ++i) {
++	for (i = 0; folder_array && i < folder_array->len; ++i) {
+ 		gchar *type, *tmp;
+ 		folder = g_ptr_array_index (folder_array, i);
+ 		type = (gchar *) e_folder_get_type_string (folder);
+diff -up evolution-exchange-2.32.3/eplugin/exchange-operations.c.covscan-issues-eex evolution-exchange-2.32.3/eplugin/exchange-operations.c
+--- evolution-exchange-2.32.3/eplugin/exchange-operations.c.covscan-issues-eex	2011-04-21 21:35:56.000000000 +0200
++++ evolution-exchange-2.32.3/eplugin/exchange-operations.c	2013-08-14 15:26:30.034879263 +0200
+@@ -119,7 +119,8 @@ exchange_operations_cta_add_node_to_tree
+ 
+ 	if (!strcmp (nodename, "personal") && !parent) {
+ 		/* FIXME: Don't hardcode this */
+-		strcpy (nodename, _("Personal Folders"));
++		strncpy (nodename, _("Personal Folders"), 79);
++		nodename[79] = '\0';
+ 	}
+ 
+ 	found = FALSE;
+@@ -164,7 +165,8 @@ exchange_operations_cta_select_node_from
+ 
+ 	if (!strcmp (nodename, "personal") && !parent) {
+ 		/* FIXME: Don't hardcode this */
+-		strcpy (nodename, _("Personal Folders"));
++		strncpy (nodename, _("Personal Folders"), 79);
++		nodename[79] = '\0';
+ 	}
+ 
+ 	status = gtk_tree_model_iter_children (GTK_TREE_MODEL (store), &iter, parent);
+diff -up evolution-exchange-2.32.3/eplugin/exchange-send-options.c.covscan-issues-eex evolution-exchange-2.32.3/eplugin/exchange-send-options.c
+--- evolution-exchange-2.32.3/eplugin/exchange-send-options.c.covscan-issues-eex	2011-04-21 21:35:56.000000000 +0200
++++ evolution-exchange-2.32.3/eplugin/exchange-send-options.c	2013-08-14 15:26:30.034879263 +0200
+@@ -563,14 +563,14 @@ exchange_sendoptions_dialog_finalize (GO
+ 	g_return_if_fail (EXCHANGE_IS_SENDOPTIONS_DIALOG (sod));
+ 	priv = sod->priv;
+ 
+-	g_free (priv->help_section);
++	if (priv) {
++		g_free (priv->help_section);
+ 
+-	if (sod->options) {
+-		g_free (sod->options);
+-		sod->options = NULL;
+-	}
++		if (sod->options) {
++			g_free (sod->options);
++			sod->options = NULL;
++		}
+ 
+-	if (sod->priv) {
+ 		g_free (sod->priv);
+ 		sod->priv = NULL;
+ 	}
+diff -up evolution-exchange-2.32.3/server/lib/e2k-autoconfig.c.covscan-issues-eex evolution-exchange-2.32.3/server/lib/e2k-autoconfig.c
+--- evolution-exchange-2.32.3/server/lib/e2k-autoconfig.c.covscan-issues-eex	2011-04-21 21:35:57.000000000 +0200
++++ evolution-exchange-2.32.3/server/lib/e2k-autoconfig.c	2013-08-14 15:26:30.035879263 +0200
+@@ -1673,6 +1673,8 @@ e2k_validate_user (const gchar *owa_url,
+ 	gint try = 0;
+ 	EUri *uri;
+ 
++	g_return_val_if_fail (user != NULL, FALSE);
++
+ 	uri = e_uri_new (owa_url);
+ 	key = g_strdup_printf ("%s%s/", pkey, uri->host); /* FIXME */
+ 	e_uri_free (uri);
+diff -up evolution-exchange-2.32.3/server/lib/e2k-restriction.c.covscan-issues-eex evolution-exchange-2.32.3/server/lib/e2k-restriction.c
+--- evolution-exchange-2.32.3/server/lib/e2k-restriction.c.covscan-issues-eex	2011-04-21 21:35:57.000000000 +0200
++++ evolution-exchange-2.32.3/server/lib/e2k-restriction.c	2013-08-14 15:26:30.035879263 +0200
+@@ -98,7 +98,6 @@ conjoinv (E2kRestrictionType type, E2kRe
+ 		g_ptr_array_add (rns, rn);
+ 		rn = va_arg (ap, E2kRestriction *);
+ 	}
+-	va_end (ap);
+ 
+ 	ret->type = type;
+ 	ret->res.and.nrns = rns->len;
+@@ -122,10 +121,14 @@ conjoinv (E2kRestrictionType type, E2kRe
+ E2kRestriction *
+ e2k_restriction_andv (E2kRestriction *rn, ...)
+ {
++	E2kRestriction *res;
+ 	va_list ap;
+ 
+ 	va_start (ap, rn);
+-	return conjoinv (E2K_RESTRICTION_AND, rn, ap);
++	res = conjoinv (E2K_RESTRICTION_AND, rn, ap);
++	va_end (ap);
++
++	return res;
+ }
+ 
+ /**
+@@ -142,10 +145,14 @@ e2k_restriction_andv (E2kRestriction *rn
+ E2kRestriction *
+ e2k_restriction_orv (E2kRestriction *rn, ...)
+ {
++	E2kRestriction *res;
+ 	va_list ap;
+ 
+ 	va_start (ap, rn);
+-	return conjoinv (E2K_RESTRICTION_OR, rn, ap);
++	res = conjoinv (E2K_RESTRICTION_OR, rn, ap);
++	va_end (ap);
++
++	return res;
+ }
+ 
+ /**
+diff -up evolution-exchange-2.32.3/server/lib/e2k-sid.c.covscan-issues-eex evolution-exchange-2.32.3/server/lib/e2k-sid.c
+--- evolution-exchange-2.32.3/server/lib/e2k-sid.c.covscan-issues-eex	2011-04-21 21:35:57.000000000 +0200
++++ evolution-exchange-2.32.3/server/lib/e2k-sid.c	2013-08-14 15:26:30.035879263 +0200
+@@ -103,7 +103,7 @@ sid_new_internal (E2kSidType type, const
+ 		e2k_sid_get_string_sid (sid);
+ 
+ 	if (!display_name) {
+-		if (type == E2K_SID_TYPE_WELL_KNOWN_GROUP) {
++		if (type == E2K_SID_TYPE_WELL_KNOWN_GROUP && string_sid) {
+ 			if (!strcmp (string_sid, E2K_SID_WKS_ANONYMOUS))
+ 				display_name = _(E2K_SID_WKS_ANONYMOUS_NAME);
+ 			else if (!strcmp (string_sid, E2K_SID_WKS_EVERYONE))

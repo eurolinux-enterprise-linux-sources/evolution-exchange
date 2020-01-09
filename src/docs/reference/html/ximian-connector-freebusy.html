@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Free/Busy Searches</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="Evolution Connector for Microsoft Exchange Programmer’s Reference Manual">
 <link rel="up" href="ch02.html" title="Implementation of Connector Features">
 <link rel="prev" href="ximian-connector-fba.html" title="Exchange 2003 Forms-Based Authentication">
 <link rel="next" href="ximian-connector-oof.html" title="Out of Office">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">Evolution Connector for Microsoft Exchange Programmer’s Reference Manual</th>
 <td><a accesskey="n" href="ximian-connector-oof.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" lang="en">
+<div class="refentry" title="Free/Busy Searches">
 <a name="ximian-connector-freebusy"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -28,8 +28,8 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsect1" lang="en">
-<a name="id323429"></a><h2>The <span class="application">OWA</span> XML Free/Busy interface</h2>
+<div class="refsect1" title="The OWA XML Free/Busy interface">
+<a name="id2959546"></a><h2>The <span class="application">OWA</span> XML Free/Busy interface</h2>
 <p>
 In Connector versions up to and including 2.0, we get free/busy data
 by using the XML interface to <span class="application">OWA</span>. The
@@ -45,12 +45,12 @@ request URL looks like:
 4
 5
 6</pre></td>
-        <td class="listing_code"><pre class="programlisting">/<span class="keyword">public</span>/?Cmd=freebusy
-                &amp;start=<span class="number">2002</span>-<span class="number">10</span>-23T04:<span class="preproc">0</span><span class="number">0</span>:00Z
-                &amp;end=<span class="number">2002</span>-<span class="number">11</span>-27T05:<span class="preproc">0</span><span class="number">0</span>:00Z
-                &amp;interval=<span class="number">30</span>
-                &amp;u=SMTP:danw@xcs.ximian.com
-                &amp;u=SMTP:eleanor@xcs.ximian.com</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">/</span><span class="normal">public</span><span class="symbol">/?</span><span class="normal">Cmd</span><span class="symbol">=</span><span class="normal">freebusy</span>
+<span class="normal">    </span><span class="symbol">&amp;</span><span class="normal">start</span><span class="symbol">=</span><span class="number">2002</span><span class="symbol">-</span><span class="number">10</span><span class="symbol">-</span><span class="normal">23T04</span><span class="symbol">:</span><span class="number">00</span><span class="symbol">:</span><span class="normal">00Z</span>
+<span class="normal">    </span><span class="symbol">&amp;</span><span class="normal">end</span><span class="symbol">=</span><span class="number">2002</span><span class="symbol">-</span><span class="number">11</span><span class="symbol">-</span><span class="normal">27T05</span><span class="symbol">:</span><span class="number">00</span><span class="symbol">:</span><span class="normal">00Z</span>
+<span class="normal">    </span><span class="symbol">&amp;</span><span class="normal">interval</span><span class="symbol">=</span><span class="number">30</span>
+<span class="normal">    </span><span class="symbol">&amp;</span><span class="normal">u</span><span class="symbol">=</span><span class="normal">SMTP</span><span class="symbol">:</span><span class="normal">danw@xcs</span><span class="symbol">.</span><span class="normal">ximian</span><span class="symbol">.</span><span class="normal">com</span>
+<span class="normal">    </span><span class="symbol">&amp;</span><span class="normal">u</span><span class="symbol">=</span><span class="normal">SMTP</span><span class="symbol">:</span><span class="normal">eleanor@xcs</span><span class="symbol">.</span><span class="normal">ximian</span><span class="symbol">.</span><span class="normal">com</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -92,27 +92,27 @@ The response (with a status of <code class="literal"><span class="errorcode">200
 19
 20
 21</pre></td>
-        <td class="listing_code"><pre class="programlisting">&lt;a:response xmlns:a=<span class="number">&quot;WM&quot;</span>&gt;
-          &lt;a:recipients&gt;
-            &lt;a:item&gt;
-              &lt;a:displayname&gt;All Attendees&lt;/a:displayname&gt;
-              &lt;a:type&gt;<span class="number">1</span>&lt;/a:type&gt;
-              &lt;a:fbdata&gt;<span class="number">00000022220000000000000001221000222222.</span>..&lt;/a:fbdata&gt;
-            &lt;/a:item&gt;
-            &lt;a:item&gt;
-              &lt;a:displayname&gt;Dan Winship&lt;/a:displayname&gt;
-              &lt;a:email type=<span class="number">&quot;SMTP&quot;</span>&gt;danw@xcs.ximian.com&lt;/a:email&gt;
-              &lt;a:type&gt;<span class="number">1</span>&lt;/a:type&gt;
-              &lt;a:fbdata&gt;<span class="number">00000000000000000000000000220000222222.</span>..&lt;/a:fbdata&gt;
-            &lt;/a:item&gt;
-            &lt;a:item&gt;
-              &lt;a:displayname&gt;Eleanor Garcia&lt;/a:displayname&gt;
-              &lt;a:email type=<span class="number">&quot;SMTP&quot;</span>&gt;eleanor@xcs.ximian.com&lt;/a:email&gt;
-              &lt;a:type&gt;<span class="number">1</span>&lt;/a:type&gt;
-              &lt;a:fbdata&gt;<span class="number">00000022220000000000000001111000000000.</span>..&lt;/a:fbdata&gt;
-            &lt;/a:item&gt;
-          &lt;/a:recipients&gt;
-        &lt;/a:response&gt;</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="usertype">response</span><span class="normal"> xmlns</span><span class="symbol">:</span><span class="normal">a</span><span class="symbol">=</span><span class="string">"WM"</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">recipients</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">item</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">displayname</span><span class="symbol">&gt;</span><span class="usertype">All</span><span class="normal"> Attendees</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">displayname</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">type</span><span class="symbol">&gt;</span><span class="number">1</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">type</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">fbdata</span><span class="symbol">&gt;</span><span class="number">00000022220000000000000001221000222222</span><span class="symbol">...&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">fbdata</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">item</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">item</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">displayname</span><span class="symbol">&gt;</span><span class="usertype">Dan</span><span class="normal"> Winship</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">displayname</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="usertype">email</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"SMTP"</span><span class="symbol">&gt;</span><span class="normal">danw@xcs</span><span class="symbol">.</span><span class="normal">ximian</span><span class="symbol">.</span><span class="normal">com</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">email</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">type</span><span class="symbol">&gt;</span><span class="number">1</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">type</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">fbdata</span><span class="symbol">&gt;</span><span class="number">00000000000000000000000000220000222222</span><span class="symbol">...&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">fbdata</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">item</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">item</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">displayname</span><span class="symbol">&gt;</span><span class="usertype">Eleanor</span><span class="normal"> Garcia</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">displayname</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="usertype">email</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"SMTP"</span><span class="symbol">&gt;</span><span class="normal">eleanor@xcs</span><span class="symbol">.</span><span class="normal">ximian</span><span class="symbol">.</span><span class="normal">com</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">email</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">type</span><span class="symbol">&gt;</span><span class="number">1</span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">type</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">fbdata</span><span class="symbol">&gt;</span><span class="number">00000022220000000000000001111000000000</span><span class="symbol">...&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">fbdata</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">item</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">recipients</span><span class="symbol">&gt;</span><span class="normal">  </span>
+<span class="symbol">&lt;/</span><span class="normal">a</span><span class="symbol">:</span><span class="normal">response</span><span class="symbol">&gt;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -145,9 +145,9 @@ specified in the request URL), with the following mapping:
 </tbody>
 </table></div>
 </div>
-<div class="refsect1" lang="en">
-<a name="id323856"></a><h2>The Lower-level Free/Busy Interface</h2>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="refsect1" title="The Lower-level Free/Busy Interface">
+<a name="id2971592"></a><h2>The Lower-level Free/Busy Interface</h2>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>There is some code in
 <code class="filename">e2k-freebusy.c</code>
@@ -155,8 +155,8 @@ that works with these interfaces, but it is not very heavily tested
 and is not currently used by Connector.
 </p>
 </div>
-<div class="refsect2" lang="en">
-<a name="id323876"></a><h3>Public Free/Busy file</h3>
+<div class="refsect2" title="Public Free/Busy file">
+<a name="id2971614"></a><h3>Public Free/Busy file</h3>
 <p>
 <span class="application">OWA</span>'s free/busy data is generated from the
 data in <code class="uri">/public/NON_IPM_SUBTREE/SCHEDULE%2B%20FREE%20BUSY/</code>.
@@ -181,7 +181,7 @@ So, given that my <em class="structfield"><code>legacyExchangeDN</code></em> is
 <p>
 you can find my public free/busy file. ("<code class="literal">_xF8FF_</code>" is
 the URI-encoded form of '<code class="literal">/</code>' when it's not a path
-separator. <code class="function">e2k_uri_encode</code>
+separator. <a class="link" href="evolution-exchange-e2k-uri.html#e2k-uri-encode" title="e2k_uri_encode ()"><code class="function">e2k_uri_encode</code></a>
 handles this.). The <em class="structfield"><code>legacyExchangeDN</code></em> is
 also stored as the <code class="literal">PR_FREEBUSY_EMAIL_ADDRESS</code>
 property on the message, so we can also just search for that.
@@ -231,10 +231,10 @@ The <code class="literal">_MONTHS</code> properties are arrays of
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">struct</span> {
-        guint month:<span class="number">4</span>; <span class="comment">/*</span><span class="comment"> 1 = January </span><span class="comment">*/</span>
-        guint year :<span class="number">28</span>;
-};</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="usertype">guint</span><span class="normal"> month</span><span class="symbol">:</span><span class="number">4</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* 1 = January */</span>
+<span class="normal">    </span><span class="usertype">guint</span><span class="normal"> year </span><span class="symbol">:</span><span class="number">28</span><span class="symbol">;</span>
+<span class="cbracket">}</span><span class="symbol">;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -253,10 +253,10 @@ and year as an array of:
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">struct</span> {
-        guint16 start;  <span class="comment">/*</span><span class="comment"> minutes since start of month </span><span class="comment">*/</span>
-        guint16 end;    <span class="comment">/*</span><span class="comment"> minutes since start of month </span><span class="comment">*/</span>
-};</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal"> start</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* minutes since start of month */</span>
+<span class="normal">    </span><span class="usertype">guint16</span><span class="normal"> end</span><span class="symbol">;</span><span class="normal">    </span><span class="comment">/* minutes since start of month */</span>
+<span class="cbracket">}</span><span class="symbol">;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -306,8 +306,8 @@ may be a timestamp of some unknown sort?
 </p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
-<a name="id359314"></a><h3>Personal Free/Busy file</h3>
+<div class="refsect2" title="Personal Free/Busy file">
+<a name="id2957442"></a><h3>Personal Free/Busy file</h3>
 <p>
 Each user also has a personal free/busy message, at:
 </p>
@@ -317,17 +317,17 @@ Each user also has a personal free/busy message, at:
 <p>
 This is known to be used for at least three things:
 </p>
-<div class="orderedlist"><ol type="1">
-<li><p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>
     The user's free/busy information is stored on it (in a completely
     different format from the public free/busy file), as described
     below.
     </p></li>
-<li><p>
+<li class="listitem"><p>
     The user's list of delegates and their "see private items"
     permissions are stored on it, as described in "Delegates".
     </p></li>
-<li><p>
+<li class="listitem"><p>
     Certain preferences that allow the account to be used as a
     "resource" are stored here, as described in "Direct Booking".
     </p></li>
@@ -377,33 +377,33 @@ The free/busy data is stored in the
 25
 26
 27</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="type">struct</span> {
-        guint32 magic;          <span class="comment">/*</span><span class="comment"> 0xdeadbeef </span><span class="comment">*/</span>
-        guint32 header_len;     <span class="comment">/*</span><span class="comment"> 0x00000040 </span><span class="comment">*/</span>
-        guint32 unknown_1;      <span class="comment">/*</span><span class="comment"> 0x00010000 </span><span class="comment">*/</span>
-        guint32 unknown_2;      <span class="comment">/*</span><span class="comment"> 0x00000000 </span><span class="comment">*/</span>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> magic</span><span class="symbol">;</span><span class="normal">      </span><span class="comment">/* 0xdeadbeef */</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> header_len</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* 0x00000040 */</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> unknown_1</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* 0x00010000 */</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> unknown_2</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* 0x00000000 */</span>
 
-        guint32 num_groups;     <span class="comment">/*</span><span class="comment"> number of free/busy groups </span><span class="comment">*/</span>
-        guint32 num_events;     <span class="comment">/*</span><span class="comment"> total number of free/busy objects </span><span class="comment">*/</span>
-        guint32 unknown_3;      <span class="comment">/*</span><span class="comment"> 0x00000008 </span><span class="comment">*/</span>
-        guint32 unknown_4;      <span class="comment">/*</span><span class="comment"> 0x00000004 </span><span class="comment">*/</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> num_groups</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* number of free/busy groups */</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> num_events</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* total number of free/busy objects */</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> unknown_3</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* 0x00000008 */</span>
+<span class="normal">    </span><span class="usertype">guint32</span><span class="normal"> unknown_4</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* 0x00000004 */</span>
 
-        guint64 first_event;    <span class="comment">/*</span><span class="comment"> Windows filetime of start of first event </span><span class="comment">*/</span>
-        guint64 last_event;     <span class="comment">/*</span><span class="comment"> Windows filetime of end of last event </span><span class="comment">*/</span>
-        guint64 start_valid;    <span class="comment">/*</span><span class="comment"> Windows filetime of start of range </span><span class="comment">*/</span>
-        guint64 end_valid;      <span class="comment">/*</span><span class="comment"> Windows filetime of end of range </span><span class="comment">*/</span>
+<span class="normal">    </span><span class="usertype">guint64</span><span class="normal"> first_event</span><span class="symbol">;</span><span class="normal">    </span><span class="comment">/* Windows filetime of start of first event */</span>
+<span class="normal">    </span><span class="usertype">guint64</span><span class="normal"> last_event</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* Windows filetime of end of last event */</span>
+<span class="normal">    </span><span class="usertype">guint64</span><span class="normal"> start_valid</span><span class="symbol">;</span><span class="normal">    </span><span class="comment">/* Windows filetime of start of range */</span>
+<span class="normal">    </span><span class="usertype">guint64</span><span class="normal"> end_valid</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* Windows filetime of end of range */</span>
 
-        <span class="type">struct</span> {
-                guint32 index;  <span class="comment">/*</span><span class="comment"> Index of first event belonging to this group </span><span class="comment">*/</span>
-                guint32 count;  <span class="comment">/*</span><span class="comment"> Number of events in this group </span><span class="comment">*/</span>
-        } groups[num_groups];
+<span class="normal">    </span><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="usertype">guint32</span><span class="normal"> index</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* Index of first event belonging to this group */</span>
+<span class="normal">        </span><span class="usertype">guint32</span><span class="normal"> count</span><span class="symbol">;</span><span class="normal">  </span><span class="comment">/* Number of events in this group */</span>
+<span class="normal">    </span><span class="cbracket">}</span><span class="normal"> groups</span><span class="symbol">[</span><span class="normal">num_groups</span><span class="symbol">];</span>
 
-        <span class="type">struct</span> {
-                guint32 offset; <span class="comment">/*</span><span class="comment"> Offset in minutes of event from start of group </span><span class="comment">*/</span>
-                guint len:<span class="number">13</span>; <span class="comment">/*</span><span class="comment"> Length of event in minutes </span><span class="comment">*/</span>
-                guint status:<span class="number">3</span>;       <span class="comment">/*</span><span class="comment"> Status (1 = tentative, 2 = busy, 3 = oof) </span><span class="comment">*/</span>
-        } events[num_events];
-};</pre></td>
+<span class="normal">    </span><span class="keyword">struct</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="usertype">guint32</span><span class="normal"> offset</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* Offset in minutes of event from start of group */</span>
+<span class="normal">        </span><span class="usertype">guint</span><span class="normal"> len</span><span class="symbol">:</span><span class="number">13</span><span class="symbol">;</span><span class="normal">   </span><span class="comment">/* Length of event in minutes */</span>
+<span class="normal">        </span><span class="usertype">guint</span><span class="normal"> status</span><span class="symbol">:</span><span class="number">3</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* Status (1 = tentative, 2 = busy, 3 = oof) */</span>
+<span class="normal">    </span><span class="cbracket">}</span><span class="normal"> events</span><span class="symbol">[</span><span class="normal">num_events</span><span class="symbol">];</span>
+<span class="cbracket">}</span><span class="symbol">;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -444,6 +444,6 @@ tested this.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

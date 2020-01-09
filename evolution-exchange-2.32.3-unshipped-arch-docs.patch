@@ -1,0 +1,20 @@
+diff --git a/docs/reference/evolution-exchange-docs.sgml b/docs/reference/evolution-exchange-docs.sgml
+index 88ed714..af394dd 100644
+--- a/docs/reference/evolution-exchange-docs.sgml
++++ b/docs/reference/evolution-exchange-docs.sgml
+@@ -7,15 +7,6 @@
+   </bookinfo>
+ 
+   <chapter>
+-    <title>Exchange Architectural Notes</title>
+-    <xi:include href="arch/bug-private.xml"/>
+-    <xi:include href="arch/bug-xml.xml"/>
+-    <xi:include href="arch/calendar.xml"/>
+-    <xi:include href="arch/mail.xml"/>
+-    <xi:include href="arch/ntlm.xml"/>
+-  </chapter>
+-
+-  <chapter>
+     <title>Implementation of Connector Features</title>
+     <xi:include href="features/autoconfig.xml"/>
+     <xi:include href="features/booking.xml"/>

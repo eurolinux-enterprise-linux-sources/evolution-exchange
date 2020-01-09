@@ -1,0 +1,38 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/libedata-book-compat.c.double-free-crash evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/libedata-book-compat.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/libedata-book-compat.c.double-free-crash	2013-07-15 19:12:17.503166900 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/libedata-book-compat.c	2013-07-15 19:14:00.893159830 +0200
+@@ -22,13 +22,14 @@
+ 
+ #if ! EDS_CHECK_VERSION (3,1,0)
+ static GList *
+-convert_slist_to_list (GSList *slist)
++convert_slist_to_list (GSList *slist,
++		       gboolean copy_data)
+ {
+ 	GSList *sl = NULL;
+ 	GList *l = NULL;
+ 
+ 	for (sl = slist; sl != NULL; sl = g_slist_next (sl))
+-		l = g_list_prepend (l, sl->data);
++		l = g_list_prepend (l, copy_data ? g_strdup (sl->data) : sl->data);
+ 	l = g_list_reverse (l);
+ 
+ 	return l;
+@@ -38,7 +39,7 @@ convert_slist_to_list (GSList *slist)
+ void	e_data_book_respond_remove_contacts_compat (EDataBook *book, guint32 opid, GError *error, const GSList *ids)
+ {
+ #if ! EDS_CHECK_VERSION (3,1,0)
+-	GList *l = convert_slist_to_list ((GSList *) ids);
++	GList *l = convert_slist_to_list ((GSList *) ids, FALSE);
+ 	e_data_book_respond_remove_contacts (book, opid, error, l);
+ 	g_list_free (l);
+ #else
+@@ -49,7 +50,7 @@ void	e_data_book_respond_remove_contacts
+ void	e_data_book_respond_get_contact_list_compat (EDataBook *book, guint32 opid, GError *error, const GSList *cards)
+ {
+ #if ! EDS_CHECK_VERSION (3,1,0)
+-	GList *l = convert_slist_to_list ((GSList *) cards);
++	GList *l = convert_slist_to_list ((GSList *) cards, TRUE);
+ 	e_data_book_respond_get_contact_list (book, opid, error, l);
+ 	g_list_free (l);
+ #else

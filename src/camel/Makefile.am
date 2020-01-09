@@ -3,17 +3,19 @@
 CAMEL_provider_LTLIBRARIES = libcamelexchange.la
 CAMEL_provider_DATA = libcamelexchange.urls
 
-AM_CPPFLAGS = \
-	$(WARN_CFLAGS) \
-	$(GLIB_CFLAGS) \
-	$(CAMEL_CFLAGS) \
-	$(SHELL_CFLAGS) \
-	$(LIBEXCHANGE_CFLAGS) \
+libcamelexchange_la_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	$(EVOLUTION_PLUGIN_CFLAGS) \
+	-I$(top_srcdir) \
+	-I$(top_srcdir)/tools \
+	-I$(top_srcdir)/server/lib \
+	-I$(top_srcdir)/server/storage \
+	-I$(top_builddir)/server/lib \
 	-DPREFIX=\"$(prefix)\" \
 	-DCONNECTOR_LOCALEDIR=\"$(localedir)\" \
 	-DG_LOG_DOMAIN=\"camel-exchange-provider\"
 
-libcamelexchange_la_SOURCES =  \
+libcamelexchange_la_SOURCES = \
 	camel-exchange-folder.c \
 	camel-exchange-provider.c \
 	camel-exchange-journal.c \
@@ -21,8 +23,8 @@ libcamelexchange_la_SOURCES =  \
 	camel-exchange-store.c \
 	camel-exchange-summary.c \
 	camel-exchange-transport.c \
-	camel-stub-marshal.c \
-	camel-stub.c
+	camel-exchange-utils.c \
+	mail-utils.c
 
 noinst_HEADERS = \
 	camel-exchange-folder.h \
@@ -31,18 +33,18 @@ noinst_HEADERS = \
 	camel-exchange-store.h \
 	camel-exchange-summary.h \
 	camel-exchange-transport.h \
-	camel-stub-constants.h \
-	camel-stub-marshal.h \
-	camel-stub.h
+	camel-exchange-utils.h \
+	mail-utils.h
 
-libcamelexchange_la_LDFLAGS = -avoid-version -module $(NO_UNDEFINED)
+libcamelexchange_la_LDFLAGS = \
+	-avoid-version -module $(NO_UNDEFINED)
 
-libcamelexchange_la_LIBADD =  \
+libcamelexchange_la_LIBADD = \
+	$(top_builddir)/tools/libevolution-exchange-shared.la \
+	$(EVOLUTION_PLUGIN_LIBS) \
 	$(LDAP_LIBS) \
-	$(LIBEXCHANGE_LIBS) \
-	$(EXCHANGE_STORAGE_LIBS) \
 	$(SOCKET_LIBS) \
-	$(PTHREAD_LIB)
+	$(DNS_LIBS)
 
 EXTRA_DIST = libcamelexchange.urls
 

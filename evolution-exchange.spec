@@ -1,38 +1,98 @@
 %define intltool_version 0.35.5
-%define libsoup_version 2.3.0
+%define libsoup_version 2.28.2-4
 
-%define evo_major 2.28
-%define eds_major 1.2
+%define evo_base_version 2.32
+%define eds_api_version 1.2
 
 # Make sure the evolution package is upgraded first, or else this variable
 # will come up empty and lead to the following libtool error.
 #
-# 	libtool: link: only absolute run-paths are allowed
+#      libtool: link: only absolute run-paths are allowed
 #
 # The error is caused by the -R ${plibdir} substitution below; -R requires
 # an argument and libtool does not complain until late in the game.  Seems
 # like it could be smarter about this.
 %define plibdir %(pkg-config evolution-shell --variable=privlibdir 2>/dev/null)
 
+%define evo_ews_name evolution-ews-gnome-3-0.gitcc16df2
+
 ### Abstract ###
 
 Name: evolution-exchange
-Version: 2.28.3
-Release: 2%{?dist}
+Version: 2.32.3
+Release: 16%{?dist}
 Group: Applications/Productivity
 Summary: Evolution plugin to interact with MS Exchange Server
 License: GPLv2+
 URL: http://projects.gnome.org/evolution/
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-Source: http://download.gnome.org/sources/%{name}/2.28/%{name}-%{version}.tar.bz2
-ExcludeArch: s390 s390x
+Source: http://download.gnome.org/sources/%{name}/2.32/%{name}-%{version}.tar.bz2
+Source1: evolution-ews-gnome-3-0.gitcc16df2.tar.gz
 
 Provides: evolution-connector = %{version}-%{release}
 Obsoletes: evolution-connector < %{version}-%{release}
 
 ### Patches ###
 
-Patch11: evolution-exchange-2.10.1-fix-64bit-acinclude.patch
+Patch01: evolution-exchange-2.10.1-fix-64bit-acinclude.patch
+
+# Forgot to include some architecture documents in the tarball.
+# Remove references to them in evolution-exchange-docs.sgml to
+# avoid a build break.
+Patch02: evolution-exchange-2.32.3-unshipped-arch-docs.patch
+
+# Translation updates
+Patch03: evolution-exchange-2.32.3-translation-updates-eex.patch
+
+# Address some of the Coverity scan issues
+Patch04: evolution-exchange-2.32.3-covscan-issues-eex.patch
+
+## evolution-ews patches, with offset 100 ##
+
+# sync (backport) 3.8.2 changes with gnome-3-0 branch at git commit cc16df2
+Patch101: evolution-ews-gnome-3-0.gitcc16df2-sync-with-3.8.2.patch
+
+# sync ews with 3.8.3 changes
+Patch102: evolution-ews-gnome-3-0.gitcc16df2-sync-with-3.8.3.patch
+
+# ews check for account completion blocks an account with None receiving type
+Patch103: evolution-ews-gnome-3-0.gitcc16df2-account-type-check.patch
+
+# RH bug #984531
+Patch104: evolution-ews-gnome-3-0.gitcc16df2-book-double-free-crash.patch
+
+# sync ews with 3.8.4 changes, except of GNOME-bug #703181
+Patch105: evolution-ews-gnome-3-0.gitcc16df2-sync-with-3.8.4.patch
+
+# RH bug #984961
+Patch106: evolution-ews-gnome-3-0.gitcc16df2-multiple-contacts-remove.patch
+
+# RH bug #985015
+Patch107: evolution-ews-gnome-3-0.gitcc16df2-empty-search-hides-contacts.patch
+
+# sync ews with 3.8.5 changes
+Patch108: evolution-ews-gnome-3-0.gitcc16df2-sync-with-3.8.5.patch
+
+# Translation updates
+Patch109: evolution-ews-gnome-3-0.gitcc16df2-translation-updates-ews.patch
+
+# regression of GNOME bug #702922
+Patch110: evolution-ews-gnome-3-0.gitcc16df2-3.8.5-create-appointments.patch
+
+# RH bug #1006336
+Patch111: evolution-ews-gnome-3-0.gitcc16df2-get-attachments-prototype-fix.patch
+
+# RH bug #1009470
+Patch112: evolution-ews-gnome-3-0.gitcc16df2-no-offline-sync-gal-crash.patch
+
+# RH bug #1005888
+Patch113: evolution-ews-gnome-3-0.gitcc16df2-no-alarm-after-start-capability.patch
+
+# RH bug #1018301
+Patch114: evolution-ews-gnome-3-0.gitcc16df2-free-busy-fetch-and-crash.patch
+
+# RH bug #1019434
+Patch115: evolution-ews-gnome-3-0.gitcc16df2-searchable-gal.patch
 
 ### Dependencies ###
 
@@ -44,8 +104,8 @@ Requires: openldap
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: db4-devel
-BuildRequires: evolution-data-server-devel >= %{version}
-BuildRequires: evolution-devel >= %{version}
+BuildRequires: evolution-data-server-devel >= 2.32.3-9
+BuildRequires: evolution-devel >= 2.32.3-27
 BuildRequires: gettext
 BuildRequires: gnome-common
 BuildRequires: gnutls-devel
@@ -55,26 +115,61 @@ BuildRequires: libsoup-devel >= %{libsoup_version}
 BuildRequires: libtool >= 1.5
 BuildRequires: openldap-evolution-devel
 BuildRequires: openssl-devel
+BuildRequires: krb5-devel
 
 %description
 This package enables added functionality to Evolution when used with a 
-Microsoft Exchange Server.
+Microsoft Exchange Server 2003. It contains also Exchange Web Services (EWS)
+connector, which can connect to Microsoft Exchange 2007 and later servers.
 
 %prep
 %setup -q -n evolution-exchange-%{version}
+%patch01 -p1 -b .fix-64bit-acinclude
+%patch02 -p1 -b .unshipped-arch-docs
+%patch03 -p1 -b .translation-updates-eex
+%patch04 -p1 -b .covscan-issues-eex
 
-%patch11 -p1 -b .fix-64bit-acinclude
+# evolution-ews setup - is as unpacked a subdirectory of evolution
+
+%setup -T -D -a 1
+
+pushd %{evo_ews_name}
+%patch101 -p1 -b .sync-with-3.8.2
+%patch102 -p1 -b .sync-with-3.8.3
+%patch103 -p1 -b .account-type-check
+%patch104 -p1 -b .book-double-free-crash
+%patch105 -p1 -b .sync-with-3.8.4
+%patch106 -p1 -b .multiple-contacts-remove
+%patch107 -p1 -b .empty-search-hides-contacts
+%patch108 -p1 -b .sync-with-3.8.5
+%patch109 -p1 -b .translation-updates-ews
+%patch110 -p1 -b .3.8.5-create-appointments
+%patch111 -p1 -b .get-attachments-prototype-fix
+%patch112 -p1 -b .no-offline-sync-gal-crash
+%patch113 -p1 -b .no-alarm-after-start-capability
+%patch114 -p1 -b .free-busy-fetch-and-crash
+%patch115 -p1 -b .searchable-gal
+
+popd
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS -DLDAP_DEPRECATED"
+export CPPFLAGS="-I%{_includedir}/et"
+export CFLAGS="$RPM_OPT_FLAGS -DLDAP_DEPRECATED -fPIC"
 # Set LIBS so that configure will be able to link with static LDAP libraries,
 # which depend on Cyrus SASL and OpenSSL.
 if pkg-config openssl ; then
-	LIBS="-lsasl2 `pkg-config --libs openssl`"
+	export LIBS="-lsasl2 `pkg-config --libs openssl`"
 else
-	LIBS="-lsasl2 -lssl -lcrypto"
+	export LIBS="-lsasl2 -lssl -lcrypto"
 fi
-export LIBS
+
+# newer versions of openldap are built with Mozilla NSS crypto, so also need
+# those libs to link with the static ldap libs
+if pkg-config nss ; then
+    export LIBS="$LIBS `pkg-config --libs nss`"
+else
+    export LIBS="$LIBS -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4"
+fi
 
 # Regenerate configure to pick up acinclude.m4 changes.
 autoreconf --force --install
@@ -82,46 +177,152 @@ autoreconf --force --install
 %configure \
   --enable-gtk-doc \
   --with-openldap=%{_libdir}/evolution-openldap \
-  --with-static-ldap
+  --with-static-ldap \
+  --with-krb5=%{_prefix}
 
 make %{?_smp_mflags} LDFLAGS="-R %{plibdir}"
+
+# evolution-ews build part
+
+pushd %{evo_ews_name}
+autoreconf --force --install
+%configure --with-internal-lzx
+make %{?_smp_mflags}
+popd
 
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
-rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution-data-server-%{eds_major}/camel-providers/*.a
-rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution-data-server-%{eds_major}/camel-providers/*.la
-%find_lang evolution-exchange-%{evo_major}
+rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution-data-server-%{eds_api_version}/extensions/libebookbackendexchange.la
+rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution-data-server-%{eds_api_version}/extensions/libecalbackendexchange.la
+rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution-data-server-%{eds_api_version}/camel-providers/*.a
+rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution-data-server-%{eds_api_version}/camel-providers/libcamelexchange.la
+rm -f $RPM_BUILD_ROOT/%{_libdir}/evolution/%{evo_base_version}/plugins/liborg-gnome-exchange-operations.la
+
+%find_lang evolution-exchange-%{evo_base_version}
+
+# evolution-ews install part
+
+pushd %{evo_ews_name}
+make install DESTDIR=$RPM_BUILD_ROOT
+
+# Remove files we don't want packaged (no devel subpackage).
+rm -r $RPM_BUILD_ROOT%{_includedir}/evolution-data-server-%{eds_api_version}/
+rm -r $RPM_BUILD_ROOT%{_datadir}/gtk-doc/html/evolution-exchange
+rm $RPM_BUILD_ROOT%{_libdir}/evolution-data-server-%{eds_api_version}/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/evolution-data-server-%{eds_api_version}/*.so
+rm $RPM_BUILD_ROOT%{_libdir}/evolution-data-server-%{eds_api_version}/*/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/evolution/%{evo_base_version}/plugins/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/evolution/%{evo_base_version}/modules/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/libeews-1.2.la
+rm $RPM_BUILD_ROOT%{_libdir}/libeews-1.2.so
+rm $RPM_BUILD_ROOT%{_libdir}/pkgconfig/libeews-1.2.pc
+
+%find_lang evolution-ews
+
+mkdir -p $RPM_BUILD_ROOT%{_defaultdocdir}/%{evo_ews_name}
+cp COPYING $RPM_BUILD_ROOT%{_defaultdocdir}/%{evo_ews_name}/
+cp NEWS $RPM_BUILD_ROOT%{_defaultdocdir}/%{evo_ews_name}/
+cp README $RPM_BUILD_ROOT%{_defaultdocdir}/%{evo_ews_name}/
+popd
 
 %post
 export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/apps_exchange_addressbook-%{evo_major}.schemas > /dev/null
+gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/apps_exchange_addressbook-%{evo_base_version}.schemas > /dev/null
 
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%files -f evolution-exchange-%{evo_major}.lang
+%files -f evolution-exchange-%{evo_base_version}.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING INSTALL NEWS docs/active-directory
 %doc docs/autoconfig docs/debug docs/forms
 %doc docs/http
-%{_bindir}/exchange-connector-setup-%{evo_major}
-%{_libdir}/bonobo/servers/GNOME_Evolution_Exchange_Storage_%{evo_major}.server
-%{_libdir}/evolution-data-server-%{eds_major}/camel-providers/libcamelexchange.so
-%{_libdir}/evolution-data-server-%{eds_major}/camel-providers/libcamelexchange.urls
-%{_libexecdir}/evolution/%{evo_major}/evolution-exchange-storage 
-%{_datadir}/gtk-doc/html/evolution-exchange
+%{_bindir}/exchange-connector-setup-%{evo_base_version}
+%{_libdir}/evolution-data-server-%{eds_api_version}/camel-providers/libcamelexchange.so
+%{_libdir}/evolution-data-server-%{eds_api_version}/camel-providers/libcamelexchange.urls
+%{_libdir}/evolution-data-server-%{eds_api_version}/extensions/libebookbackendexchange.so
+%{_libdir}/evolution-data-server-%{eds_api_version}/extensions/libecalbackendexchange.so
+%{_libdir}/evolution/%{evo_base_version}/plugins/liborg-gnome-exchange-operations.so
+%{_libdir}/evolution/%{evo_base_version}/plugins/org-gnome-exchange-operations.eplug
+%{_datadir}/evolution/%{evo_base_version}/errors/org-gnome-exchange-operations.error
+
 %dir %{_datadir}/evolution-exchange
-%dir %{_datadir}/evolution-exchange/%{evo_major}
-%dir %{_datadir}/evolution-exchange/%{evo_major}/glade
-%dir %{_datadir}/evolution-exchange/%{evo_major}/images
-%dir %{_datadir}/evolution-exchange/%{evo_major}/ui
-%{_datadir}/evolution-exchange/%{evo_major}/glade/*
-%{_datadir}/evolution-exchange/%{evo_major}/images/*
-%{_datadir}/evolution-exchange/%{evo_major}/ui/*
-%{_sysconfdir}/gconf/schemas/apps_exchange_addressbook-%{evo_major}.schemas
+%dir %{_datadir}/evolution-exchange/%{evo_base_version}
+%dir %{_datadir}/evolution-exchange/%{evo_base_version}/images
+%dir %{_datadir}/evolution-exchange/%{evo_base_version}/ui
+%{_datadir}/evolution-exchange/%{evo_base_version}/images/*
+%{_datadir}/evolution-exchange/%{evo_base_version}/ui/*
+%{_sysconfdir}/gconf/schemas/apps_exchange_addressbook-%{evo_base_version}.schemas
+
+# evolution-ews files - part of main evolution rpm
+
+# replaces the %doc section for evolution-ews
+%{_defaultdocdir}/%{evo_ews_name}/*
+%{_libdir}/libeews-1.2.so.*
+%{_libdir}/evolution-data-server-%{eds_api_version}/libewsutils.so.*
+%{_libdir}/evolution-data-server-%{eds_api_version}/extensions/libebookbackendews.so
+%{_libdir}/evolution-data-server-%{eds_api_version}/extensions/libecalbackendews.so
+%{_libdir}/evolution-data-server-%{eds_api_version}/camel-providers/libcamelews.so
+%{_libdir}/evolution-data-server-%{eds_api_version}/camel-providers/libcamelews.urls
+%{_libdir}/evolution/%{evo_base_version}/modules/module-ews-ui-config.so
+%{_libdir}/evolution/%{evo_base_version}/plugins/liborg-gnome-exchange-ews.so
+%{_libdir}/evolution/%{evo_base_version}/plugins/org-gnome-exchange-ews.eplug
+%{_datadir}/locale/*/*/evolution-ews.mo
 
 %changelog
+* Fri Oct 18 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-16.el6
+- Add patch for RH bug #1019434 (evolution-ews searchable GAL)
+
+* Mon Oct 14 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-15.el6
+- Add patch for RH bug #1018301 (evolution-ews crash and broken Free/Busy fetch)
+
+* Wed Sep 18 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-14.el6
+- Add patch for RH bug #1009470 (evolution-ews crash when GAL not marked for offline sync)
+- Add patch for RH bug #1005888 (evolution-ews add 'no-alarm-after-start' calendar capability)
+
+* Tue Sep 10 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-13.el6
+- Add patch for RH bug #1006336 (evolution-ews fails to download attachments)
+
+* Fri Aug 23 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-12.el6
+- Do not ship gtk-doc files (RH bug #1000325)
+
+* Fri Aug 16 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-11.el6
+- Add patch to regression of GNOME bug #702922 (Cannot create appointments)
+
+* Wed Aug 14 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-10.el6
+- Add patch for some issues found by Coverity scan in evolution-exchange
+
+* Wed Aug 14 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-9.el6
+- Update translation patch for evolution-exchange
+
+* Mon Aug 12 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-8.el6
+- Add patches for translation updates
+
+* Mon Aug 12 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-7.el6
+- Add patch for evolution-ews to match 3.8.5 upstream release
+
+* Thu Jul 25 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-6.el6
+- Update patch for evolution-ews to match 3.8.4 upstream release (RH bug #988356)
+
+* Wed Jul 24 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-5.el6
+- Add patch for evolution-ews to match 3.8.4 upstream release
+- Add patch for RH bug #984961 (evolution-ews multiple contacts remove hang)
+- Add patch for RH bug #985015 (evolution-ews empty search hides contacts)
+
+* Mon Jul 15 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-4.el6
+- Add patch for RH bug #984531 (evolution-ews double-free in book backend)
+
+* Mon Jul 08 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-3.el6
+- Add patch for evolution-ews to fix account type check in new account wizard
+
+* Mon Jun 10 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-2.el6
+- Add patch for evolution-ews to match 3.8.3 upstream release
+
+* Thu Jun 06 2013 Milan Crha <mcrha@redhat.com> - 2.32.3-1.el6
+- Rebase to 2.32.3
+- Bundle evolution-ews as part of this, with feature parity of its 3.8.2 release
+
 * Wed Mar 31 2010 Matthew Barnes <mbarnes@redhat.com> - 2.28.3-2.el6
 - Don't install libtool archives (RH bug #564489).
 

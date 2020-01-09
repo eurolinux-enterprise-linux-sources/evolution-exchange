@@ -29,9 +29,6 @@
 
 #include <glib/gi18n-lib.h>
 
-#include <camel/camel-provider.h>
-#include <camel/camel-session.h>
-#include <camel/camel-url.h>
 #include "camel-exchange-store.h"
 #include "camel-exchange-transport.h"
 
@@ -75,7 +72,7 @@ CamelProviderConfEntry exchange_conf_entries[] = {
 	/* extra Exchange configuration settings */
 	{ CAMEL_PROVIDER_CONF_SECTION_START, "activedirectory", NULL,
 	  /* i18n: GAL is an Outlookism, AD is a Windowsism */
-	  N_("Global Address List / Active Directory") },
+	  N_("Global Address List/Active Directory") },
 	{ CAMEL_PROVIDER_CONF_ENTRY, "ad_server", NULL,
 	  /* i18n: "Global Catalog" is a Windowsism, but it's a
 	     technical term and may not have translations? */
@@ -86,6 +83,8 @@ CamelProviderConfEntry exchange_conf_entries[] = {
 	  N_("Authentication _Type:"), "default:Secure or Plaintext Password:basic:Plaintext Password:ntlm:Secure Password" },
 	{ CAMEL_PROVIDER_CONF_CHECKBOX, "ad_browse", NULL,
 	  N_("Allow _browsing of the GAL until download limit is reached"), "0" },
+	{ CAMEL_PROVIDER_CONF_CHECKBOX, "ad_expand_groups", NULL,
+	  N_("_Expand groups of contacts in GAL to contact lists"), "0" },
 	{ CAMEL_PROVIDER_CONF_SECTION_END },
 	{ CAMEL_PROVIDER_CONF_SECTION_START, "generals", NULL,
 	  N_("Options") },
@@ -149,7 +148,7 @@ CamelServiceAuthType camel_exchange_password_authtype = {
 
 static gint
 exchange_auto_detect_cb (CamelURL *url, GHashTable **auto_detected,
-			 CamelException *ex)
+			 GError **error)
 {
 	*auto_detected = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -168,6 +167,7 @@ camel_provider_module_init (void)
 {
 	gint i;
 
+	exchange_provider.translation_domain = (gchar *) GETTEXT_PACKAGE;
 	exchange_provider.object_types[CAMEL_PROVIDER_STORE] = camel_exchange_store_get_type ();
 	exchange_provider.object_types[CAMEL_PROVIDER_TRANSPORT] = camel_exchange_transport_get_type ();
 	exchange_provider.authtypes = g_list_prepend (g_list_prepend (NULL, &camel_exchange_password_authtype), &camel_exchange_ntlm_authtype);
@@ -177,12 +177,10 @@ camel_provider_module_init (void)
 
 	bindtextdomain (GETTEXT_PACKAGE, CONNECTOR_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	exchange_provider.translation_domain = (gchar *) GETTEXT_PACKAGE;
-	exchange_provider.translation_domain = (gchar *) GETTEXT_PACKAGE;
 
 	/* 'auth_types' is not used anywhere else, it's there just for localization of the 'al_auth' */
-	for (i = 0; auth_types [i]; i++) {
-		auth_types [i] = _(auth_types [i]);
+	for (i = 0; auth_types[i]; i++) {
+		auth_types[i] = _(auth_types[i]);
 	}
 
 	camel_provider_register (&exchange_provider);

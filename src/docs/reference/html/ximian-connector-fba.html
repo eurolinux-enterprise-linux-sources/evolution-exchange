@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Exchange 2003 Forms-Based Authentication</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="Evolution Connector for Microsoft Exchange Programmer’s Reference Manual">
 <link rel="up" href="ch02.html" title="Implementation of Connector Features">
 <link rel="prev" href="ximian-connector-favorites.html" title="Favorite Public Folders">
 <link rel="next" href="ximian-connector-freebusy.html" title="Free/Busy Searches">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">Evolution Connector for Microsoft Exchange Programmer’s Reference Manual</th>
 <td><a accesskey="n" href="ximian-connector-freebusy.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" lang="en">
+<div class="refentry" title="Exchange 2003 Forms-Based Authentication">
 <a name="ximian-connector-fba"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -117,12 +117,12 @@ password:
 4
 5
 6</pre></td>
-        <td class="listing_code"><pre class="programlisting">POST /exchweb/bin/auth/owaauth.dll HTTP/<span class="number">1.1</span>
-<span class="keyword">Host</span>: ex2k3.xcs.ximian.com
-Content-Type: application/x-www-form-urlencoded
-Content-Length: &lt;em <span class="type">class</span>=<span class="number">&quot;replaceable&quot;</span>&gt;&lt;code&gt;len&lt;/code&gt;&lt;/em&gt;
+        <td class="listing_code"><pre class="programlisting"><span class="normal">POST </span><span class="symbol">/</span><span class="normal">exchweb</span><span class="symbol">/</span><span class="normal">bin</span><span class="symbol">/</span><span class="normal">auth</span><span class="symbol">/</span><span class="normal">owaauth</span><span class="symbol">.</span><span class="usertype">dll</span><span class="normal"> HTTP</span><span class="symbol">/</span><span class="number">1.1</span>
+<span class="normal">Host</span><span class="symbol">:</span><span class="normal"> ex2k3</span><span class="symbol">.</span><span class="normal">xcs</span><span class="symbol">.</span><span class="normal">ximian</span><span class="symbol">.</span><span class="normal">com</span>
+<span class="normal">Content</span><span class="symbol">-</span><span class="normal">Type</span><span class="symbol">:</span><span class="normal"> application</span><span class="symbol">/</span><span class="normal">x</span><span class="symbol">-</span><span class="normal">www</span><span class="symbol">-</span><span class="normal">form</span><span class="symbol">-</span><span class="normal">urlencoded</span>
+<span class="normal">Content</span><span class="symbol">-</span><span class="normal">Length</span><span class="symbol">:</span><span class="normal"> </span><span class="symbol">&lt;</span><span class="usertype">em</span><span class="normal"> class</span><span class="symbol">=</span><span class="string">"replaceable"</span><span class="symbol">&gt;&lt;</span><span class="normal">code</span><span class="symbol">&gt;</span><span class="normal">len</span><span class="symbol">&lt;/</span><span class="normal">code</span><span class="symbol">&gt;&lt;/</span><span class="normal">em</span><span class="symbol">&gt;</span>
 
-destination=https%3A%<span class="number">2F</span>%<span class="number">2F</span>ex2k3.xcs.ximian.com%<span class="number">2F</span>exchange%<span class="number">2F</span>&amp;flags=<span class="number">0</span>&amp;username=&lt;em <span class="type">class</span>=<span class="number">&quot;replaceable&quot;</span>&gt;&lt;code&gt;username&lt;/code&gt;&lt;/em&gt;&amp;password=&lt;em <span class="type">class</span>=<span class="number">&quot;replaceable&quot;</span>&gt;&lt;code&gt;password&lt;/code&gt;&lt;/em&gt;&amp;SubmitCreds=Log+On&amp;trusted=<span class="number">4</span></pre></td>
+<span class="normal">destination</span><span class="symbol">=</span><span class="normal">https</span><span class="symbol">%</span><span class="normal">3A</span><span class="symbol">%</span><span class="normal">2F</span><span class="symbol">%</span><span class="normal">2Fex2k3</span><span class="symbol">.</span><span class="normal">xcs</span><span class="symbol">.</span><span class="normal">ximian</span><span class="symbol">.</span><span class="normal">com</span><span class="symbol">%</span><span class="normal">2Fexchange</span><span class="symbol">%</span><span class="normal">2F</span><span class="symbol">&amp;</span><span class="normal">flags</span><span class="symbol">=</span><span class="number">0</span><span class="symbol">&amp;</span><span class="normal">username</span><span class="symbol">=&lt;</span><span class="usertype">em</span><span class="normal"> class</span><span class="symbol">=</span><span class="string">"replaceable"</span><span class="symbol">&gt;&lt;</span><span class="normal">code</span><span class="symbol">&gt;</span><span class="normal">username</span><span class="symbol">&lt;/</span><span class="normal">code</span><span class="symbol">&gt;&lt;/</span><span class="normal">em</span><span class="symbol">&gt;&amp;</span><span class="normal">password</span><span class="symbol">=&lt;</span><span class="usertype">em</span><span class="normal"> class</span><span class="symbol">=</span><span class="string">"replaceable"</span><span class="symbol">&gt;&lt;</span><span class="normal">code</span><span class="symbol">&gt;</span><span class="normal">password</span><span class="symbol">&lt;/</span><span class="normal">code</span><span class="symbol">&gt;&lt;/</span><span class="normal">em</span><span class="symbol">&gt;&amp;</span><span class="normal">SubmitCreds</span><span class="symbol">=</span><span class="normal">Log</span><span class="symbol">+</span><span class="normal">On</span><span class="symbol">&amp;</span><span class="normal">trusted</span><span class="symbol">=</span><span class="number">4</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -143,14 +143,14 @@ To which the server responds:
 6
 7
 8</pre></td>
-        <td class="listing_code"><pre class="programlisting">HTTP/<span class="number">1.1</span> <span class="number">302</span> Moved Temporarily
-<span class="keyword">Server</span>: Microsoft-IIS/<span class="number">5.0</span>
-<span class="keyword">Date</span>: Thu, <span class="number">24</span> Jul <span class="number">2003</span> <span class="number">17</span>:<span class="number">23</span>:<span class="number">33</span> GMT
-X-Powered-By: ASP.NET
-<span class="keyword">Location</span>: https:<span class="comment">//ex2k3.xcs.ximian.com/exchange/</span>
-Set-Cookie: sessionid=fbb50caf-381a-<span class="number">4f</span>85-<span class="number">9582</span>-a7a902b4561f,<span class="number">0x409</span>; path=/
-Set-Cookie: cadata=<span class="number">&quot;2,8JOrhvROIJykiSTShG6Ujrigo+a5XQgEbws7tq3//37QERyFwWDoV7xw6DG+Awlm&quot;</span>; HttpOnly; secure; path=/
-Content-Length: <span class="number">0</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">HTTP</span><span class="symbol">/</span><span class="number">1.1</span><span class="normal"> </span><span class="number">302</span><span class="normal"> Moved Temporarily</span>
+<span class="normal">Server</span><span class="symbol">:</span><span class="normal"> Microsoft</span><span class="symbol">-</span><span class="normal">IIS</span><span class="symbol">/</span><span class="number">5.0</span>
+<span class="normal">Date</span><span class="symbol">:</span><span class="normal"> Thu</span><span class="symbol">,</span><span class="normal"> </span><span class="number">24</span><span class="normal"> Jul </span><span class="number">2003</span><span class="normal"> </span><span class="number">17</span><span class="symbol">:</span><span class="number">23</span><span class="symbol">:</span><span class="number">33</span><span class="normal"> GMT</span>
+<span class="normal">X</span><span class="symbol">-</span><span class="normal">Powered</span><span class="symbol">-</span><span class="normal">By</span><span class="symbol">:</span><span class="normal"> ASP</span><span class="symbol">.</span><span class="normal">NET</span>
+<span class="normal">Location</span><span class="symbol">:</span><span class="normal"> https</span><span class="symbol">:</span><span class="comment">//ex2k3.xcs.ximian.com/exchange/</span>
+<span class="normal">Set</span><span class="symbol">-</span><span class="normal">Cookie</span><span class="symbol">:</span><span class="normal"> sessionid</span><span class="symbol">=</span><span class="normal">fbb50caf</span><span class="symbol">-</span><span class="normal">381a</span><span class="symbol">-</span><span class="normal">4f85</span><span class="symbol">-</span><span class="number">9582</span><span class="symbol">-</span><span class="normal">a7a902b4561f</span><span class="symbol">,</span><span class="number">0x409</span><span class="symbol">;</span><span class="normal"> path</span><span class="symbol">=/</span>
+<span class="normal">Set</span><span class="symbol">-</span><span class="normal">Cookie</span><span class="symbol">:</span><span class="normal"> cadata</span><span class="symbol">=</span><span class="string">"2,8JOrhvROIJykiSTShG6Ujrigo+a5XQgEbws7tq3//37QERyFwWDoV7xw6DG+Awlm"</span><span class="symbol">;</span><span class="normal"> HttpOnly</span><span class="symbol">;</span><span class="normal"> secure</span><span class="symbol">;</span><span class="normal"> path</span><span class="symbol">=/</span>
+<span class="normal">Content</span><span class="symbol">-</span><span class="normal">Length</span><span class="symbol">:</span><span class="normal"> </span><span class="number">0</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -174,8 +174,8 @@ cookies:
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="keyword">Cookie</span>: sessionid=fbb50caf-381a-<span class="number">4f</span>85-<span class="number">9582</span>-a7a902b4561f,<span class="number">0x409</span>;
-        cadata=<span class="number">&quot;2,8JOrhvROIJykiSTShG6Ujrigo+a5XQgEbws7tq3//37QERyFwWDoV7xw6DG+Awlm&quot;</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">Cookie</span><span class="symbol">:</span><span class="normal"> sessionid</span><span class="symbol">=</span><span class="normal">fbb50caf</span><span class="symbol">-</span><span class="normal">381a</span><span class="symbol">-</span><span class="normal">4f85</span><span class="symbol">-</span><span class="number">9582</span><span class="symbol">-</span><span class="normal">a7a902b4561f</span><span class="symbol">,</span><span class="number">0x409</span><span class="symbol">;</span>
+<span class="normal">        cadata</span><span class="symbol">=</span><span class="string">"2,8JOrhvROIJykiSTShG6Ujrigo+a5XQgEbws7tq3//37QERyFwWDoV7xw6DG+Awlm"</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -198,10 +198,10 @@ Timeout</span></code>" cancelling the cookie:
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="number">440</span> Login Timeout
-Set-Cookie: sessionid=; path=/; expires=Thu, <span class="preproc">0</span><span class="number">1</span>-Jan-<span class="number">1970</span> <span class="preproc">0</span><span class="number">0</span>:<span class="preproc">0</span><span class="number">0</span>:<span class="preproc">0</span><span class="number">0</span> GMT
-Set-Cookie: cadata=; path=/; expires=Thu, <span class="preproc">0</span><span class="number">1</span>-Jan-<span class="number">1970</span> <span class="preproc">0</span><span class="number">0</span>:<span class="preproc">0</span><span class="number">0</span>:<span class="preproc">0</span><span class="number">0</span> GMT
-<span class="keyword">Connection</span>: close</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="number">440</span><span class="normal"> Login Timeout</span>
+<span class="normal">Set</span><span class="symbol">-</span><span class="normal">Cookie</span><span class="symbol">:</span><span class="normal"> sessionid</span><span class="symbol">=;</span><span class="normal"> path</span><span class="symbol">=/;</span><span class="normal"> expires</span><span class="symbol">=</span><span class="normal">Thu</span><span class="symbol">,</span><span class="normal"> </span><span class="number">01</span><span class="symbol">-</span><span class="normal">Jan</span><span class="symbol">-</span><span class="number">1970</span><span class="normal"> </span><span class="number">00</span><span class="symbol">:</span><span class="number">00</span><span class="symbol">:</span><span class="number">00</span><span class="normal"> GMT</span>
+<span class="normal">Set</span><span class="symbol">-</span><span class="normal">Cookie</span><span class="symbol">:</span><span class="normal"> cadata</span><span class="symbol">=;</span><span class="normal"> path</span><span class="symbol">=/;</span><span class="normal"> expires</span><span class="symbol">=</span><span class="normal">Thu</span><span class="symbol">,</span><span class="normal"> </span><span class="number">01</span><span class="symbol">-</span><span class="normal">Jan</span><span class="symbol">-</span><span class="number">1970</span><span class="normal"> </span><span class="number">00</span><span class="symbol">:</span><span class="number">00</span><span class="symbol">:</span><span class="number">00</span><span class="normal"> GMT</span>
+<span class="normal">Connection</span><span class="symbol">:</span><span class="normal"> close</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -216,6 +216,6 @@ get a new cookie.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

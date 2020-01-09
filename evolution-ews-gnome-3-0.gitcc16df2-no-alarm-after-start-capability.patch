@@ -1,0 +1,13 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.no-alarm-after-start-capability evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.no-alarm-after-start-capability	2013-09-18 18:15:23.251051235 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c	2013-09-18 18:15:23.262051235 +0200
+@@ -262,7 +262,8 @@ e_cal_backend_ews_get_static_capabilitie
+ 			 CAL_STATIC_CAPABILITY_NO_CONV_TO_ASSIGN_TASK ","
+ 		//	 CAL_STATIC_CAPABILITY_NO_CONV_TO_RECUR ","
+ 			 CAL_STATIC_CAPABILITY_NO_TASK_ASSIGNMENT ","
+-			 CAL_STATIC_CAPABILITY_SAVE_SCHEDULES);
++			 CAL_STATIC_CAPABILITY_SAVE_SCHEDULES ","
++			 "no-alarm-after-start");
+ 
+ 	e_data_cal_notify_static_capabilities (cal, context, NULL, capabilities);
+ }

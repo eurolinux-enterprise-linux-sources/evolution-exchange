@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Account Autoconfiguration</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="Evolution Connector for Microsoft Exchange Programmer’s Reference Manual">
 <link rel="up" href="ch02.html" title="Implementation of Connector Features">
 <link rel="prev" href="ch02.html" title="Implementation of Connector Features">
 <link rel="next" href="ximian-connnector-booking.html" title="Direct Booking of Resource Calendars">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">Evolution Connector for Microsoft Exchange Programmer’s Reference Manual</th>
 <td><a accesskey="n" href="ximian-connnector-booking.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" lang="en">
+<div class="refentry" title="Account Autoconfiguration">
 <a name="ximian-connector-autoconfig"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -36,8 +36,8 @@ Autoconfiguration attempts to figure all of these out automatically so
 that the user doesn't need to enter in any more information than is
 absolutely necessary.
 </p>
-<div class="refsect2" lang="en">
-<a name="id355964"></a><h3>The Initial WebDAV Connection</h3>
+<div class="refsect2" title="The Initial WebDAV Connection">
+<a name="id2969971"></a><h3>The Initial WebDAV Connection</h3>
 <p>
 To start things off, the user must provide three pieces of
 information: an <span class="application">OWA</span> URL, a username, and a
@@ -51,19 +51,19 @@ If the provided URL doesn't start with "<code class="literal">http://</code>" or
 "<code class="literal">https://</code>", Connector prepends that. From the URL
 we get:
 </p>
-<div class="itemizedlist"><ul type="disc">
-<li><p>Whether or not to use SSL (based on whether the
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Whether or not to use SSL (based on whether the
     provided URL is <code class="literal">http</code> or
     <code class="literal">https</code>).</p></li>
-<li><p>The name of the
+<li class="listitem"><p>The name of the
     <span class="application">Exchange</span> server to connect to (which
     may just be a front-end <span class="application">OWA</span> server).
     </p></li>
-<li><p>The port number to use, if non-standard
+<li class="listitem"><p>The port number to use, if non-standard
     </p></li>
-<li><p>The <span class="application">OWA</span> path
+<li class="listitem"><p>The <span class="application">OWA</span> path
     </p></li>
-<li><p><span class="emphasis"><em>Possibly</em></span> the user's mailbox
+<li class="listitem"><p><span class="emphasis"><em>Possibly</em></span> the user's mailbox
     name (if they provided a URL like
     <code class="uri">http://example.com/exchange/<em class="replaceable"><code>mailbox-name</code></em></code>
     rather than just <code class="uri">http://example.com/exchange/</code>).
@@ -135,14 +135,14 @@ various results possible:
 <td><p><span class="term"><code class="literal"><span class="errorcode">401</span> <span class="errorname">Unauthorized</span></code></span></p></td>
 <td>
 <p>Again, there are several possibilities:</p>
-<div class="itemizedlist"><ul type="disc">
-<li><p>If we were trying to use NTLM
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If we were trying to use NTLM
 	    authentication, but the server didn't offer NTLM, we can
 	    try falling back to Basic auth.</p></li>
-<li><p>Likewise, if we were trying to use Basic
+<li class="listitem"><p>Likewise, if we were trying to use Basic
 	    authentication, but the server didn't offer it, we can try
 	    NTLM.</p></li>
-<li><p>If we tried to use Basic auth, and didn't
+<li class="listitem"><p>If we tried to use Basic auth, and didn't
 	    provide an explicit domain name as part of the username,
 	    then we can suggest that the user try that.
 	    </p></li>
@@ -190,8 +190,8 @@ various results possible:
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
-<a name="id354111"></a><h3>Further WebDAV Probes</h3>
+<div class="refsect2" title="Further WebDAV Probes">
+<a name="id2968129"></a><h3>Further WebDAV Probes</h3>
 <p>
 At this point, we should have the HTML of the
 <span class="application">OWA</span> frame. (If we used NTLM authentication,
@@ -244,8 +244,8 @@ authentication instead.
 </p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
-<a name="id354287"></a><h3>The Global Catalog Server</h3>
+<div class="refsect2" title="The Global Catalog Server">
+<a name="id2963455"></a><h3>The Global Catalog Server</h3>
 <p>
 At the moment, we can only autodetect the Global Catalog server if we
 are using NTLM authentication and managed to autodetect the
@@ -270,8 +270,8 @@ autodetection is complete.
 </p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
-<a name="id354348"></a><h3>Autoconfiguration Hints</h3>
+<div class="refsect2" title="Autoconfiguration Hints">
+<a name="id2963522"></a><h3>Autoconfiguration Hints</h3>
 <p>
 It is possible for a system administrator to provide hints to the
 autoconfig process, to make things easier on users. This is done by
@@ -290,8 +290,8 @@ It consists of a series of lines such as:
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting">OWA-URL: https:<span class="comment">//exchange.rupertcorp.com/exchange/</span>
-Disable-Plaintext: <span class="number">true</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">OWA</span><span class="symbol">-</span><span class="normal">URL</span><span class="symbol">:</span><span class="normal"> https</span><span class="symbol">:</span><span class="comment">//exchange.rupertcorp.com/exchange/</span>
+<span class="normal">Disable</span><span class="symbol">-</span><span class="normal">Plaintext</span><span class="symbol">:</span><span class="normal"> true</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -340,6 +340,6 @@ The available hints are:
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

@@ -558,7 +558,6 @@ static const gchar *task_props[] = {
         E2K_PR_EXCHANGE_KEYWORDS,
         E2K_PR_CALENDAR_URL
 };
-static const gint n_task_props = sizeof (task_props) / sizeof (task_props[0]);
 
 static guint
 get_changed_tasks (ECalBackendExchange *cbex)
@@ -611,7 +610,7 @@ get_changed_tasks (ECalBackendExchange *cbex)
 
         iter = e_folder_exchange_search_start (cbex->folder, NULL,
 					       task_props,
-					       n_task_props,
+					       G_N_ELEMENTS (task_props),
 					       rn, NULL, TRUE);
         e2k_restriction_unref (rn);
 
@@ -647,7 +646,7 @@ get_changed_tasks (ECalBackendExchange *cbex)
 		}
 		e_cal_backend_exchange_cache_unlock (cbex);
 
-		e_cal_backend_exchange_add_timezone (cbex, icalcomp);
+		e_cal_backend_exchange_add_timezone (cbex, icalcomp, NULL);
 
 		itt = icaltime_from_timet (e2k_parse_timestamp (modtime), 0);
 		if (!icaltime_is_null_time (itt)) {
@@ -986,43 +985,54 @@ notify_changes (E2kContext *ctx, const gchar *uri,
 
 }
 
-static ECalBackendSyncStatus
+static void
 open_task (ECalBackendSync *backend, EDataCal *cal,
 	   gboolean only_if_exits,
-	   const gchar *username, const gchar *password)
+	   const gchar *username, const gchar *password, GError **perror)
 {
-	ECalBackendSyncStatus status;
 	GThread *thread = NULL;
 	GError *error = NULL;
 	ECalBackendExchangeTasks *cbext = E_CAL_BACKEND_EXCHANGE_TASKS (backend);
 
-	status = E_CAL_BACKEND_SYNC_CLASS (parent_class)->open_sync (backend,
-				     cal, only_if_exits, username, password);
-	if (status != GNOME_Evolution_Calendar_Success)
-		return status;
+	E_CAL_BACKEND_SYNC_CLASS (parent_class)->open_sync (backend,
+				     cal, only_if_exits, username, password, &error);
+	if (error) {
+		g_propagate_error (perror, error);
+		return;
+	}
 
 	if (!e_cal_backend_exchange_is_online (E_CAL_BACKEND_EXCHANGE (backend))) {
 		d(printf ("ECBEC : calendar is offline\n"));
-		return GNOME_Evolution_Calendar_Success;
+		return;
 	}
 
 	if (cbext->priv->is_loaded)
-		return GNOME_Evolution_Calendar_Success;
+		return;
 
 	/* Subscribe to the folder to notice changes */
         e_folder_exchange_subscribe (E_CAL_BACKEND_EXCHANGE (backend)->folder,
                                         E2K_CONTEXT_OBJECT_CHANGED, 30,
                                         notify_changes, backend);
+        e_folder_exchange_subscribe (E_CAL_BACKEND_EXCHANGE (backend)->folder,
+                                        E2K_CONTEXT_OBJECT_ADDED, 30,
+                                        notify_changes, backend);
+        e_folder_exchange_subscribe (E_CAL_BACKEND_EXCHANGE (backend)->folder,
+                                        E2K_CONTEXT_OBJECT_REMOVED, 30,
+                                        notify_changes, backend);
 
 	thread = g_thread_create ((GThreadFunc) get_changed_tasks, E_CAL_BACKEND_EXCHANGE (backend), FALSE, &error);
 	if (!thread) {
-		g_warning (G_STRLOC ": %s", error->message);
+		g_propagate_error (perror, EDC_ERROR_EX (OtherError, error->message));
 		g_error_free (error);
-
-		return GNOME_Evolution_Calendar_OtherError;
 	}
+}
 
-	return GNOME_Evolution_Calendar_Success;
+static void
+refresh_task (ECalBackendSync *backend, EDataCal *cal, GError **perror)
+{
+	g_return_if_fail (E_IS_CAL_BACKEND_EXCHANGE (backend));
+
+	get_changed_tasks (E_CAL_BACKEND_EXCHANGE (backend));
 }
 
 struct _cb_data {
@@ -1031,14 +1041,15 @@ struct _cb_data {
         EDataCal *cal;
 };
 
-static ECalBackendSyncStatus
+static void
 create_task_object (ECalBackendSync *backend, EDataCal *cal,
-		    gchar **calobj, gchar **return_uid)
+		    gchar **calobj, gchar **return_uid, GError **error)
 {
 	ECalBackendExchangeTasks *ecalbextask;
 	ECalBackendExchange *ecalbex;
 	E2kProperties *props;
 	E2kContext *e2kctx;
+	E2kHTTPStatus status;
 	ECalComponent *comp;
 	icalcomponent *icalcomp, *real_icalcomp;
 	icalcomponent_kind kind;
@@ -1051,29 +1062,32 @@ create_task_object (ECalBackendSync *backend, EDataCal *cal,
 	const gchar *summary;
 	gchar * modtime;
 	gchar *location;
-	ECalBackendSyncStatus status;
 	const gchar *temp_comp_uid;
 
 	ecalbextask = E_CAL_BACKEND_EXCHANGE_TASKS (backend);
 	ecalbex = E_CAL_BACKEND_EXCHANGE (backend);
 
-	g_return_val_if_fail (calobj != NULL, GNOME_Evolution_Calendar_ObjectNotFound);
+	e_return_data_cal_error_if_fail (calobj != NULL, InvalidArg);
 
 	if (!e_cal_backend_exchange_is_online (E_CAL_BACKEND_EXCHANGE (backend))) {
 		d(printf ("tasks are offline\n"));
-		return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (RepositoryOffline));
+		return;
 	}
 
 	/* Parse the icalendar text */
 	icalcomp = icalparser_parse_string (*calobj);
-	if (!icalcomp)
-		return GNOME_Evolution_Calendar_InvalidObject;
+	if (!icalcomp) {
+		g_propagate_error (error, EDC_ERROR (InvalidObject));
+		return;
+	}
 
 	/* Check kind with the parent */
 	kind = e_cal_backend_get_kind (E_CAL_BACKEND (ecalbex));
         if (icalcomponent_isa (icalcomp) != kind) {
 		icalcomponent_free (icalcomp);
-		return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (InvalidObject));
+		return;
         }
 
 	current = icaltime_current_time_with_zone (icaltimezone_get_utc_timezone ());
@@ -1095,7 +1109,8 @@ create_task_object (ECalBackendSync *backend, EDataCal *cal,
 	temp_comp_uid = icalcomponent_get_uid (icalcomp);
 	if (!temp_comp_uid) {
 		icalcomponent_free (icalcomp);
-		return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (InvalidObject));
+		return;
 	}
 
 	e_cal_backend_exchange_cache_lock (ecalbex);
@@ -1104,7 +1119,8 @@ create_task_object (ECalBackendSync *backend, EDataCal *cal,
 					     temp_comp_uid, modtime, NULL, NULL)) {
 		e_cal_backend_exchange_cache_unlock (ecalbex);
 		icalcomponent_free (icalcomp);
-		return GNOME_Evolution_Calendar_ObjectIdAlreadyExists;
+		g_propagate_error (error, EDC_ERROR (ObjectIdAlreadyExists));
+		return;
 	}
 	e_cal_backend_exchange_cache_unlock (ecalbex);
 
@@ -1163,7 +1179,8 @@ create_task_object (ECalBackendSync *backend, EDataCal *cal,
 		g_object_unref (comp);
 		g_free (from_name);
 		g_free (from_addr);
-		return GNOME_Evolution_Calendar_OtherError;
+		g_propagate_error (error, EDC_ERROR_EX (OtherError, "Cannot get ECalComp as string"));
+		return;
 	}
 
 	real_icalcomp = icalparser_parse_string (*calobj);
@@ -1186,17 +1203,19 @@ create_task_object (ECalBackendSync *backend, EDataCal *cal,
 		g_free (modtime);
 	}
 
+	if (!E2K_HTTP_STATUS_IS_SUCCESSFUL (status))
+		g_propagate_error (error, EDC_ERROR_HTTP_STATUS (status));
+
 	*return_uid = g_strdup (temp_comp_uid);
 	icalcomponent_free (real_icalcomp);
 	g_free (from_name);
 	g_free (from_addr);
-	return GNOME_Evolution_Calendar_Success;
 }
 
-static ECalBackendSyncStatus
+static void
 modify_task_object (ECalBackendSync *backend, EDataCal *cal,
 	       const gchar *calobj, CalObjModType mod,
-	       gchar **old_object, gchar **new_object)
+	       gchar **old_object, gchar **new_object, GError **error)
 {
 	ECalBackendExchangeTasks *ecalbextask;
 	ECalBackendExchangeComponent *ecalbexcomp;
@@ -1211,32 +1230,34 @@ modify_task_object (ECalBackendSync *backend, EDataCal *cal,
 	gchar *attach_body_crlf = NULL;
 	gchar *boundary = NULL;
 	struct icaltimetype current;
-	ECalBackendSyncStatus status;
 	E2kContext *e2kctx;
+	E2kHTTPStatus status;
 
 	ecalbextask = E_CAL_BACKEND_EXCHANGE_TASKS (backend);
 	ecalbex = E_CAL_BACKEND_EXCHANGE (backend);
 
-	g_return_val_if_fail (E_IS_CAL_BACKEND_EXCHANGE_TASKS (ecalbextask),
-					GNOME_Evolution_Calendar_NoSuchCal);
-	g_return_val_if_fail (calobj != NULL,
-				GNOME_Evolution_Calendar_ObjectNotFound);
+	e_return_data_cal_error_if_fail (E_IS_CAL_BACKEND_EXCHANGE_TASKS (ecalbextask), InvalidArg);
+	e_return_data_cal_error_if_fail (calobj != NULL, InvalidArg);
 
 	if (!e_cal_backend_exchange_is_online (E_CAL_BACKEND_EXCHANGE (backend))) {
 		d(printf ("tasks are offline\n"));
-		return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (RepositoryOffline));
+		return;
 	}
 
 	/* Parse the icalendar text */
         icalcomp = icalparser_parse_string ((gchar *) calobj);
-        if (!icalcomp)
-                return GNOME_Evolution_Calendar_InvalidObject;
+        if (!icalcomp) {
+                g_propagate_error (error, EDC_ERROR (InvalidObject));
+		return;
+	}
 
 	/* Check kind with the parent */
         if (icalcomponent_isa (icalcomp) !=
 			e_cal_backend_get_kind (E_CAL_BACKEND (backend))) {
                 icalcomponent_free (icalcomp);
-                return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (InvalidObject));
+		return;
         }
 
 	/* Get the uid */
@@ -1250,7 +1271,8 @@ modify_task_object (ECalBackendSync *backend, EDataCal *cal,
 	if (!ecalbexcomp) {
 		icalcomponent_free (icalcomp);
 		e_cal_backend_exchange_cache_unlock (ecalbex);
-		return GNOME_Evolution_Calendar_ObjectNotFound;
+		g_propagate_error (error, EDC_ERROR (ObjectNotFound));
+		return;
 	}
 
         cache_comp = e_cal_component_new ();
@@ -1285,8 +1307,10 @@ modify_task_object (ECalBackendSync *backend, EDataCal *cal,
 	comp_str = e_cal_component_get_as_string (new_comp);
 	icalcomp = icalparser_parse_string (comp_str);
 	g_free (comp_str);
-	if (!icalcomp)
-		return GNOME_Evolution_Calendar_OtherError;
+	if (!icalcomp) {
+		g_propagate_error (error, EDC_ERROR_EX (OtherError, "Failed to parse comp_str"));
+		return;
+	}
 	icalcomponent_free (icalcomp);
 
 	get_from (backend, new_comp, &from_name, &from_addr);
@@ -1311,12 +1335,14 @@ modify_task_object (ECalBackendSync *backend, EDataCal *cal,
 		}
 	}
 	icalcomponent_free (icalcomp);
-	return GNOME_Evolution_Calendar_Success;
+
+	if (!E2K_HTTP_STATUS_IS_SUCCESSFUL (status))
+		g_propagate_error (error, EDC_ERROR_HTTP_STATUS (status));
 }
 
-static ECalBackendSyncStatus
+static void
 receive_task_objects (ECalBackendSync *backend, EDataCal *cal,
-                 const gchar *calobj)
+                 const gchar *calobj, GError **error)
 {
 	ECalBackendExchangeTasks *ecalbextask;
 	ECalBackendExchange *cbex;
@@ -1325,24 +1351,22 @@ receive_task_objects (ECalBackendSync *backend, EDataCal *cal,
         struct icaltimetype current;
         icalproperty_method method;
         icalcomponent *subcomp;
-        ECalBackendSyncStatus status = GNOME_Evolution_Calendar_Success;
+	GError *err = NULL;
 
 	ecalbextask = E_CAL_BACKEND_EXCHANGE_TASKS (backend);
 	cbex = E_CAL_BACKEND_EXCHANGE (backend);
 
-	g_return_val_if_fail (E_IS_CAL_BACKEND_EXCHANGE_TASKS (ecalbextask),
-                                        GNOME_Evolution_Calendar_NoSuchCal);
-        g_return_val_if_fail (calobj != NULL,
-                                GNOME_Evolution_Calendar_ObjectNotFound);
+	e_return_data_cal_error_if_fail (E_IS_CAL_BACKEND_EXCHANGE_TASKS (ecalbextask), InvalidArg);
+        e_return_data_cal_error_if_fail (calobj != NULL, InvalidArg);
 
 	if (!e_cal_backend_exchange_is_online (E_CAL_BACKEND_EXCHANGE (backend))) {
 		d(printf ("tasks are offline\n"));
-		return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (RepositoryOffline));
+		return;
 	}
 
-	status = e_cal_backend_exchange_extract_components (calobj, &method, &comps);
-        if (status != GNOME_Evolution_Calendar_Success)
-                return GNOME_Evolution_Calendar_InvalidObject;
+	if (!e_cal_backend_exchange_extract_components (calobj, &method, &comps, error))
+		return;
 
 	for (l = comps; l; l = l->next) {
                 const gchar *uid;
@@ -1369,10 +1393,11 @@ receive_task_objects (ECalBackendSync *backend, EDataCal *cal,
                         gchar *old_object;
 
 			e_cal_backend_exchange_cache_unlock (cbex);
-                        status = modify_task_object (backend, cal, calobj, CALOBJ_MOD_THIS, &old_object, NULL);
-                        if (status != GNOME_Evolution_Calendar_Success) {
+                        modify_task_object (backend, cal, calobj, CALOBJ_MOD_THIS, &old_object, NULL, &err);
+                        if (err) {
 				g_free (rid);
-                                goto error;
+				g_propagate_error (error, err);
+                                return;
 			}
 
                         e_cal_backend_notify_object_modified (E_CAL_BACKEND (backend), old_object, calobj);
@@ -1382,11 +1407,12 @@ receive_task_objects (ECalBackendSync *backend, EDataCal *cal,
 
 			e_cal_backend_exchange_cache_unlock (cbex);
 			calobj = (gchar *) icalcomponent_as_ical_string_r (subcomp);
-			status = create_task_object (backend, cal, &calobj, &returned_uid);
-                        if (status != GNOME_Evolution_Calendar_Success) {
+			create_task_object (backend, cal, &calobj, &returned_uid, &err);
+                        if (err) {
 				g_free (calobj);
 				g_free (rid);
-                                goto error;
+				g_propagate_error (error, err);
+                                return;
 			}
 
                         e_cal_backend_notify_object_created (E_CAL_BACKEND (backend), calobj);
@@ -1396,27 +1422,25 @@ receive_task_objects (ECalBackendSync *backend, EDataCal *cal,
         }
 
         g_list_free (comps);
-error:
-        return status;
 }
 
-static ECalBackendSyncStatus
+static void
 remove_task_object (ECalBackendSync *backend, EDataCal *cal,
 	       const gchar *uid, const gchar *rid, CalObjModType mod,
-	       gchar **old_object, gchar **object)
+	       gchar **old_object, gchar **object, GError **error)
 {
 	ECalBackendExchange *ecalbex = E_CAL_BACKEND_EXCHANGE (backend);
 	ECalBackendExchangeComponent *ecalbexcomp;
 	ECalComponent *comp;
 	E2kContext *ctx;
-	gint status;
+	E2kHTTPStatus status;
 
-	g_return_val_if_fail (E_IS_CAL_BACKEND_EXCHANGE (ecalbex),
-					GNOME_Evolution_Calendar_OtherError);
+	e_return_data_cal_error_if_fail (E_IS_CAL_BACKEND_EXCHANGE (ecalbex), InvalidArg);
 
 	if (!e_cal_backend_exchange_is_online (E_CAL_BACKEND_EXCHANGE (backend))) {
 		d(printf ("tasks are offline\n"));
-		return GNOME_Evolution_Calendar_InvalidObject;
+		g_propagate_error (error, EDC_ERROR (RepositoryOffline));
+		return;
 	}
 
 	e_cal_backend_exchange_cache_lock (ecalbex);
@@ -1424,7 +1448,8 @@ remove_task_object (ECalBackendSync *backend, EDataCal *cal,
 
 	if (!ecalbexcomp || !ecalbexcomp->href) {
 		e_cal_backend_exchange_cache_unlock (ecalbex);
-		return GNOME_Evolution_Calendar_ObjectNotFound;
+		g_propagate_error (error, EDC_ERROR (ObjectNotFound));
+		return;
 	}
 
         comp = e_cal_component_new ();
@@ -1439,9 +1464,10 @@ remove_task_object (ECalBackendSync *backend, EDataCal *cal,
 	status = e2k_context_delete (ctx, NULL, ecalbexcomp->href);
 	if (E2K_HTTP_STATUS_IS_SUCCESSFUL (status)) {
 		if (e_cal_backend_exchange_remove_object (ecalbex, uid))
-			return GNOME_Evolution_Calendar_Success;
+			return;
 	}
-	return GNOME_Evolution_Calendar_OtherError;
+
+	g_propagate_error (error, EDC_ERROR_HTTP_STATUS (status));
 }
 
 static void
@@ -1484,6 +1510,7 @@ class_init (ECalBackendExchangeTasksClass *klass)
 	parent_class = g_type_class_peek_parent (klass);
 
 	sync_class->open_sync = open_task;
+	sync_class->refresh_sync = refresh_task;
 	sync_class->create_object_sync = create_task_object;
 	sync_class->modify_object_sync = modify_task_object;
 	sync_class->remove_object_sync = remove_task_object;

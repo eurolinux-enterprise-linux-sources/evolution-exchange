@@ -1,0 +1,142 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c.empty-search-hides-contacts evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c.empty-search-hides-contacts	2013-07-24 07:41:48.241435395 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c	2013-07-24 07:41:48.243435395 +0200
+@@ -1047,6 +1047,7 @@ func_check (struct _ESExp *f,
+ {
+ 	ESExpResult *r;
+ 	gint truth = FALSE;
++	gboolean *is_summ_query = data;
+ 
+ 	if (argc == 2
+ 	    && argv[0]->type == ESEXP_RES_STRING
+@@ -1067,6 +1068,9 @@ func_check (struct _ESExp *f,
+ 		}
+ 	}
+ 
++	if (is_summ_query)
++		*is_summ_query = (*is_summ_query) && truth;
++
+ 	r = e_sexp_result_new (f, ESEXP_RES_BOOL);
+ 	r->value.boolean = truth;
+ 
+@@ -1099,7 +1103,7 @@ e_book_backend_sqlitedb_is_summary_query
+ {
+ 	ESExp *sexp;
+ 	ESExpResult *r;
+-	gboolean retval;
++	gboolean retval = TRUE;
+ 	gint i;
+ 	gint esexp_error;
+ 
+@@ -1111,10 +1115,10 @@ e_book_backend_sqlitedb_is_summary_query
+ 	for (i = 0; i < G_N_ELEMENTS (check_symbols); i++) {
+ 		if (check_symbols[i].type == 1) {
+ 			e_sexp_add_ifunction (sexp, 0, check_symbols[i].name,
+-					      (ESExpIFunc *) check_symbols[i].func, NULL);
++					      (ESExpIFunc *) check_symbols[i].func, &retval);
+ 		} else {
+ 			e_sexp_add_function (sexp, 0, check_symbols[i].name,
+-					     check_symbols[i].func, NULL);
++					     check_symbols[i].func, &retval);
+ 		}
+ 	}
+ 
+@@ -1122,12 +1126,13 @@ e_book_backend_sqlitedb_is_summary_query
+ 	esexp_error = e_sexp_parse (sexp);
+ 
+ 	if (esexp_error == -1) {
++		e_sexp_unref (sexp);
+ 		return FALSE;
+ 	}
+ 
+ 	r = e_sexp_eval (sexp);
+ 
+-	retval = (r && r->type == ESEXP_RES_BOOL && r->value.boolean);
++	retval = retval && (r && r->type == ESEXP_RES_BOOL && r->value.boolean);
+ 
+ 	e_sexp_result_free (sexp, r);
+ 
+@@ -1142,6 +1147,7 @@ func_and (ESExp *f, gint argc, struct _E
+ 	ESExpResult *r, *r1;
+ 	GString *string;
+ 	gint i;
++	gboolean wrote_any = FALSE;
+ 
+ 	string = g_string_new("( ");
+ 	for (i = 0; i < argc; i++) {
+@@ -1151,18 +1157,22 @@ func_and (ESExp *f, gint argc, struct _E
+ 			e_sexp_result_free (f, r1);
+ 			continue;
+ 		}
+-		if (r1->value.string && *r1->value.string)
+-			g_string_append_printf(string, "%s%s", r1->value.string, ((argc>1) && (i != argc-1)) ?  " AND ":"");
++		if (r1->value.string && *r1->value.string) {
++			if (wrote_any)
++				g_string_append (string, " AND ");
++			g_string_append (string, r1->value.string);
++			wrote_any = TRUE;
++		}
+ 		e_sexp_result_free (f, r1);
+ 	}
+ 	g_string_append(string, " )");
+ 	r = e_sexp_result_new (f, ESEXP_RES_STRING);
+ 
+-	if (strlen (string->str) == 4)
+-		r->value.string = g_strdup("");
+-	else
++	if (wrote_any)
+ 		r->value.string = string->str;
+-	g_string_free (string, FALSE);
++	else
++		r->value.string = NULL;
++	g_string_free (string, !wrote_any);
+ 
+ 	return r;
+ }
+@@ -1176,6 +1186,7 @@ func_or (ESExp *f,
+ 	ESExpResult *r, *r1;
+ 	GString *string;
+ 	gint i;
++	gboolean wrote_any = FALSE;
+ 
+ 	string = g_string_new("( ");
+ 	for (i = 0; i < argc; i++) {
+@@ -1185,14 +1196,22 @@ func_or (ESExp *f,
+ 			e_sexp_result_free (f, r1);
+ 			continue;
+ 		}
+-		g_string_append_printf(string, "%s%s", r1->value.string, ((argc>1) && (i != argc-1)) ?  " OR ":"");
++		if (r1->value.string && *r1->value.string) {
++			if (wrote_any)
++				g_string_append (string, " OR ");
++			g_string_append (string, r1->value.string);
++			wrote_any = TRUE;
++		}
+ 		e_sexp_result_free (f, r1);
+ 	}
+ 	g_string_append(string, " )");
+ 
+ 	r = e_sexp_result_new (f, ESEXP_RES_STRING);
+-	r->value.string = string->str;
+-	g_string_free (string, FALSE);
++	if (wrote_any)
++		r->value.string = string->str;
++	else
++		r->value.string = NULL;
++	g_string_free (string, !wrote_any);
+ 	return r;
+ }
+ 
+@@ -1354,6 +1373,12 @@ sexp_to_sql_query (const gchar *query)
+ 
+ 	e_sexp_result_free (sexp, r);
+ 	e_sexp_unref (sexp);
++
++	if (res && !*res) {
++		g_free (res);
++		res = NULL;
++	}
++
+ 	return res;
+ }
+ 

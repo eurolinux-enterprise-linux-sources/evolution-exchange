@@ -1,60 +1,370 @@
-Evolution Exchange 2.28.3 2010-03-01
+Evolution Exchange 2.32.3 2011-04-21
+------------------------------------
+
+Freeze the minimum evo/eds requirement at 2.32.2.
+
+There may be more Evolution/Evolution-Data-Server 2.32 releases to come,
+and we don't want to have to re-release Evolution-Exchange just to bump
+the version requirement each time.
+
+
+Evolution Exchange 2.32.2 2011-02-07
 ------------------------------------
 
 Bug Fixes:
-	#260407 - 'endswith' address book search doesn't work
-	#603836 - Crash at startup after re-enabling exchange account
+	Bug 625570 - Do not free ExchangeFolder on error (Milan Crha)
+	Bug 634573 - Crash when importing ics file (Milan Crha)
+	Bug 638241 - Renaming folder always fails (Milan Crha)
+	Bug 639123 - Incorrect unref of ExchangeAccount in
+	             EBookBackendExchange (Milan Crha)
+
+
+Evolution Exchange 2.32.1 2010-11-15
+-------------------------------------
+
+Bug Fixes:
+	Bug #632669 - Crash when path for attachments doesn't exist (Milan Crha)
+	Bug #631034 - Message cache keeps zero-sized mails on cancel (Milan Crha)
+	Bug #629603 - Allow calendar refresh on demand (Milan Crha)
+
+Miscellaneous Fixes:
+	Can read out of bounds in exchange_folder_get_message_sync (Milan Crha)
 
 Translations:
+	Gil Forcada (ca)
+
+Evolution Exchange 2.31.92 2010-09-13
+-------------------------------------
+
+Bug Fixes:
+	Bug 629393 - git.mk breaks parallel builds (Matthew Barnes)
+	Bug #629118 - Translation not working in "Add Account" dialog (Milan Crha)
+	Bug #624146 - Runtime warnings while connecting (Milan Crha)
+
+Miscellaneous Fixes:
+	Use --disable-gtk3 in DISTCHECK_CONFIGURE_FLAGS. (Matthew Barnes)
+	Properly report failure in CamelExchangeFolder::sync (Milan Crha)
+
+Translations:
+	Changwoo Ryu (ko)
+	Luca Ferretti (it)
 	Petr Kovar (cs)
+	Antonio Fernandes C. Neto (pt)
+	Duarte Loreto (pt)
+	Bruce Cowan (en_GB)
+	drtv (ta)
+	Michael Kotsarinis (el)
+	Dirgita (id)
 
-Evolution Exchange 2.28.2 2009-12-14
-------------------------------------
-
-Bug Fixes:
-	#436619 - Adding a meeting "Resource" gives "Unable to book"
-	          error (Milan Crha)
-	#601218 - Accepted meeting doesn't show attachments in calendar
-	          view (Milan Crha)
-	#603437 - Fix a memory leak (Milan Crha)
-
-
-Evolution Exchange 2.28.1 2009-10-19
-------------------------------------
-
-Bug Fixes:
-	#521956 - Groups from Global Address List are incomplete (Milan Crha)
-	#596157 - Use "Message-ID" instead of "Message-Id" (Matthew Barnes)
-
-Translations:
-	Yaron Shahrabani (he)
-
-Evolution Exchange 2.28.0 2009-09-21
+Evolution Exchange 2.31.91 2010-08-29
 -------------------------------------
 
-Notable changes in 2.28.0 release,
-	Bug fixes.
-
 Translations:
-	Ani (ml)
-	Rajesh Ranjan (mai)
+	Ask H. Larsen (da)
+	Ivar Smolin (et)
 	Gabor Kelemen (hu)
+	Daniel Nylander (sv)
 
-Evolution Exchange 2.27.92 2009-09-07
+Evolution Exchange 2.31.90 2010-08-16
 -------------------------------------
 
-No changes since 2.27.91.
+Bug Fixes:
+	Bug 626090 - Only set -fno-strict-aliasing for GCC (Matthew Barnes)
 
-Evolution Exchange 2.27.91 2009-08-24
+Miscellaneous Fixes:
+	Baseversion 3.0 -> 2.32 as in evolution and evolution-data-server (Fridrich Štrba)
+
+Translations:
+	Claude Paroz (fr)
+	Kjartan Maraas (nn)
+
+Evolution Exchange 2.31.6 2010-08-02
+------------------------------------
+
+Other Changes:
+	* Adapt to removal of deprecated ECalBackend::set_default_timezone
+	  (Milan Crha)
+	* Adapt to libedata-book and libedata-cal API changes. (Matthew Barnes)
+	* Use the new base directory functions in E-D-S. (Matthew Barnes)
+	* Prefer gio-2.0 when requiring GLib libraries. (Matthew Barnes)
+
+Translations:
+	Mario Blättermann (de)
+	Fran Diéguez (gl)
+	Yaron Shahrabani (he)
+	Kjartan Maraas (nb)
+	Matej Urbančič (sl)
+	Eleanor Chen (zh_CN)
+	Aron Xu (zh_CN)
+	Chao-Hsiung Liao (zh_HK)
+
+Evolution Exchange 2.31.5 2010-07-12
+------------------------------------
+
+Bug Fixes:
+	Bug 623204 - Be able to report detailed errors from backends
+	             (Milan Crha)
+
+Other Changes:
+	* Migrate from CamelException to GError. (Matthew Barnes)
+
+Translations:
+	Jorge González (es)
+	Kjartan Maraas (nb)
+	Matej Urbancic (sl)
+
+Evolution Exchange 2.31.4 2010-06-29
+------------------------------------
+
+Bug Fixes:
+	Bug #621167 - NULL tzid passed in internal_get_timezone (Milan Crha)
+	Bug #620815 - Memory leaks with Evolution (Milan Crha)
+
+Miscellaneous Fixes:
+	Adapt to gtk3 changes (Chenthill Palanisamy, Matthew Barnes)
+	One day off in addressbook's populate_date function (Charles Bovy)
+	Add missing LDAP_LIBS to addressbook (Milan Crha)
+
+Translations:
+	Yaron Shahrbani (he)
+	Yaron Shahrabani (he)
+	Kjartan Maraas (nn)
+
+Evolution Exchange 2.31.3 2010-06-07
+------------------------------------
+Bug Fixes:
+	Bug #478840 - Exchange folder size report needs a total (Milan Crha)
+
+Miscellaneous Fixes:
+	Adapt to Camel API changes. (Matthew Barnes)
+
+Translations:
+	Jorge Gonz¿¿lez (es)
+	Fran Di¿¿guez (gl)
+	Ivar Smolin (et)
+
+Evolution Exchange 2.31.2 2010-05-24
+------------------------------------
+
+Bug Fixes:
+	Bug #337479 - Evolution forgets password on any error (Milan Crha)
+	Bug #617510 - Displays source of a message sent by RoadSync 5
+	              (Milan Crha)
+	Bug #617989 - Folder -> Subscription doesn't show sub folders
+	              (Milan Crha)
+
+Translations:
+	Thomas Thurman (en@shaw)
+	Jorge GonzÃ¡lez (es)
+
+Evolution Exchange 2.29.92 2010-03-08
 -------------------------------------
+
+Bug Fixes:
+	Bug #616913 - Unnecessary check producing false critical warnings (Milan Crha)
+	Bug #617248 - Crash after folder list fetch (Milan Crha)
+	Bug #403903 - Appointments don't display in Windows Mobile 5 (Peter)
+	Bug #545505 - Properly free unused message infos periodically (Milan Crha)
+	Bug #615714 â Miscellaneous string fixes (Philip Withnall)
+	Bug #608766 - Replace pthread with GLib's GThread (Milan Crha)
+	Bug #611188 - Doesn't support plural forms properly (needs ngettext) (Milan Crha)
+	Bug #458615 - Not possible to translate "Delegate Permissions" properly (Suman Manjunath)
+	Bug #417413 - "Sensitivity" needs translator-comment (Milan Crha)
+	Bug #613409 - Missing rpath for calendar and address book plugins (Josselin Mouette)
+
+Miscellaneous Fixes:
+	Adapt to Camel API changes. (Matthew Barnes)
+	[win32] Pass the correct pointer to ber_flatten (Fridrich Å trba)
+	Add LDAP build flags to the EPlugin. (Matthew Barnes)
+	Adapt to Camel API changes. (Matthew Barnes)
+	Bump gtk+ version requirement to 2.20.0 (Milan Crha)
+	Fix GSEAL compliance issues. (Matthew Barnes)
+	Add GSEAL_ENABLE to AS_COMPILER_FLAGS. (Matthew Barnes)
+	Adapt to ESexp header changes. (Matthew Barnes)
+	Only #include Camel's top-level header. (Matthew Barnes)
+
+Translations:
+	Mario BlÃ¤ttermann (de)
+	Valencian translation  (ca)
+	Francisco DiÃ©guez (gl)
+	Jorge GonzÃ¡lez (es)
+	Bruno Brouard (fr)
+	Philip Withnall (en_GB)
+	Wadim Dziedzic (pl)
+	Fran DiÃ©guez (gl)
+	Kjartan Maraas (nn)
+	Maxim V. Dziumanenko (uk)
+	Jordi Serratosa (ca)
+
+Evolution Exchange 2.29.92 2010-03-08
+-------------------------------------
+
+Bug Fixes:
+	#601787 - Double free in destroy_oof_data (Milan Crha)
+	#602800 - Missing menu entries (mailer part) (Milan Crha)
+
+Other Changes:
+	Add also authentication section to account wizard (Milan Crha)
+	Work around recent GTK+ deprecations. (Matthew Barnes)
+
+Translations:
+	Alexander Shopov (bg)
+	Mario BlÃ¤ttermann (de)
+	Claude Paroz (fr)
+	Bruce Cowan (en_GB)
+	Jorge GonzÃ¡lez (es)
+	Inaki Larranaga Murgoitio (eu)
+	Fran DiÃ©guez (gl)
+	Kjartan Maraas (nb)
+	Gilfran Ribeiro (pt_BR)
+	Leonid Kanter (ru)
+	vasudeven (ta)
+	Chao-Hsiung Liao (zh_HK)
+
+Evolution Exchange 2.29.91 2010-02-22
+-------------------------------------
+
+Bug Fixes:
+	#608257 - Minor string fixes. (Bruce Cowan)
+	#610426 - Unsubscribing other user's folder throws an error (Milan Crha)
+	#597509 - Subscribe to other user's mailbox doesn't work (Milan Crha)
+	#602800 - Missing menu entries (Milan Crha)
+	#597507 - Permission dialog doesn't pop up. (Bharath Acharya)
+
+Translations:
+	Krasimir Chonov (bg)
+	Petr Kovar (cs)
+	Lucian Adrian Grijincu (ro)
+	Mario BlÃ¤ttermann (de)
+	Fran DiÃ©guez (gl)
+	Kjartan Maraas (nb)
+
+Evolution Exchange 2.29.90 2010-02-08
+-------------------------------------
+
+Bug Fixes:
+	(None)
+
+Other Changes:
+	Disable strict aliasing optimization. (Matthew Barnes)
+
+Translations:
+	Jamil Ahmed (bn)
+
+Evolution Exchange 2.29.6 2010-01-25
+------------------------------------
+
+Translations:
+	Chao-Hsiung Liao (zh_HK) (zh_TW)
+	Kjartan Maraas (nb)
+	Daniel Nylander (sv)
+
+Evolution Exchange 2.29.5 2010-01-11
+------------------------------------
+
+Bug Fixes:
+	#600521 - Remove trailing spaces from particular account fields
+	          (Milan Crha)
+	#604143 - cache support should be optional just like in 2.28 (Wang Xin)
+	#605111 - evolution-exchange requires evolution-mail, evolution-shell
+	          (Wang Xin)
+
+Translations:
+	Jiri Eischmann (cs)
+	Kjartan Maraas (nb)
+	Aron Xu (zh_CN)
+
+Evolution Exchange 2.29.4 2009-12-21
+------------------------------------
+
+Bug Fixes:
+	
+Calendar:
+	#604255 - e-calendar-factory crashed on start up
+	#603437 - Fix for valgrind report on e-calendar-factory (Milan Crha)
+	#603567 -  e-calendar-factory crashes if i try to create any appointment (Chenthill Palanisamy)
+	#602945 - Avoid code duplication with timezone fetching from backends (Milan Crha)
+Misc:
+	#604544 - Try Exchange fallback authentication only once (Milan Crha)
+	#600397 - Delete option enabled for undeletable ESource (Milan Crha)
+	#600778 - Harmonize --enable-e2k-debug help string with the option (Milan Crha)
+	#591938 - Update translator's comments (Milan Crha)
+	#603457 - evolution-exchange for e_error -> e_alert changes in evolution (Jonathon Jongsma)
+
+Translations:
+	Lucian Adrian Grijincu (ro)
+	Kjartan Maraas (nb)
+
+Evolution Exchange 2.29.3 2009-11-30
+------------------------------------
+
+Misc:
+	Fix a parsing issue with GETTEXT_PACKAGE. (Matthew Barnes)
+
+Translations:
+	Claude Paroz (fr)
+
+
+Evolution Exchange 2.29.2 2009-11-16
+------------------------------------
+
+Bug Fixes:
+	Bug 601218 - Accepted meeting doesn't show attachments in calendar
+	view (Milan Crha)
+	Bug 599654 - evolution crashes : move from offline to online state
+	(Milan Crha)
+
+Translations:
+	Thomas Thurman (en@shaw)
+	Jorge GonzÃ¡lez (es)
+	Matej UrbanÄiÄ (sl)
+	drtvasudevan (ta)
+
+
+Evolution Exchange 2.29.1 2009-10-26
+------------------------------------
+
+Bug Fixes:
+	Bug #260407 - 'endswith' address book search doesn't work (Milan Crha)
+        Bug #260407 - Return the appropriate value for queries having 'NOT' 
+	(Shakti Sen)
+	Bug #436619 - "Unable to book" dialog when adding "Resources" 
+	(Milan Crha)
+	Bug #521956 - Groups from Global Address List are incomplete 
+	(Milan Crha)
+	Bug #597123 - Composer's Send Options doesn't work (Milan Crha)
+	Bug #594471 - Shouldn't call e_error_new/run with NULL 'parent' 
+	(Milan Crha)
+	Bug #597932 - Split out Kerberos 5 check into an macro (H. Habighorst)
+	Bug #597932 - Split out Kerberos 5 check into an macro (H. Habighorst)
+	Bug #591953 - Rewrite of build system (H. Habighorst)
+	Bug #597400 - Folder flags get lost (Milan Crha)
+	Bug #456240 - Move exchange plugin to exchange package (Milan Crha)
+	Bug #590251 - Let it compile and run with eds/evo master (Milan Crha)
+	Bug #596157 - Use "Message-ID" instead of "Message-Id" (Matthew Barnes)
+	Bug #590251 - Fails to build against eds-dbus (Matthew Barnes)
+	Bug #592875 - Use mnemonics in account wizard (Milan Crha)
+	Bug #592568 - Remove libglade dependency (Milan Crha)
+	Bug #580904 - Kill libgnome(ui) dependency (Milan Crha)
+	Bug #599651 - authentication fails durig exchange account configuration (Chenthill Palanisamy)
 
 Other Fixes:
-	Fix the addressbook loading failures (Bharath Acharya)
+	Move server code over from evolution-data-server. (Matthew Barnes) 
+	Fix distcheck errors. (Matthew Barnes)
+        Coding style and whitespace cleanup. (Matthew Barnes)
+	Fix wrong include and double include. (H. Habighorst)
+	Various build system improvements. (H. Habighorst)  
+        Mark string for a translation. (Milan Crha)
+        Fixes the addressbook loading failures (Bharath Acharya) 
 
 Translations:
-	Carles Ferrando (ca@valencia)
-	Ivar Smolin (et)
-	Rajesh Ranjan (hi)
+	Matej UrbanÄiÄ (sl)
+	drtvasudevan (ta)
+	Yaron Shahrabani (he)
+	Andre Klapper (cs)
+	Gabor Kelemen (hu)  
+	Rajesh Ranjan (mai)
+	Rodrigo L. M. Flores (pt_BR)
 
 Evolution Exchange 2.27.90 2009-08-10
 -------------------------------------
@@ -81,7 +391,7 @@ Bug Fixes:
 	
 Misc:
 	#586206 - build failed on Solaris. (Jedy Wang)
-	#586809 – Enable "silent rules" automake 1.11 option (Matthew Barnes)
+	#586809 â Enable "silent rules" automake 1.11 option (Matthew Barnes)
 
 Other Fixes:
 
@@ -134,15 +444,15 @@ Evolution Exchange 2.25.92 2009-03-02
 -------------------------------------
 
 Updated Translations:
-»·······Chao-Hsiung Liao (zh)
-»·······Clytie Siddall (vi)
-»·······Jani Monoses (ro)
-»·······Praveen Arimbrathodiyil (ml)
-»·······Takeshi AIHANA (ja)
+Â»Â·Â·Â·Â·Â·Â·Â·Chao-Hsiung Liao (zh)
+Â»Â·Â·Â·Â·Â·Â·Â·Clytie Siddall (vi)
+Â»Â·Â·Â·Â·Â·Â·Â·Jani Monoses (ro)
+Â»Â·Â·Â·Â·Â·Â·Â·Praveen Arimbrathodiyil (ml)
+Â»Â·Â·Â·Â·Â·Â·Â·Takeshi AIHANA (ja)
 
 Bug Fixes:
-»·······#432885 : Rescan foreign hierarchy  to get list of shared calendars before giving up opening of the foreign calendar (Milan Crha)
-»·······#545455 : Check for the correct href of the message before accessing it (Milan Crha)
+Â»Â·Â·Â·Â·Â·Â·Â·#432885 : Rescan foreign hierarchy  to get list of shared calendars before giving up opening of the foreign calendar (Milan Crha)
+Â»Â·Â·Â·Â·Â·Â·Â·#545455 : Check for the correct href of the message before accessing it (Milan Crha)
 
 Evolution Exchange 2.25.90 2009-02-02
 -------------------------------------
@@ -241,7 +551,7 @@ Updated Translations:
 	Ilkka Tuohela (fi)
 	Daniel Nylander (sv)
 	Leonardo Ferreira Fontenelle (pt_BR)
-	Robert-André Mauchin (fr)
+	Robert-AndrÃ© Mauchin (fr)
 	Inaki Larranaga Murgoitio (eu)
 	Ignacio Casal Quinteiro (gl)
 	Theppitak Karoonboonyanan (th)
@@ -325,7 +635,7 @@ New in 2.23.2:
 	Final outstanding Win32 portability changes (Tor Lillqvist)
 
 Bug fixes:
-	#366250: Don't compile/package semi-free RFCs and other IETF documents that are easily accessible on the web (Øystein Gisnås)
+	#366250: Don't compile/package semi-free RFCs and other IETF documents that are easily accessible on the web (Ãystein GisnÃ¥s)
 	#523023: Another leak fix (Matthew Barnes)
 	#533422: server_DATA should not be packed in dist tarballs (Johnny Jacob)
 
@@ -405,7 +715,7 @@ Updated Translations:
 	Ilkka Tuohela (fi)
 	Changwoo Ryu (ko)
 	Wadim Dziedzic (pl)
-	Robert-André Mauchin, Stéphane Raimbault (fr)
+	Robert-AndrÃ© Mauchin, StÃ©phane Raimbault (fr)
 	Ivar Smolin (et)
 	Ignacio Casal Quinteiro (gl)
 	Pawan Chitrakar (ne)
@@ -494,7 +804,7 @@ Other Contributors:
 
 Updated Translations:
 	Yannig Marchegay (oc)
-	Matej Urbanči (sl)
+	Matej UrbanÄi (sl)
 	Ignacio Casal Quinteiro (gl)
 	Changwoo Ryu (ko)
 
@@ -518,7 +828,7 @@ Other Contributors:
 
 Updated Translations:
 	Djihed Afifi (ar)
-	Matej Urbanči (sl)
+	Matej UrbanÄi (sl)
 	Alexander Shopov (bg)
 	Ignacio Casal Quinteiro (gl)
 	David Planella (ca)
@@ -558,7 +868,7 @@ Bug Fixes:
 
 Updated Translations:
 	Duarte Loreto (pt)
-	Stéphane Raimbault (fr)
+	StÃ©phane Raimbault (fr)
 
 Evolution Exchange 2.11.91 2007-08-27
 --------------------------------------
@@ -620,7 +930,7 @@ Bug fixes:
 
 Updated Translations:
 	Ankit Patel (gu)
-	Nguyễn Thái Ngọc Duy (vi)
+	Nguyá»n ThÃ¡i Ngá»c Duy (vi)
 	Pema Geyleg (dz)
 	Clytie Siddall (vi)
 	Kjartan Maraas (nb)
@@ -674,7 +984,7 @@ Bug fixes:
 	#405916: Fix all compiler warnings (Matthew Barnes)
 	#405495: Don't mix declarations and code (Matthew Barnes)
 	#363283: Fix the bug-report address in AC_INIT (Gilles Dartiguelongue)
-	#414216: Fix a #include typo (Loïc Minier)
+	#414216: Fix a #include typo (LoÃ¯c Minier)
 	
 Other contributions:
 	Use GLib marshallers wherever possible (Matthew Barnes) 
@@ -696,7 +1006,7 @@ Updated Translations:
 	Leonid Kanter (ru)
 	Mugurel Tudor (ro)
 	Djihed Afifi (ar)
-	Igor Nestorović (sr, sr@Latn)
+	Igor NestoroviÄ (sr, sr@Latn)
 
 Bug fixes: 384303, cleanups and other fixes
 
@@ -725,7 +1035,7 @@ Updated Translations:
 	Xavier Conde Rueda (ca)
 	Duarte Loreto (pt)
 	Djihed Afifi (ar)
-	Stéphane Raimbault (fr)
+	StÃ©phane Raimbault (fr)
 	Raphael Higino (pt_BR)
 	Daniel Nylander (sv)
 	Priit Laes (et) 
@@ -766,12 +1076,12 @@ Evolution Exchange 2.9.3 2006-12-04
 Updated Translations:
 
 Daniel Nylander (sv), Ivar Smolin (et), Vladimer Sichinava (ka), Rahul
-Bhalerao (mr), David Lodge (en_GB), Djihed Afifi (ar), Åsmund
-Skjæveland (nn), Baris Cicek (tr), Woodman Tuen (zh), Kostas Papadimas
+Bhalerao (mr), David Lodge (en_GB), Djihed Afifi (ar), Ãsmund
+SkjÃ¦veland (nn), Baris Cicek (tr), Woodman Tuen (zh), Kostas Papadimas
 (el), Jovan Naumovski (mk), Gabor Kelemen (hu), Duarte Loreto (pt),
-Gintautas Miliauskas (lt), Robert-André Mauchin (fr), Subhransu Behera
+Gintautas Miliauskas (lt), Robert-AndrÃ© Mauchin (fr), Subhransu Behera
 (or), Ani Peter (ml), Funda Wang (zh_CN), Raivis Dejus (lv), Josep
-Puigdemont i Casamajó (ca), Alexander Shopov (bg)
+Puigdemont i CasamajÃ³ (ca), Alexander Shopov (bg)
 
 Downstream patches - GAL caching and other bug fixes
 
@@ -787,7 +1097,7 @@ Updated Translations:
 Vladimer Sichinava (ka), Ivar Smolin (et),
 Rahul Bhalerao (mr), David Lodge (en_GB),
 Djihed Afifi (ar), Baris Cicek (tr),
-Woodman Tuen (zh_HK), Åsmund Skjæveland (nn),
+Woodman Tuen (zh_HK), Ãsmund SkjÃ¦veland (nn),
 
 
 Evolution Exchange 2.8.0   2006-09-04
@@ -804,7 +1114,7 @@ Gintautas Miliauskas (lt)
 Christophe Merlet (fr),
 Priit Laes (et),
 Raivis Dejus (lv)
-Josep Puigdemont i Casamajó (ca)
+Josep Puigdemont i CasamajÃ³ (ca)
 
 Added Translations:
 
@@ -819,7 +1129,7 @@ Updated Translations:
 Alexander Shopov (bg), Satoru SATOH (ja), Artur Flinta (pl), 
 Leonid Kanter (ru),  Daniel Nylander (sv), Gabor Kelemen (hu), 
 Hendrik Richter (de), Sanlig Badral (mn), Ilkka Tuohela (fi), 
-Clytie Siddall (vi), Matic Žgur (sl), Changwoo Ryu (ko), 
+Clytie Siddall (vi), Matic Å½gur (sl), Changwoo Ryu (ko), 
 Tino Meinen (nl), Ivar Smolin (et), Runa Bhattacharjee (bn_IN),
 Maxim Dziumanenko (uk), Guntupalli Karunakar (dz), Kjartan Maraas (nb),
 Theppitak Karoonboonyanan (th), Ankit Patel (gu), Jovan Naumovski (mk) 
@@ -1012,7 +1322,7 @@ Bugzilla bugs fixed (see http://bugzilla.gnome.org/show_bug.cgi)
 	#330640 - Exchange storage crashes after modifying a single instance 
 	of recurring meeting.
 
-	#330504 – Mnemonic missing for most of the fields in 'Receiving Options'
+	#330504 â Mnemonic missing for most of the fields in 'Receiving Options'
 
 	#311017 - Unable to delete mails in online mode with evolution started 
 	in offline mode. (Arun Prakash)
@@ -1170,7 +1480,7 @@ Updated Translations : (Since July 2005)
   - gu (Ankit Patel)
   - hu (Gabor Kelemen)
   - ja (Satoru SATOH)
-  - lt (Žygimantas Beručka)
+  - lt (Å½ygimantas BeruÄka)
   - nb (Kjartan Maraas & Terance Sola)
   - nl (Vincent van Adrighem)
   - no (Kjartan Maraas & Terance Sola)
@@ -1181,8 +1491,8 @@ Updated Translations : (Since July 2005)
   - ru (Nickolay V. Shmyrev)
   - sk (Marcel Telka)
   - sq (Laurent Dhima)
-  - sr (Danilo Šegan)
-  - sr@Latn (Danilo Šegan)
+  - sr (Danilo Å egan)
+  - sr@Latn (Danilo Å egan)
   - sv (Christian Rose)
   - th (Udomsak Chundang & Theppitak Karoonboonyanan)
   - tr (Baris Cicek)
@@ -1255,8 +1565,8 @@ Updated Translations : (Since June 2005)
   - no (Kjartan Maraas)
   - no (Terance Edward Sola)
   - nl (Vincent van Adrighem)
-  - sr (Danilo Šegan)
-  - sr@Latn (Danilo Šegan)
+  - sr (Danilo Å egan)
+  - sr@Latn (Danilo Å egan)
   - vi (Clytie Siddall)
   - zh_CN (Funda Wang)
   - zh_TW (Abel Cheung)
@@ -1424,7 +1734,7 @@ Updated Translations :
    - gu (Ankit Patel)
    - hu (Laszlo Dvornik)
    - ko (Changwoo Ryu)
-   - lt (ygimantas Beručka)
+   - lt (ygimantas BeruÄka)
    - nb (Kjartan Maraas)
    - nl (Vincent van Adrighem)
    - no (Kjartan Maraas)
@@ -1447,7 +1757,7 @@ Bugzilla bugs fixed (see http://bugzilla.ximian.com/show_bug.cgi):
 	Fixed a few l10n and i18n bugs.
 
 Updated Translations :
-  - lt (ygimantas Beručka)
+  - lt (ygimantas BeruÄka)
   - pt (Duarte Loreto)
   - en_CA (Adam Weinberger)
   - es (Francisco Javier F. Serrador)

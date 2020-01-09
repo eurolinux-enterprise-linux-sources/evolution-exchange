@@ -1,0 +1,118 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.get-attachments-prototype-fix evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.get-attachments-prototype-fix	2013-09-10 15:22:32.623691757 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c	2013-09-10 15:22:32.655691757 +0200
+@@ -3396,6 +3396,7 @@ ews_get_attachments (ECalBackendEws *cbe
+ 	ECalComponent *comp;
+ 	const gchar *uid;
+ 	GSList *uris = NULL, *info_attachments = NULL;
++	GError *local_error = NULL;
+ 
+ 	e_ews_item_has_attachments (item, &has_attachment);
+ 	if (!has_attachment)
+@@ -3425,7 +3426,7 @@ ews_get_attachments (ECalBackendEws *cbe
+ 		&info_attachments,
+ 		NULL, NULL,
+ 		cbews->priv->cancellable,
+-		NULL)) {
++		&local_error)) {
+ 		icalcomponent *icalcomp;
+ 		icalproperty *icalprop;
+ 		icalparameter *icalparam;
+@@ -3474,7 +3475,10 @@ ews_get_attachments (ECalBackendEws *cbe
+ 
+ 		g_slist_free_full (uris, g_free);
+ 		g_slist_free_full (info_attachments, (GDestroyNotify) e_ews_attachment_info_free);
++	} else {
++		g_warning ("%s: Failed to get attachments: %s", G_STRFUNC, local_error ? local_error->message : "Unknown error");
+ 	}
++	g_clear_error (&local_error);
+ 
+ 	PRIV_UNLOCK (cbews->priv);
+ }
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c.get-attachments-prototype-fix evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c.get-attachments-prototype-fix	2013-09-10 15:22:32.626691757 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c	2013-09-10 15:22:32.652691757 +0200
+@@ -6049,7 +6049,7 @@ e_ews_connection_get_attachments (EEwsCo
+ 	g_object_unref (simple);
+ }
+ 
+-GSList *
++gboolean
+ e_ews_connection_get_attachments_finish (EEwsConnection *cnc,
+                                          GAsyncResult *result,
+                                          GSList **items,
+@@ -6058,24 +6058,24 @@ e_ews_connection_get_attachments_finish 
+ 	GSimpleAsyncResult *simple;
+ 	EwsAsyncData *async_data;
+ 
+-	g_return_val_if_fail (cnc != NULL, NULL);
++	g_return_val_if_fail (cnc != NULL, FALSE);
+ 	g_return_val_if_fail (
+ 		g_simple_async_result_is_valid (
+ 		result, G_OBJECT (cnc), e_ews_connection_get_attachments),
+-		NULL);
++		FALSE);
+ 
+ 	simple = G_SIMPLE_ASYNC_RESULT (result);
+ 	async_data = g_simple_async_result_get_op_res_gpointer (simple);
+ 
+ 	if (g_simple_async_result_propagate_error (simple, error))
+-		return NULL;
++		return FALSE;
+ 
+ 	*items = async_data->items;
+ 
+-	return async_data->items_created;
++	return TRUE;
+ }
+ 
+-GSList *
++gboolean
+ e_ews_connection_get_attachments_sync (EEwsConnection *cnc,
+                                        gint pri,
+                                        const gchar *uid,
+@@ -6090,9 +6090,9 @@ e_ews_connection_get_attachments_sync (E
+ {
+ 	EAsyncClosure *closure;
+ 	GAsyncResult *result;
+-	GSList *attachments_ids;
++	gboolean success;
+ 
+-	g_return_val_if_fail (cnc != NULL, NULL);
++	g_return_val_if_fail (cnc != NULL, FALSE);
+ 
+ 	closure = e_async_closure_new ();
+ 
+@@ -6103,12 +6103,12 @@ e_ews_connection_get_attachments_sync (E
+ 
+ 	result = e_async_closure_wait (closure);
+ 
+-	attachments_ids = e_ews_connection_get_attachments_finish (
++	success = e_ews_connection_get_attachments_finish (
+ 		cnc, result, items, error);
+ 
+ 	e_async_closure_free (closure);
+ 
+-	return attachments_ids;
++	return success;
+ }
+ 
+ static void
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h.get-attachments-prototype-fix evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h.get-attachments-prototype-fix	2013-09-10 15:22:32.627691757 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h	2013-09-10 15:22:32.653691757 +0200
+@@ -735,12 +735,12 @@ void		e_ews_connection_get_attachments
+ 						 GCancellable *cancellable,
+ 						 GAsyncReadyCallback callback,
+ 						 gpointer user_data);
+-GSList *	e_ews_connection_get_attachments_finish
++gboolean	e_ews_connection_get_attachments_finish
+ 						(EEwsConnection *cnc,
+ 						 GAsyncResult *result,
+ 						 GSList **items,
+ 						 GError **error);
+-GSList *	e_ews_connection_get_attachments_sync
++gboolean	e_ews_connection_get_attachments_sync
+ 						(EEwsConnection *cnc,
+ 						 gint pri,
+ 						 const gchar *comp_uid,

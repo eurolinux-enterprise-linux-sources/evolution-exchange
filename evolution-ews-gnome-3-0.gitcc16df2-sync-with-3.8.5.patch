@@ -1,0 +1,2800 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/po/gu.po.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/po/gu.po
+--- evolution-ews-gnome-3-0.gitcc16df2/po/gu.po.sync-with-3.8.5	2013-08-12 12:33:04.801417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/po/gu.po	2013-08-12 12:33:04.801417278 +0200
+@@ -0,0 +1,1079 @@
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++#
++# , 2013.
++msgid ""
++msgstr ""
++"Project-Id-Version: \n"
++"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
++"cgi?product=evolution-ews&keywords=I18N+L10N&component=general\n"
++"POT-Creation-Date: 2013-08-05 08:58+0000\n"
++"PO-Revision-Date: 2013-08-05 16:30+0530\n"
++"Last-Translator: \n"
++"Language-Team: American English <kde-i18n-doc@kde.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Language: \n"
++"Plural-Forms: nplurals=2; plural=(n != 1);\n"
++"X-Generator: Lokalize 1.0\n"
++
++#: ../src/addressbook/e-book-backend-ews.c:1038
++msgid "The backend does not support bulk additions"
++msgstr "બેકઍન્ડ જથ્થાબંધ ઉમેરાઓને આધાર આપતુ નથી"
++
++#: ../src/addressbook/e-book-backend-ews.c:1325
++msgid "The backend does not support bulk modifications"
++msgstr "બેકઍન્ડ જથ્થાબંધ બદલાવોને આધાર આપતુ નથી"
++
++#: ../src/addressbook/e-book-backend-ews.c:1513
++msgid "Wait till syncing is done"
++msgstr "રાહ જુઓ જ્યાં સુધી સુળે કરવાનું પૂર્ણ થાય"
++
++#: ../src/addressbook/e-book-backend-ews.c:1922
++#, c-format
++msgid "Downloading contacts in %s %d%% completed... "
++msgstr "%s %d%% માં સંપર્કોને ડાઉનલોડ કરવાનું સમાપ્ત થયેલ છે... "
++
++#: ../src/addressbook/e-book-backend-ews.c:2535
++msgid "Syncing contacts..."
++msgstr "સંપર્કોનો સુમેળ કરી રહ્યા છે..."
++
++#: ../src/addressbook/e-book-backend-ews.c:2757
++#: ../src/configuration/e-ews-search-user.c:365
++msgid "Searching..."
++msgstr "શોધી રહ્યા છીએ..."
++
++#: ../src/calendar/e-cal-backend-ews.c:1112
++msgid "EWS does not support bulk removals"
++msgstr "EWS એ જથ્થાબંધ નિરાકરણેન આધાર આપતુ નથી"
++
++#: ../src/calendar/e-cal-backend-ews.c:1763
++msgid "EWS does not support bulk additions"
++msgstr "EWS એ જથ્થાબંધ ઉમેરાઓને આધાર આપતુ નથી"
++
++#: ../src/calendar/e-cal-backend-ews.c:2346
++msgid "EWS does not support bulk modifications"
++msgstr "EWS એ જથ્થાબંધ બદલાવોને આધાર આપતુ નથી"
++
++#: ../src/camel/camel-ews-folder.c:268
++#, c-format
++msgid "Unable to open mimecontent temporary file!"
++msgstr "mimecontent કામચલાઉ ફાઇલને ખોલવાનું અસમર્થ!"
++
++#: ../src/camel/camel-ews-folder.c:276
++#, c-format
++msgid "Unable to generate parser from mimecontent!"
++msgstr "mimecontent માંથી પાર્સરને ઉત્પન્ન કરવાનું અસમર્થ!"
++
++#: ../src/camel/camel-ews-folder.c:285
++#, c-format
++msgid "Unable to parse meeting request mimecontent!"
++msgstr "મંત્રણા માંગણી mimecontent નું પદચ્છેદન કરવાનું અસમર્થ!"
++
++#: ../src/camel/camel-ews-folder.c:344
++#, c-format
++msgid "Unable to create cache file"
++msgstr "કેશ ફાઇલને બનાવવાનું અસમર્થ"
++
++#: ../src/camel/camel-ews-folder.c:448 ../src/camel/camel-ews-folder.c:527
++#, c-format
++msgid "Unable to create cache path"
++msgstr "કેશ પથ બનાવવા સમર્થ નથી"
++
++#: ../src/camel/camel-ews-folder.c:537
++#, c-format
++msgid "Failed to move message cache file"
++msgstr "સંદેશા કેશ ફાઇલને ખસેડવામાં નિષ્ફળતા"
++
++#: ../src/camel/camel-ews-folder.c:1185
++#, c-format
++msgid "Could not load summary for %s"
++msgstr "%s માટે સારાંશ ને લોડ કરી શકાયુ નહિં"
++
++#: ../src/camel/camel-ews-folder.c:1621
++#, c-format
++msgid "Cant perform actions on the folder while in offline mode"
++msgstr "ફોલ્ડર પર ક્રિયાઓને ચલાની શકાતી નથી જ્યારે ઓફલાઇન સ્થિતિમાં હોય"
++
++#: ../src/camel/camel-ews-provider.c:48
++msgid "Checking for new mail"
++msgstr "નવા મેઇલ માટે ચકાસી રહ્યા છે"
++
++#: ../src/camel/camel-ews-provider.c:50
++msgid "C_heck for new messages in all folders"
++msgstr "બધા ફોલ્ડરો માં નવા સંદેશા માટે ચકાસો (_h)"
++
++#: ../src/camel/camel-ews-provider.c:53
++msgid "Options"
++msgstr "વિકલ્પો"
++
++#: ../src/camel/camel-ews-provider.c:55
++msgid "_Apply filters to new messages in Inbox on this server"
++msgstr "આ સર્વર પર ઇનબોક્સ માં નવા સંદેશાઓ માટે ગાળકો ને લાગુ કરો (_A)"
++
++#: ../src/camel/camel-ews-provider.c:57
++msgid "Check new messages for _Junk contents"
++msgstr "નકામા સમાવિષ્ટો માટે નવા સંદેશાઓને ચકાસો (_J)"
++
++#: ../src/camel/camel-ews-provider.c:59
++msgid "Only check for Junk messages in the IN_BOX folder"
++msgstr "માત્ર ઇનબોક્સ ફોલ્ડરમાં બગડેલ સંદેશાઓ માટે ચકાસો (_B)"
++
++#: ../src/camel/camel-ews-provider.c:61
++msgid "Automatically synchroni_ze remote mail locally"
++msgstr "દૂરસ્થ મેઈલને સ્થાનિકપણે આપોઆપ સુમેળ કરો (_z)"
++
++#: ../src/camel/camel-ews-provider.c:64
++msgid "Connection"
++msgstr "જોડાણ"
++
++#. Translators: '%s' is preplaced with a widget, where "
++#. * user can select how long the timeout should be.
++#: ../src/camel/camel-ews-provider.c:68
++#, c-format
++msgid "Connection _timeout (in seconds) %s"
++msgstr "જોડાણ સમયસમાપ્તિ (સેકંડ માં) %s (_t)"
++
++#: ../src/camel/camel-ews-provider.c:76
++msgid "Exchange Web Services"
++msgstr "ઍક્સચેન્જ વેબ સેવાઓ"
++
++#: ../src/camel/camel-ews-provider.c:78
++msgid "For accessing Exchange servers using Web Services"
++msgstr "વેબ સેવાઓની મદદથી ઍક્સચેન્જ સર્વરોને વાપરવા માટે"
++
++#: ../src/camel/camel-ews-provider.c:93
++msgid "NTLM"
++msgstr "NTLM"
++
++#: ../src/camel/camel-ews-provider.c:95
++msgid ""
++"This option will connect to the Exchange server using a plaintext password "
++"with NTLM authentication."
++msgstr ""
++"આ વિકલ્પ એ NTLM સત્તાધિકરણ સાથે સાદાલખાણ પાસવર્ડની મદદથી ઍક્સચેન્જ સર્વર સાથે જોડાશે."
++
++#: ../src/camel/camel-ews-provider.c:103
++msgid "Basic"
++msgstr "મૂળભૂત"
++
++#: ../src/camel/camel-ews-provider.c:105
++msgid ""
++"This option will connect to the Exchange server using a plaintext password "
++"with Basic authentication."
++msgstr ""
++"આ વિકલ્પ મૂળ સત્તાધિકરણ સાથે સાદા લખાણ પાસવર્ડની મદદથી ઍક્સચેન્જ સર્વર સાથે જોડાશે."
++
++#: ../src/camel/camel-ews-store.c:192
++#, c-format
++msgid "Session has no storage path"
++msgstr "સંત્ર પાસે સંગ્રહ પાથ નથી"
++
++#: ../src/camel/camel-ews-store.c:229
++#, c-format
++msgctxt "PublicFolders"
++msgid "%s_%d"
++msgstr "%s_%d"
++
++#: ../src/camel/camel-ews-store.c:358
++#, c-format
++msgctxt "ForeignFolders"
++msgid "%s_%d"
++msgstr "%s_%d"
++
++#: ../src/camel/camel-ews-store.c:727
++msgid "Updating foreign folder structure"
++msgstr "વિદેશી ફોલ્ડર માળખું સુધારી રહ્યા છીએ"
++
++#: ../src/camel/camel-ews-store.c:1169
++msgid "Query for authentication types is not supported"
++msgstr "સત્તાધિકરણ પ્રકારો માટે ક્વેરી આધારભૂત નથી"
++
++#: ../src/camel/camel-ews-store.c:1221
++#, c-format
++msgid "No such folder: %s"
++msgstr "આવું કોઈ ફોલ્ડર નથી: %s"
++
++#: ../src/camel/camel-ews-store.c:1533
++msgid "Cannot list EWS public folders in offline mode"
++msgstr "ઓફલાઇન સ્થિતિમાં EWS ની સાર્વજનિક ફોલ્ડરની યાદી કરી શકાતી નથી"
++
++#: ../src/camel/camel-ews-store.c:1606
++msgid "Cannot find any EWS public folders"
++msgstr "કોઇપણ EWS સાર્વજનિક ફોલ્ડરો શોધી શકાતા નથી"
++
++#: ../src/camel/camel-ews-store.c:1711
++#, c-format
++msgid "Cannot create folder '%s', folder already exists"
++msgstr "ફોલ્ડર '%s' ને બનાવી શકાતુ નથી, ફોલ્ડર પહેલેથી અસ્તિત્વમાં છે"
++
++#: ../src/camel/camel-ews-store.c:1726
++#, c-format
++msgid "Parent folder %s does not exist"
++msgstr "મુખ્ય ફોલ્ડર %s અસ્તિત્વમાં નથી"
++
++#: ../src/camel/camel-ews-store.c:1736
++#, c-format
++msgid "Cannot create folder under '%s', it is used for folders of other users only"
++msgstr ""
++"'%s' હેઠળ ફોલ્ડરને બનાવી શકાતુ નથી, તે ફક્ત બીજા વપરાશકર્તાઓનાં ફોલ્ડર માટે વાપરેલ છે"
++
++#: ../src/camel/camel-ews-store.c:1746
++#, c-format
++msgid "Cannot create folder under '%s', it is used for public folders only"
++msgstr "'%s' હેઠળ ફોલ્ડરને બનાવી શકાતુ નથી, તે ફક્ત સાર્વજનિક ફોલ્ડર માટે વાપરેલ છે"
++
++#: ../src/camel/camel-ews-store.c:1815
++#, c-format
++msgid "Folder does not exist"
++msgstr "ફોલ્ડર અસ્તિત્વમાં નથી"
++
++#: ../src/camel/camel-ews-store.c:1824
++#, c-format
++msgid "Cannot remove folder '%s', it is used for folders of other users only"
++msgstr ""
++"ફોલ્ડર '%s' ને દૂર કરી શકાતુ નથી, તે ફક્ત બીજા વપરાશકર્તાઓનાં ફોલ્ડર માટે વાપરેલ છે"
++
++#: ../src/camel/camel-ews-store.c:1834
++#, c-format
++msgid "Cannot remove folder '%s', it is used for public folders only"
++msgstr "ફોલ્ડર %s' ને દૂર કરી શકાતુ નથી, તે ફક્ત સાર્વજનિક ફોલ્ડર માટે વાપરેલ છે"
++
++#: ../src/camel/camel-ews-store.c:1942
++#, c-format
++msgid "Folder %s does not exist"
++msgstr "ફોલ્ડર '%s' અસ્તિત્વમાં નથી"
++
++#: ../src/camel/camel-ews-store.c:1952
++#, c-format
++msgid "No change key record for folder %s"
++msgstr "ફોલ્ડર %s માટે કી રેકોર્ડમાં ફેરફાર નથી"
++
++#: ../src/camel/camel-ews-store.c:1994
++#, c-format
++msgid "Cannot both rename and move a folder at the same time"
++msgstr "બંનેનુ નામ બદલી શકાતુ નથી અને એજ સમયે ફોલ્ડરને ખસેડો"
++
++#: ../src/camel/camel-ews-store.c:2030
++#, c-format
++msgid "Cannot find folder ID for parent folder %s"
++msgstr "મુખ્ય ફોલ્ડર %s માટે ફોલ્ડર ID ને શોધી શકાતુ નથી"
++
++#: ../src/camel/camel-ews-store.c:2080 ../src/camel/camel-ews-transport.c:69
++#, c-format
++msgid "Exchange server %s"
++msgstr "ઍક્સચેન્જ સર્વર %s"
++
++#: ../src/camel/camel-ews-store.c:2083
++#, c-format
++msgid "Exchange service for %s on %s"
++msgstr "%s પર %s માટે ઍક્સચેન્જ સેવા"
++
++#: ../src/camel/camel-ews-store.c:2127
++#, c-format
++msgid "Could not locate Trash folder"
++msgstr "કચરાપેટી ફોલ્ડરને સ્થિત કરી શક્યા નહિં"
++
++#: ../src/camel/camel-ews-store.c:2187
++#, c-format
++msgid "Could not locate Junk folder"
++msgstr "ખરાબ ફોલ્ડરને સ્થિત કરી શક્યા નહિં"
++
++#: ../src/camel/camel-ews-store.c:2377
++msgid "Cannot subscribe EWS folders in offline mode"
++msgstr "ઓફલાઇન સ્થિતિમાં EWS ફોલ્ડરની ઉમેદવારી કરી શકાતી નથી"
++
++#: ../src/camel/camel-ews-store.c:2400
++#, c-format
++msgid "Cannot subscribe folder '%s', no public folder available"
++msgstr "ફોલ્ડર '%s' ની ઉમેદવારી કરી શકાતી નથી, સાર્વજનિક ફોલ્ડર ઉપલબ્ધ નથી"
++
++#: ../src/camel/camel-ews-store.c:2410
++#, c-format
++msgid "Cannot subscribe folder '%s', folder not found"
++msgstr "ફોલ્ડર '%s' ની ઉમેદવારી કરી શકાતી નથી, ફોલ્ડર મળ્યુ નથી"
++
++#: ../src/camel/camel-ews-store.c:2501
++msgid "Cannot unsubscribe EWS folders in offline mode"
++msgstr "ઓફલાઇન સ્થિતિ માં EWS ફોલ્ડરોને ઉમેદવારી હટાવી શકાતી નથી"
++
++#: ../src/camel/camel-ews-store.c:2618
++#, c-format
++msgid "You must be working online to complete this operation"
++msgstr "આ પ્રક્રિયા પૂર્ણ કરવા માટે તમારે ઓનલાઈન કામ કરવું જ પડશે"
++
++#: ../src/camel/camel-ews-transport.c:72
++#, c-format
++msgid "Exchange mail delivery via %s"
++msgstr "%s મારફતે ઍક્સચેન્જ મેઇલ ડિલીવરી"
++
++#: ../src/camel/camel-ews-transport.c:119
++msgid "Cannot send message with no From address"
++msgstr "સરનામાં પ્રતિ કોઇ સાથે સંદેશાને મોકલી શકાતુ નથી"
++
++#: ../src/camel/camel-ews-transport.c:125
++msgid "Exchange server cannot send message with multiple From addresses"
++msgstr "ઘણાં સરનામાં પ્રતિ કોઇ સાથે ઍક્સચેન્ડ સર્વરને સંદેશા મોકલી શકાતા નથી"
++
++#: ../src/camel/camel-ews-transport.c:136
++msgid "Failed to read From address"
++msgstr "સરનામાંથી વાંચવામાં નિષ્ફળતા"
++
++#: ../src/camel/camel-ews-transport.c:148
++#, c-format
++msgid ""
++"Exchange server cannot send message as '%s', when the account was configured "
++"for address '%s'"
++msgstr ""
++"'%s' તરીકે ઍક્સચેન્જ સર્વર સંદેશાને મોકલી શકાતુ નથી, જ્યારે ખાતુ સરનામાં '%s' માટે "
++"રૂપરેખાંકિત થયેલ હતુ"
++
++#: ../src/camel/camel-ews-transport.c:162
++#, c-format
++msgid "Service not connected"
++msgstr "સેવા જોડાયેલ નથી"
++
++#: ../src/collection/e-ews-backend.c:428
++#: ../src/configuration/e-mail-config-ews-gal.c:274
++msgid "Global Address List"
++msgstr "વૈશ્ર્વિક સરનામાં યાદી"
++
++#: ../src/collection/e-ews-backend.c:813
++#, c-format
++msgid "Could not determine a suitable folder class for a new folder named '%s'"
++msgstr "નામ થયેલ નવુ ફોલ્ડર '%s' માટે અનૂકુળ ફોલ્ડર વર્ગને નક્કી કરી શક્યા નહિં"
++
++#: ../src/collection/e-ews-backend.c:902
++#, c-format
++msgid "Data source '%s' does not represent an Exchange Web Services folder"
++msgstr "માહિતી સ્ત્રોત '%s' ઍક્સચેન્જ વેબ ફોલ્ડરને રજૂ કરતુ નથી"
++
++#: ../src/configuration/e-ews-config-utils.c:516
++#, c-format
++msgid "Cannot edit permissions of folder '%s', choose other folder."
++msgstr "ફોલ્ડર '%s' ની પરવાનગીઓમાં ફેરફાર કરી શકાતો નથી, બીજા ફોલ્ડરને પસંદ કરો."
++
++#: ../src/configuration/e-ews-config-utils.c:594
++msgid "Subscribe to folder of other user..."
++msgstr "બીજા વપરાશકર્તાનાં ફોલ્ડરમાં ઉમેદવારી કરો..."
++
++#: ../src/configuration/e-ews-config-utils.c:603
++#: ../src/configuration/e-ews-config-utils.c:884
++#: ../src/configuration/e-ews-config-utils.c:915
++#: ../src/configuration/e-ews-config-utils.c:946
++#: ../src/configuration/e-ews-config-utils.c:977
++msgid "Permissions..."
++msgstr "પરવાનગીઓ..."
++
++#: ../src/configuration/e-ews-config-utils.c:605
++msgid "Edit EWS folder permissions"
++msgstr "EWS ફોલ્ડર પરવાનગીઓમાં ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-config-utils.c:886
++msgid "Edit EWS calendar permissions"
++msgstr "EWS કૅલેન્ડર પરવાનગીઓમાં ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-config-utils.c:917
++msgid "Edit EWS tasks permissions"
++msgstr "EWS કાર્ય પરવાનગીઓમાં ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-config-utils.c:948
++msgid "Edit EWS memos permissions"
++msgstr "EWS મેમો પરવાનગીઓમાં ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-config-utils.c:979
++msgid "Edit EWS contacts permissions"
++msgstr "EWS સંપર્ક પરવાનગીઓમાં ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:87
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:499
++msgctxt "PermissionsLevel"
++msgid "None"
++msgstr "કંઈ નહિં"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:88
++msgctxt "PermissionsLevel"
++msgid "Owner"
++msgstr "માલિક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:98
++msgctxt "PermissionsLevel"
++msgid "Publishing Editor"
++msgstr "સંપાદકને પ્રકાશિત કરી રહ્યા છે"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:107
++msgctxt "PermissionsLevel"
++msgid "Editor"
++msgstr "સંપાદક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:115
++msgctxt "PermissionsLevel"
++msgid "Publishing Author"
++msgstr "લેખકને પ્રકાશિત કરી રહ્યા છે"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:122
++msgctxt "PermissionsLevel"
++msgid "Author"
++msgstr "લેખક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:128
++msgctxt "PermissionsLevel"
++msgid "Nonediting Author"
++msgstr "ફેરફાર ન કરી શકાય તેવા લેખક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:133
++msgctxt "PermissionsLevel"
++msgid "Reviewer"
++msgstr "સમીક્ષક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:136
++msgctxt "PermissionsLevel"
++msgid "Contributor"
++msgstr "ફાળક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:139
++msgctxt "PermissionsLevel"
++msgid "Free/Busy time"
++msgstr "મુક્ત/વ્યસ્ત સમય"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:141
++msgctxt "PermissionsLevel"
++msgid "Free/Busy time, subject, location"
++msgstr "મુક્ત/વ્યસ્ત સમય, વિષય, સ્થાન"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:143
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:520
++msgctxt "PermissionsLevel"
++msgid "Custom"
++msgstr "વૈવિધ્ય"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:267
++msgid "Writing folder permissions, please wait..."
++msgstr "ફોલ્ડર પરવાનગીઓને લખી રહ્યા છે, મહેરબાની કરીને થોભો..."
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:777
++msgctxt "User"
++msgid "Anonymous"
++msgstr "અનામિક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:780
++msgctxt "User"
++msgid "Default"
++msgstr "મૂળભૂત"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:786
++msgctxt "User"
++msgid "Unknown"
++msgstr "અજ્ઞાત"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:867
++#: ../src/configuration/e-ews-search-user.c:431
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1075
++msgid "Name"
++msgstr "નામ"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:873
++msgid "Permission level"
++msgstr "પરવાનગી સ્તર"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:925
++msgid "Edit EWS folder permissions..."
++msgstr "EWS ફોલ્ડર પરવાનગીઓમાં ફેરફાર કરો..."
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:950
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:635
++msgid "Account:"
++msgstr "ખાતુ:"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:978
++msgid "Folder name:"
++msgstr "ફોલ્ડર નામ:"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1001
++msgid "Folder ID:"
++msgstr "ફોલ્ડર ID:"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1065
++msgid "Permissions"
++msgstr "પરવાનગીઓ"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1087
++msgid "Permi_ssion level:"
++msgstr "પરવાનગી સ્તર (_s):"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1121
++msgctxt "Permissions"
++msgid "Read"
++msgstr "વાંચો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1133
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1200
++msgctxt "Permissions"
++msgid "None"
++msgstr "કંઈ નહિં"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1139
++msgctxt "Permissions"
++msgid "Free/Busy time"
++msgstr "મુક્ત/વ્યસ્ત સમય"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1144
++msgctxt "Permissions"
++msgid "Free/Busy time, subject, location"
++msgstr "મુક્ત/વ્યસ્ત સમય, વિષય, સ્થાન"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1150
++msgctxt "Permissions"
++msgid "Full Details"
++msgstr "સંપૂર્ણ વિગતો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1156
++msgctxt "Permissions"
++msgid "Write"
++msgstr "લખો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1168
++msgctxt "Permissions"
++msgid "Create items"
++msgstr "વસ્તુઓને બનાવો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1172
++msgctxt "Permissions"
++msgid "Create subfolders"
++msgstr "ઉપફોલ્ડરને બનાવો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1176
++msgctxt "Permissions"
++msgid "Edit own"
++msgstr "પોતે ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1180
++msgctxt "Permissions"
++msgid "Edit all"
++msgstr "બધામાં ફેરફાર કરો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1188
++msgctxt "Permissions"
++msgid "Delete items"
++msgstr "વસ્તુઓને કાઢી નાંખો"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1205
++msgctxt "Permissions"
++msgid "Own"
++msgstr "પોતાનું"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1210
++msgctxt "Permissions"
++msgid "All"
++msgstr "બધા"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1216
++msgctxt "Permissions"
++msgid "Other"
++msgstr "બીજુ"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1228
++msgctxt "Permissions"
++msgid "Folder owner"
++msgstr "ફોલ્ડર માલિક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1232
++msgctxt "Permissions"
++msgid "Folder contact"
++msgstr "ફોલ્ડર સંપર્ક"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1236
++msgctxt "Permissions"
++msgid "Folder visible"
++msgstr "ફોલ્ડર દૃશ્યમાન"
++
++#: ../src/configuration/e-ews-edit-folder-permissions.c:1309
++msgid "Reading folder permissions, please wait..."
++msgstr "ફોલ્ડર પરવાનગીઓને વાંચી રહ્યા છે, મહેરબાની કરીને થોભો..."
++
++#: ../src/configuration/e-ews-search-user.c:208
++#, c-format
++msgid "No users found, only one contact"
++msgid_plural "No users found, only %d contacts"
++msgstr[0] "વપરાશકર્તાઓ મળ્યા નથી, ફક્ત એક સંપર્ક"
++msgstr[1] "વપરાશકર્તાઓ મળ્યા નથી, ફક્ત %d સંપર્કો"
++
++#: ../src/configuration/e-ews-search-user.c:213
++msgid "No users found"
++msgstr "વપરાશકર્તાઓ મળ્યા નથી"
++
++#: ../src/configuration/e-ews-search-user.c:217
++#, c-format
++msgid "Found one user"
++msgid_plural "Found %d users"
++msgstr[0] "એક વપરાશકર્તા મળ્યો"
++msgstr[1] "%d વપરાશકર્તાઓ મળ્યા"
++
++#: ../src/configuration/e-ews-search-user.c:223
++#, c-format
++msgid "Found more than 100 users, but showing only first %d"
++msgid_plural "Found more than 100 users, but showing only first %d"
++msgstr[0] "100 વપરાશકર્તાઓ કરતા વધારે મળ્યાં, પરંતુ ફક્ત %d ને બતાવી રહ્યા છે"
++msgstr[1] "100 વપરાશકર્તાઓ કરતા વધારે મળ્યાં, પરંતુ ફક્ત પ્રથમ %d ને બતાવી રહ્યા છે"
++
++#: ../src/configuration/e-ews-search-user.c:357
++#: ../src/configuration/e-ews-search-user.c:540
++msgid "Search for a user"
++msgstr "વપરાશકર્તા માટે શોધો"
++
++#: ../src/configuration/e-ews-search-user.c:437
++msgid "E-mail"
++msgstr "ઇ-મેઇલ"
++
++#: ../src/configuration/e-ews-search-user.c:474
++msgid "Choose EWS user..."
++msgstr "EWS વપરાશકર્તાને પસંદ કરો..."
++
++#: ../src/configuration/e-ews-search-user.c:497
++msgid "_Search:"
++msgstr "શોધો (_S):"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:97
++#: ../src/server/e-ews-folder.c:632
++#, c-format
++msgid "Cannot add folder, folder already exists as '%s'"
++msgstr "ફોલ્ડરને ઉમેરી શકાતુ નથી, ફોલ્ડર પહેલેથી '%s' તરીકે અસ્તિત્વમાં છે"
++
++#. Translators: The '%s' is replaced with user name, to whom the foreign mailbox belongs.
++#. * Example result: "Mailbox - John Smith"
++#.
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:107
++#, c-format
++msgctxt "ForeignFolder"
++msgid "Mailbox - %s"
++msgstr "મેઇલબોક્સ - %s"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:272
++msgid "Cannot test foreign folder availability while in offline mode"
++msgstr "વિદેશી ફોલ્ડર ઉપલબ્ધતાને ચકાસી શકાતુ નથી જ્યારે ઓફલાઇન સ્થિતિમાં હોય"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:297
++#, c-format
++msgid "User '%s' was not found on the server"
++msgstr "વપરાશકર્તા '%s' એ સર્વર પર મળ્યુ ન હતુ"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:333
++#, c-format
++msgid "User name '%s' is ambiguous, specify it more precisely, please"
++msgstr "વપરાશકર્તા નામ '%s' અસ્પષ્ટ છે, વધારે બારીકાઇથી તેને સ્પષ્ટ કરો, મહેરબાની કરીને"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:355
++#, c-format
++msgid ""
++"Folder '%s' not found. Either it does not exist or you do not have "
++"permission to access it."
++msgstr ""
++"ફોલ્ડર '%s' મળ્યુ નથી. ક્યાંતો તે અસ્તિત્વ ધરાવતુ નથી અથવા તમારી પાસે તેને વાપરવા માટે "
++"પરવાનગી નથી."
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:373
++msgid "Cannot add folder, cannot determine folder's type"
++msgstr "ફોલ્ડરને ઉમેરી શકાતુ નથી, ફોલ્ડરનાં પ્રકારને નક્કી કરી શકાતુ નથી"
++
++#. Translators: This is used to name foreign folder.
++#. * The first '%s' is replaced with user name to whom the folder belongs,
++#. * the second '%s' is replaced with folder name.
++#. * Example result: "John Smith - Calendar"
++#.
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:418
++#, c-format
++msgctxt "ForeignFolder"
++msgid "%s - %s"
++msgstr "%s - %s"
++
++#. convert well-known names to their non-localized form
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:512
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:720
++msgid "Inbox"
++msgstr "ઇનબોક્સ"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:514
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:721
++msgid "Contacts"
++msgstr "સંપર્કો"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:516
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:722
++msgid "Calendar"
++msgstr "કૅલેન્ડર"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:518
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:723
++msgid "Memos"
++msgstr "મેમો"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:520
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:724
++msgid "Tasks"
++msgstr "કાર્યો"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:537
++#, c-format
++msgid "Testing availability of folder '%s' of user '%s', please wait..."
++msgstr "વપરાશકર્તા '%s' નું ફોલ્ડર '%s' ની ચકાસણી ઉપલબ્ધતા, મહેરબાની કરીને થોભો..."
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:614
++msgid "Subscribe to folder of other EWS user..."
++msgstr "બીજા EWS વપરાશકર્તાનાં ફોલ્ડરની ઉમેદવારી કરો..."
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:665
++msgid "User"
++msgstr "વપરાશકર્તા"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:672
++msgid "_User:"
++msgstr "વપરાશકર્તા (_U):"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:687
++msgid "C_hoose..."
++msgstr "પસંદ કરો (_h)..."
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:703
++msgid "_Folder name:"
++msgstr "ફોલ્ડર નામ (_F):"
++
++#: ../src/configuration/e-ews-subscribe-foreign-folder.c:733
++msgid "Include _subfolders"
++msgstr "ઉપફોલ્ડરનો સમાવો (_s)"
++
++#: ../src/configuration/e-mail-config-ews-autodiscover.c:140
++msgid "Querying Autodiscover service"
++msgstr "Autodiscover સેવાની ક્વેરી કરી રહ્યા છે"
++
++#: ../src/configuration/e-mail-config-ews-autodiscover.c:231
++msgid "Fetch _URL"
++msgstr "URL લાવો (_U)"
++
++#: ../src/configuration/e-mail-config-ews-backend.c:140
++msgid "Configuration"
++msgstr "રૂપરેખાંકન"
++
++#: ../src/configuration/e-mail-config-ews-backend.c:158
++msgid "User_name:"
++msgstr "વપરાશકર્તા નામ (_n):"
++
++#: ../src/configuration/e-mail-config-ews-backend.c:172
++msgid "_Host URL:"
++msgstr "યજમાન URL (_H):"
++
++#: ../src/configuration/e-mail-config-ews-backend.c:191
++msgid "OAB U_RL:"
++msgstr "OAB URL (_R):"
++
++#: ../src/configuration/e-mail-config-ews-backend.c:205
++msgid "Open _Mailbox of other user"
++msgstr "બીજા વપરાશકર્તાનાં મેઇલબોક્સને ખોલો (_M)"
++
++#: ../src/configuration/e-mail-config-ews-backend.c:239
++msgid "S_earch..."
++msgstr "શોધો (_e)..."
++
++#: ../src/configuration/e-mail-config-ews-backend.c:250
++msgid "Authentication"
++msgstr "સત્તાધિકરણ"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:500
++msgctxt "PermissionsLevel"
++msgid "Reviewer (can read items)"
++msgstr "સમીક્ષર (વસ્તુઓને વાંચી શકે છે)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:501
++msgctxt "PermissionsLevel"
++msgid "Author (can read and create items)"
++msgstr "લેખક (વસ્તુઓને વાંચી અને બનાવી શકાય છે)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:502
++msgctxt "PermissionsLevel"
++msgid "Editor (can read, create and modify items)"
++msgstr "સંપાદક (વસ્તુઓને વાંચી, બનાવી અને બદલી શકાય છે)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:605
++msgid "Delegate permissions"
++msgstr "પ્રતિનિધિ પરવાનગીઓ"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:623
++msgid "C_alendar"
++msgstr "કેલેન્ડર (_a)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:626
++msgid "_Delegate receives copies of meeting-related messages sent to me"
++msgstr "મને મોકલેલ મંત્રણા સંબંધી સંદેશાની નકલોને પ્રતિનિધિ પ્રાપ્ત કરે છે (_D)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:631
++msgid "_Tasks"
++msgstr "બાબતો (_T)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:634
++msgid "_Inbox"
++msgstr "ઇનબોક્સ (_I)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:637
++msgid "C_ontacts"
++msgstr "સંપર્કો (_o)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:640
++msgid "_Notes"
++msgstr "નોંધો (_N)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:643
++msgid "_Journal"
++msgstr "જર્નલ (_J)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:646
++#, c-format
++msgid "Delegate '%s' has the following permissions"
++msgstr "પ્રતિનિધિ '%s' પાસે નીચેની પરવાનગીઓ છે"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:664
++msgid "Delegate can see my _private items"
++msgstr "પ્રતિનિધિ મારી ખાનગી વસ્તુઓને જોઇ શકે છે (_p)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:987
++msgid "Retrieving current user permissions, please wait..."
++msgstr "હાલની વપરાશકર્તા પરવાનગીઓને પ્રાપ્ત કરી રહ્યા છે, મહેરબાની કરીને થોભો..."
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1108
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1638
++msgid "Delegates"
++msgstr "પ્રતિનિધિઓ"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1132
++msgid ""
++"Delegates can send items on your behalf, including creating and responding "
++"to meeting requests. If you want to grant folder permissions without giving "
++"send-on-behalf-of permissions, close this dialog box, right-click the "
++"folder, click Permissions and change the options there."
++msgstr ""
++"પ્રતિનિધિ તમારા તરફથી વસ્તુઓને મોકલી શકે છે, મંત્રણાની માંગણીને બનાવી અને જવાબ આપવાનું "
++"ઉમેરી રહ્યા છે. જો તમે તેનાં બદલે મોકલવાની પરવાનગીઓ આપ્યા વગર ફોલ્ડર પરવાનગીઓને સંમત "
++"કરવા માંગો તો, આ સંવાદ બોક્સને બંધ કરો, ફોલ્ડર પર જમણી ક્લિક કરો, ત્યાં પરવાનગીઓ પર "
++"ક્લિક કરો વિકલ્પોને બદલો."
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1181
++msgid ""
++"Deliver meeting requests addressed to me and responses to meeting requests "
++"where I am the organizer to:"
++msgstr ""
++"મને અદા થયેલ મંત્રણા માંગણીઓ મોકલો અને મંત્રણા માંગણીને જવાબ આપે છે જ્યાં તેની માટે "
++"હું સંચાલક છુ:"
++
++#. new-line break, because GtkRadioButton doesn't allow wrapping of the inner label
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1190
++msgid ""
++"My delegates only, but _send a copy of meeting requests\n"
++"and responses to me (recommended)"
++msgstr ""
++"ફક્ત મારાં પ્રતિનિધિ, પરંતુ મંત્રણા માંગણીની નકલને મોકલો અને મને જવાબ આપો (અગ્રહણીય) "
++"(_s)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1197
++msgid "My d_elegates only"
++msgstr "મારાં પ્રતિનિધિ ફક્ત (_e)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1204
++msgid "My delegates a_nd me"
++msgstr "મારા પ્રતિનિધિ અને હું (_n)"
++
++#: ../src/configuration/e-mail-config-ews-delegates-page.c:1713
++msgid "Retrieving \"Delegates\" settings"
++msgstr "\"પ્રતિનિધિ\" સુયોજનોને પ્રાપ્ત કરી રહ્યા છે"
++
++#: ../src/configuration/e-mail-config-ews-gal.c:221
++msgid "Locating offline address books"
++msgstr "ઓફલાઇન સરનામાં પુસ્તિકાને સ્થિત કરી રહ્યા છે"
++
++#: ../src/configuration/e-mail-config-ews-gal.c:301
++msgid "Cache o_ffline address book"
++msgstr "કેશ ઓફલાઇન સરનામાં પુસ્તિકા (_f)"
++
++#: ../src/configuration/e-mail-config-ews-gal.c:327
++msgid "Select ad_dress list:"
++msgstr "સરનામાં યાદીને પસંદ કરો (_d):"
++
++#: ../src/configuration/e-mail-config-ews-gal.c:351
++msgid "Fetch List"
++msgstr "યાદીને લાવો"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:444
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:923
++msgid "Out of Office"
++msgstr "ઓફિસની બહાર"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:460
++msgid ""
++"The messages specified below will be automatically sent to each internal and "
++"external person who sends a mail to you."
++msgstr ""
++"સંદેશા નીચે સ્પષ્ટ કરેલ છે જે દરેક આંતરિક અને બહારનાં માણસ માટે આપમેળે મોકલાશે કે જે "
++"તમને મેઇલ મોકલે છે."
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:468
++msgid "Do _not send Out of Office replies"
++msgstr "ઓફિસની બહાર જવાબોને મોકલો નહિં (_n)"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:476
++msgid "_Send Out of Office replies"
++msgstr "ઓફિસની બહાર જવાબોને મોકલો (_S)"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:484
++msgid "Send Out of Office replies only _during this time period:"
++msgstr "આ સમયગાળા દરમ્યાન ફક્ત ઓફિસની બહાર જવાબોને મોકલો (_d):"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:504
++msgid "_From:"
++msgstr "માંથી (_F):"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:529
++msgid "_To:"
++msgstr "પ્રતિ (_T):"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:554
++msgid "I_nternal:"
++msgstr "આંતરિક (_n):"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:563
++msgid "Message to be sent within the organization"
++msgstr "સંદેશાને સંસ્થામાં મોકલેલ છે"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:590
++msgid "E_xternal:"
++msgstr "બહારનું (_x):"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:598
++msgid "Message to be sent outside the organization"
++msgstr "સંદેશાને સંસ્થાની બહાર મોકલેલ છે"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:608
++msgid "Do not reply to senders outside the organization"
++msgstr "સંસ્થાની બહાર મોકલનારને જવાબ આપો નહિં"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:611
++msgid "Reply only to known senders outside the organization"
++msgstr "સંસ્થાની બહાર ફક્ત જાણીતા મોકનારાઓને જવાબ આપો"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:614
++msgid "Reply to any sender outside the organization"
++msgstr "સંસ્થાની બહાર કોઇપણ મોકલનારને જવાબ આપો"
++
++#: ../src/configuration/e-mail-config-ews-ooo-page.c:999
++msgid "Retrieving \"Out of Office\" settings"
++msgstr "\"ઓફિસની બહાર\" સુયોજનોને પ્રાપ્ત કરી રહ્યા છે"
++
++#: ../src/configuration/module-ews-configuration.error.xml.h:1
++msgid "Autodiscovery query failed."
++msgstr "Autodiscovery ક્વેરી નિષ્ફળ."
++
++#: ../src/configuration/module-ews-configuration.error.xml.h:2
++msgid "The reported error was &quot;{0}&quot;."
++msgstr "અહેવાલ થયેલ ભૂલ &quot;{0}&quot; હતી."
++
++#: ../src/configuration/module-ews-configuration.error.xml.h:3
++msgid "Failed to locate offline address books."
++msgstr "ઓફલાઇન સરનામાં પુસ્તિકાને સ્થિત કરવામાં નિષ્ફળતા."
++
++#: ../src/configuration/module-ews-configuration.error.xml.h:4
++msgid "Failed to retrieve &quot;Out of Office&quot; settings."
++msgstr "&quot;ઓફિસની બહાર&quot; સુયોજનોને પ્રાપ્ત કરવામાં નિષ્ફળતા."
++
++#: ../src/configuration/module-ews-configuration.error.xml.h:5
++msgid "Failed to retrieve &quot;Delegates&quot; settings."
++msgstr "&quot;પ્રતિનિધિ&quot; સુયોજનોને પ્રાપ્ત કરવામાં નિષ્ફળતા."
++
++#: ../src/server/e-ews-connection.c:494
++msgid "Operation Cancelled"
++msgstr "પ્રક્રિયા રદ થઈ ગઈ હતી"
++
++#: ../src/server/e-ews-connection.c:563
++msgid "Authentication failed"
++msgstr "સત્તાધિકરણ નિષ્ફળ"
++
++#: ../src/server/e-ews-connection.c:574
++#, c-format
++msgid "No response: %s"
++msgstr "જવાબ નથી: %s"
++
++#: ../src/server/e-ews-connection.c:2058
++#, c-format
++msgid "Failed to parse autodiscover response XML"
++msgstr "autodiscover પ્રત્યુત્તર XML નું પદચ્છેદન કરતી વખતે નિષ્ફળતા"
++
++#: ../src/server/e-ews-connection.c:2065
++#, c-format
++msgid "Failed to find <Autodiscover> element"
++msgstr "<Autodiscover> ઘટકને શોધવામાં નિષ્ફળતા"
++
++#: ../src/server/e-ews-connection.c:2076
++#, c-format
++msgid "Failed to find <Response> element"
++msgstr "<Response> ઘટકને શોધવામાં નિષ્ફળતા"
++
++#: ../src/server/e-ews-connection.c:2087
++#, c-format
++msgid "Failed to find <Account> element"
++msgstr "<Account> ઘટકને શોધવામાં નિષ્ફળતા"
++
++#: ../src/server/e-ews-connection.c:2106
++#, c-format
++msgid "Failed to find <ASUrl> and <OABUrl> in autodiscover response"
++msgstr "autodiscover જવાબમાં <ASUrl> અને <OABUrl> શોધવામાં નિષ્ફળતા"
++
++#: ../src/server/e-ews-connection.c:2188
++msgid "URL cannot be NULL"
++msgstr "URL ને NULL કરી શકાતુ નથી"
++
++#: ../src/server/e-ews-connection.c:2196
++#, c-format
++msgid "URL '%s' is not valid"
++msgstr "URL '%s' યોગ્ય નથી"
++
++#: ../src/server/e-ews-connection.c:2298
++msgid "Email address is missing a domain part"
++msgstr "ઇમેઇલ સરનામું ડોમેઇન ભાગ ગુમ થયેલ છે"
++
++#: ../src/server/e-ews-connection.c:2625
++msgid "Failed to parse oab XML"
++msgstr "oab XML ને પદચ્છેદન કરવામાં નિષ્ફળતા"
++
++#: ../src/server/e-ews-connection.c:2633
++msgid "Failed to find <OAB> element\n"
++msgstr "<OAB> ઘટકને શોધવામાં નિષ્ફળતા\n"
++
++#: ../src/server/e-ews-connection.c:3819
++msgid "No items found"
++msgstr "કોઈ વસ્તુઓ મળી નહિં"
++
++#: ../src/server/e-ews-folder.c:587
++msgid "Cannot add folder, unsupported folder type"
++msgstr "ફોલ્ડરને ઉમેરી શકાતુ નથી, બિનઆધારભૂત ફોલ્ડર પ્રકાર"
++
++#: ../src/server/e-ews-folder.c:592
++msgid "Cannot add folder, master source not found"
++msgstr "ફોલ્ડરને ઉમેરી શકાતુ નથી, મુખ્ય સ્ત્રોત મળ્યો નથી"
++
++#: ../src/utils/ews-camel-common.c:221
++#, c-format
++msgid "CreateItem call failed to return ID for new message"
++msgstr "નવાં સંદેશા માટે ID ને પાછુ મેળવવા માટે CreateItem કોલ નિષ્ફળ"
++
++#~ msgid ""
++#~ "Cannot save contact list, it's only supported on EWS Server 2010 or later"
++#~ msgstr ""
++#~ "સંપર્ક યાદીને સંગ્રહ કરી શકાતુ નથી, તે ફક્ત EWS Server 2010 અથવા પછીનાં પર આધારભૂત છે"
++
++#~ msgid "Unknown error"
++#~ msgstr "અજ્ઞાત ભૂલ"
++
++#~ msgid "Checking \"Out of Office\" settings"
++#~ msgstr "\"ઓફિસની બહાર\" સુયોજનોને ચકાસી રહ્યા છે"
++
++#~ msgid "Unset on Server"
++#~ msgstr "સર્વર પર અસુયોજિત"
++
++#~ msgid "Unset the \"Out of Office\" status"
++#~ msgstr "\"ઓફિસની બહાર\" સ્થિતિનું બિનસુયોજન"
+diff -up evolution-ews-gnome-3-0.gitcc16df2/po/kn.po.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/po/kn.po
+--- evolution-ews-gnome-3-0.gitcc16df2/po/kn.po.sync-with-3.8.5	2013-08-12 12:33:04.800417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/po/kn.po	2013-08-12 12:33:04.800417278 +0200
+@@ -0,0 +1,357 @@
++#
++# Shankar Prasad <svenkate@redhat.com>, 2013.
++msgid ""
++msgstr ""
++"Project-Id-Version: \n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2013-07-09 10:40+0530\n"
++"PO-Revision-Date: 2013-07-29 12:15+0530\n"
++"Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
++"Language-Team: Kannada <kde-i18n-doc@kde.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Language: kn\n"
++"X-Generator: Lokalize 1.5\n"
++"Plural-Forms: nplurals=2; plural=(n!=1)\n"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-listener.c:247
++msgid "Global Address list"
++msgstr "ಜಾಗತಿಕ ವಿಳಾಸ ಪಟ್ಟಿ"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:114
++#, c-format
++msgid "Autodiscover failed: %s"
++msgstr "ಸ್ವಯಂಪತ್ತೆಯು ವಿಫಲಗೊಂಡಿದೆ: %s"
++
++# translation auto-copied from project evolution, version el6, document evolution-2.32
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:149
++#, c-format
++msgid "Enter Password for %s"
++msgstr "%s ಗಾಗಿ ಗುಪ್ತಪದವನ್ನು ನಮೂದಿಸಿ"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:158
++msgid "Could not get password."
++msgstr "ಗುಪ್ತಪದವನ್ನು ಪಡೆಯಲಾಗಿಲ್ಲ."
++
++#. OAB url entry
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:262
++msgid "OAB U_RL:"
++msgstr "OAB U_RL:"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:274
++msgid "_Host URL:"
++msgstr "ಆತಿಥೇಯ URL (_H):"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:287
++msgid "Fetch _URL"
++msgstr "_URL ಅನ್ನು ಪಡೆದುಕೊ"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:453
++msgid "Could not fetch oal list: "
++msgstr "oal ಪಟ್ಟಿ ಪಡೆಯಲಾಗಲಿಲ್ಲ:"
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:495
++msgid "Fetching..."
++msgstr "ಪಡೆಯಲಾಗುತ್ತಿದೆ..."
++
++#. Add cache check box
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:632
++msgid "Cache o_ffline address book"
++msgstr "ಆಫ್‌ಲೈನ್ ವಿಳಾಸ ಪುಸ್ತಕದ ಕ್ಯಾಶ್ (_f)"
++
++#. Add label
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:638
++msgid "Select Ad_dress list: "
++msgstr "ವಿಳಾಸ ಪಟ್ಟಿಯನ್ನು ಆರಿಸು (_d): "
++
++#: ../src/account-setup-eplugin/exchange-ews-account-setup.c:648
++msgid "Fetch _list"
++msgstr "ಪಟ್ಟಿಯನ್ನು ಪಡೆದುಕೊ (_l)"
++
++#: ../src/account-setup-eplugin/org-gnome-exchange-ews.eplug.xml.h:1
++#: ../src/camel/camel-ews-provider.c:69
++msgid "Exchange Web Services"
++msgstr "ಎಕ್ಸ್‌ಚೇಂಜ್ ವೆಬ್ ಸರ್ವಿಸಸ್"
++
++#: ../src/account-setup-eplugin/org-gnome-exchange-ews.eplug.xml.h:2
++msgid "GAL settings"
++msgstr "GAL ಸಿದ್ಧತೆಗಳು"
++
++#: ../src/account-setup-eplugin/org-gnome-exchange-ews.eplug.xml.h:3
++msgid "Exchange Web Services Plugin"
++msgstr "ಎಕ್ಸ್‌ಚೇಂಜ್ ವೆಬ್ ಸರ್ವಿಸಸ್ ಪ್ಲಗ್‌ಇನ್"
++
++#: ../src/addressbook/e-book-backend-ews.c:1474
++#, c-format
++msgid "Downloading contacts in %s %d%% completed... "
++msgstr "ಸಂಪರ್ಕಗಳನ್ನು %s %d%% ಗೆ ಇಳಿಸಿಕೊಳ್ಳುವುದು ಪೂರ್ಣಗೊಂಡಿದೆ... "
++
++#: ../src/addressbook/e-book-backend-ews.c:1864
++msgid "Syncing contacts..."
++msgstr "ಸಂಪರ್ಕವಿಳಾಸಗಳನ್ನು ಹೊಂದಾಣಿಕೆ ಮಾಡಲಾಗುತ್ತಿದೆ..."
++
++# translation auto-copied from project evolution-exchange, version el6, document evolution-exchange-2.32
++#: ../src/addressbook/e-book-backend-ews.c:2061
++msgid "Searching..."
++msgstr "ಹುಡುಕಲಾಗುತ್ತಿದೆ..."
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/addressbook/e-book-backend-sqlitedb.c:470
++#, c-format
++msgid "Insufficient memory"
++msgstr "ಸಾಕಷ್ಟು ಮೆಮೊರಿ ಇಲ್ಲ"
++
++#: ../src/calendar/e-cal-backend-ews.c:3796
++#, c-format
++msgid "Unknown calendar property '%s'"
++msgstr "ಗೊತ್ತಿರದ ಕ್ಯಾಲೆಂಡರ್ ಗುಣಲಕ್ಷಣ: '%s'"
++
++#: ../src/camel/camel-ews-folder.c:268
++#, c-format
++msgid "Unable to open mimecontent temporary file!"
++msgstr "mimecontent ತಾತ್ಕಾಲಿಕ ಕಡತವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ!"
++
++#: ../src/camel/camel-ews-folder.c:275
++#, c-format
++msgid "Unable to generate parser from mimecontent!"
++msgstr "mimecontent ಇಂದ ಪಾರ್ಸರ್ ಅನ್ನು ಉತ್ಪಾದಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ!"
++
++#: ../src/camel/camel-ews-folder.c:283
++#, c-format
++msgid "Unable to parse meeting request mimecontent!"
++msgstr "mimecontent ಮೀಟಿಂಗ್ ಮನವಿಯನ್ನು ಪಾರ್ಸ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ!"
++
++#: ../src/camel/camel-ews-folder.c:340
++#, c-format
++msgid "Unable to create cache file"
++msgstr "ಕ್ಯಾಶ್ ಕಡತವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-folder.c:440
++#: ../src/camel/camel-ews-folder.c:509
++#, c-format
++msgid "Unable to create cache path"
++msgstr "ಕ್ಯಾಶ್ ಮಾರ್ಗವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-folder.c:518
++#, c-format
++msgid "Failed to move message cache file"
++msgstr "ಸಂದೇಶ ಕ್ಯಾಶ್ ಕಡತವನ್ನು ಸ್ಥಳಾಂತರಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
++
++# translation auto-copied from project evolution-exchange, version el6, document evolution-exchange-2.32
++#: ../src/camel/camel-ews-folder.c:866
++#, c-format
++msgid "Could not load summary for %s"
++msgstr "%s ಗಾಗಿ ಸಾರಂಶವನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-folder.c:1193
++#: ../src/camel/camel-ews-store.c:575
++#: ../src/camel/camel-ews-store.c:632
++#: ../src/camel/camel-ews-store.c:701
++#, c-format
++msgid "Cant perform actions on the folder while in offline mode"
++msgstr ""
++"ಆಫ್‌ಲೈನ್ ಸ್ಥಿತಿಯಲ್ಲಿದ್ದಾಗ ಪತ್ರಕೋಶದ ಮೇಲೆ ಯಾವುದೆ ಕ್ರಿಯೆಗಳನ್ನು ನಡೆಸಲಾಗಿಲ್ಲ"
++
++# translation auto-copied from project evolution, version el6, document evolution-2.32
++#: ../src/camel/camel-ews-provider.c:48
++msgid "Checking for new mail"
++msgstr "ಹೊಸ ಅಂಚೆಗಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ"
++
++# translation auto-copied from project evolution-exchange, version el6, document evolution-exchange-2.32
++#: ../src/camel/camel-ews-provider.c:50
++msgid "C_heck for new messages in all folders"
++msgstr "ಎಲ್ಲಾ ಕಡತಕೋಶಗಳಲ್ಲಿ ಹೊಸ ಸಂದೇಶಗಳಿಗಾಗಿ ಹುಡುಕು (_h)"
++
++# translation auto-copied from project evolution, version el6, document evolution-2.32
++#: ../src/camel/camel-ews-provider.c:53
++msgid "Options"
++msgstr "ಆಯ್ಕೆಗಳು"
++
++# translation auto-copied from project evolution-exchange, version el6, document evolution-exchange-2.32
++#: ../src/camel/camel-ews-provider.c:55
++msgid "_Apply filters to new messages in Inbox on this server"
++msgstr ""
++"ಈ ಪರಿಚಾರಕದಲ್ಲಿನ ಒಳಪೆಟ್ಟಿಗೆಯಲ್ಲಿನ ಹೊಸ ಸಂದೇಶಗಳಿಗೆ ಫಿಲ್ಟರನ್ನು ಅನ್ವಯಿಸು (_A)"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-provider.c:57
++msgid "Check new messages for Jun_k contents"
++msgstr "ರದ್ದಿ ವಿಷಯಗಳಿಗಾಗಿ ಹೊಸ ಸಂದೇಶಗಳನ್ನು ಪರಿಶೀಲಿಸು (_k)"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-provider.c:59
++msgid "Only check for Junk messages in the IN_BOX folder"
++msgstr "ಕೇವಲ IN_BOX ಪತ್ರಕೋಶದಲ್ಲಿನ ರದ್ದಿ ಸಂದೇಶಗಳನ್ನು ಮಾತ್ರ ಪರಿಶೀಲಿಸು"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-provider.c:61
++msgid "Automatically synchroni_ze remote mail locally"
++msgstr "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ದೂರಸ್ಥ ಅಂಚೆಗಳನ್ನು ಸ್ಥಳೀಯವಾಗು ಹೊಂದಾಣಿಕೆ ಮಾಡು (_z)"
++
++#: ../src/camel/camel-ews-provider.c:71
++msgid "For accessing Exchange servers using Web Services"
++msgstr "ವೆಬ್‌ ಸರ್ವಿಸಸ್ ಬಳಸಿಕೊಂಡು ಎಕ್ಸ್‌ಚೇಂಜ್ ಪೂರೈಕೆಗಣಕಗಳನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-provider.c:87
++msgid "Password"
++msgstr "ಗುಪ್ತಪದ"
++
++#: ../src/camel/camel-ews-provider.c:89
++msgid ""
++"This option will connect to the Exchange server using a plaintext password."
++msgstr ""
++"ಈ ಆಯ್ಕೆಯಿಂದಾಗಿ ಸರಳಪಠ್ಯ ಗುಪ್ತಪದದ ಮೂಲಕ ಎಕ್ಸ್‌ಚೇಂಜ್ ಪರಿಚಾರಕದೊಂದಿಗೆ ಸಂಪರ್ಕಸಾಧಿಸಲು "
++"ಸಹಾಯವಾಗುತ್ತದೆ."
++
++#: ../src/camel/camel-ews-store.c:174
++#, c-format
++msgid "Session has no storage path"
++msgstr "ಅಧಿವೇಶನವು ಯಾವುದೆ ಶೇಖರಣಾ ಮಾರ್ಗವನ್ನು ಹೊಂದಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-store.c:184
++#, c-format
++msgid "EWS service has no host URL"
++msgstr "EWS ಸೇವೆಯು ಯಾವುದೆ ಆತಿಥೇಯ URL ಅನ್ನು ಹೊಂದಿಲ್ಲ"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-store.c:359
++#, c-format
++msgid "No such folder: %s"
++msgstr "ಅಂತಹ ಪತ್ರಕೋಶಗಳಿಲ್ಲ: %s"
++
++#: ../src/camel/camel-ews-store.c:568
++#, c-format
++msgid "Parent folder %s does not exist"
++msgstr "ಮೂಲ %s ಪತ್ರಕೋಶ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-store.c:626
++#, c-format
++msgid "Folder does not exist"
++msgstr "ಪತ್ರಕೋಶ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-store.c:709
++#, c-format
++msgid "Folder %s does not exist"
++msgstr "'%s' ಪತ್ರಕೋಶ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-store.c:718
++#, c-format
++msgid "No change key record for folder %s"
++msgstr "%s ಪತ್ರಕೋಶಕ್ಕಾಗಿ ಯಾವುದೆ ಕೀಲಿ ಬದಲಾವಣೆ ದಾಖಲೆ ಇಲ್ಲ"
++
++#: ../src/camel/camel-ews-store.c:757
++#, c-format
++msgid "Cannot both rename and move a folder at the same time"
++msgstr ""
++"ಪತ್ರಕೋಶದ ಸ್ಥಳಾಂತರಿಸುವಿಕೆ ಮತ್ತು ಹೆಸರು ಬದಲಾಯಿಸುವಿಕೆಯನ್ನು ಒಟ್ಟಿಗೆ ನಡೆಸಲು "
++"ಸಾಧ್ಯವಿಲ್ಲ"
++
++#: ../src/camel/camel-ews-store.c:788
++#, c-format
++msgid "Cannot find folder ID for parent folder %s"
++msgstr "ಮೂಲ ಪತ್ರಕೋಶ %s ಕ್ಕಾಗಿ ಪತ್ರಕೋಶದ ID ಕಂಡುಬಂದಿಲ್ಲ"
++
++# translation auto-copied from project evolution-exchange, version el6, document evolution-exchange-2.32
++#: ../src/camel/camel-ews-store.c:817
++#: ../src/camel/camel-ews-transport.c:61
++#, c-format
++msgid "Exchange server %s"
++msgstr "ಎಕ್ಸ್‌ಚೇಂಜ್ ಪರಿಚಾರಕ %s"
++
++#: ../src/camel/camel-ews-store.c:819
++#, c-format
++msgid "Exchange service for %s on %s"
++msgstr "%s %s ನಲ್ಲಿನ Exchange ಸೇವೆ"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/camel/camel-ews-store.c:856
++#, c-format
++msgid "You must be working online to complete this operation"
++msgstr "ಈ ಕಾರ್ಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ನೀವು ಆನ್‌ಲೈನ್‌ನಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತಿರಬೇಕು"
++
++#: ../src/camel/camel-ews-transport.c:65
++#, c-format
++msgid "Exchange mail delivery via %s"
++msgstr "%s ಮೂಲಕ ಎಕ್ಸ್‌ಚೇಂಜ್ ಅಂಚೆ ರವಾನೆ"
++
++#: ../src/camel/camel-ews-transport.c:92
++#, c-format
++msgid "Service not connected"
++msgstr "ಸೇವೆಯೊಂದಿಗೆ ಸಂಪರ್ಕ ಸಾಧಿಸಲಾಗಿಲ್ಲ"
++
++#: ../src/server/e-ews-connection.c:354
++msgid "Operation Cancelled"
++msgstr "ಕಾರ್ಯವು ರದ್ದು ಮಾಡಲ್ಪಟ್ಟಿದೆ"
++
++# translation auto-copied from project evolution-data-server, version el6, document evolution-data-server-2.32
++#: ../src/server/e-ews-connection.c:408
++msgid "Authentication failed"
++msgstr "ದೃಢೀಕರಣವು ವಿಫಲಗೊಂಡಿದೆ"
++
++#: ../src/server/e-ews-connection.c:416
++#, c-format
++msgid "No response: %s"
++msgstr "ಯಾವುದೆ ಪ್ರತಿಕ್ರಿಯೆ ಇಲ್ಲ: %s"
++
++#: ../src/server/e-ews-connection.c:1072
++#: ../src/server/e-ews-connection.c:1388
++#: ../src/server/e-ews-connection.c:1625
++#, c-format
++msgid "Code: %d - Unexpected response from server"
++msgstr "ಸಂಕೇತ: %d - ಪೂರೈಕೆಗಣಕದಿಂದ ಅನಿರೀಕ್ಷಿತವಾದ ಪ್ರತಿಕ್ರಿಯೆ ಬಂದಿದೆ"
++
++#: ../src/server/e-ews-connection.c:1084
++#, c-format
++msgid "Failed to parse autodiscover response XML"
++msgstr "ಸ್ವಯಂಪತ್ತೆ ಪ್ರತಿಕ್ರಿಯೆ XML ಅನ್ನು ಪಾರ್ಸ್ ಮಾಡುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
++
++#: ../src/server/e-ews-connection.c:1092
++#, c-format
++msgid "Failed to find <Autodiscover> element\n"
++msgstr "<Autodiscover> ಘಟಕವನ್ನು ಪತ್ತೆ ಮಾಡುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ\n"
++
++#: ../src/server/e-ews-connection.c:1104
++#, c-format
++msgid "Failed to find <Response> element\n"
++msgstr "<Response> ಘಟಕವನ್ನು ಪತ್ತೆ ಮಾಡುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ\n"
++
++#: ../src/server/e-ews-connection.c:1116
++#, c-format
++msgid "Failed to find <Account> element\n"
++msgstr "<Account> ಘಟಕವನ್ನು ಪತ್ತೆ ಮಾಡುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ\n"
++
++#: ../src/server/e-ews-connection.c:1135
++#, c-format
++msgid "Failed to find <ASUrl> and <OABUrl> in autodiscover response"
++msgstr ""
++"<ASUrl> ಮತ್ತು <OABUrl> ಅನ್ನು ಸ್ವಯಂಪತ್ತೆ ಪ್ರತಿಕ್ರಿಯೆಯಲ್ಲಿ ಪತ್ತೆಮಾಡಲು "
++"ವಿಫಲಗೊಂಡಿದೆ"
++
++#: ../src/server/e-ews-connection.c:1231
++#, c-format
++msgid "Both email and password must be provided"
++msgstr "ವಿಅಂಚೆ ಮತ್ತು ಗುಪ್ತಪದ ಎರಡನ್ನೂ ಸಹ ಒದಗಿಸಬೇಕು"
++
++#: ../src/server/e-ews-connection.c:1238
++#, c-format
++msgid "Wrong email id"
++msgstr "ತಪ್ಪು ವಿಅಂಚೆ id"
++
++#: ../src/server/e-ews-connection.c:1398
++#, c-format
++msgid "Failed to parse oab XML"
++msgstr "oab XML ಅನ್ನು ಪಾರ್ಸ್ ಮಾಡುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
++
++#: ../src/server/e-ews-connection.c:1405
++#, c-format
++msgid "Failed to find <OAB> element\n"
++msgstr "<OAB> ಘಟಕವನ್ನು ಪತ್ತೆ ಮಾಡುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ\n"
++
++#: ../src/utils/ews-camel-common.c:139
++#, c-format
++msgid "CreateItem call failed to return ID for new message"
++msgstr "CreateItem ಕರೆಯು ಹೊಸ ಸಂದೇಶಕ್ಕಾಗಿ ID ಯನ್ನು ಮರಳಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
++
+diff -up evolution-ews-gnome-3-0.gitcc16df2/po/LINGUAS.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/po/LINGUAS
+--- evolution-ews-gnome-3-0.gitcc16df2/po/LINGUAS.sync-with-3.8.5	2013-08-12 12:33:04.760417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/po/LINGUAS	2013-08-12 12:33:04.801417278 +0200
+@@ -7,8 +7,10 @@ en_GB
+ es
+ fr
+ gl
++gu
+ hu
+ id
++kn
+ lv
+ mr
+ nb
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c.sync-with-3.8.5	2013-08-12 12:33:04.767417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c	2013-08-12 12:33:04.789417278 +0200
+@@ -683,14 +683,22 @@ ebews_set_full_name_changes (ESoapMessag
+ 
+ 	name = e_contact_get (new, E_CONTACT_NAME);
+ 	old_name = e_contact_get (old, E_CONTACT_NAME);
+-	if (!name && !old_name)
++	if (!old_name && !name)
+ 		return;
+ 
+-	if (g_strcmp0 (name->given, old_name->given) != 0)
++	if (!old_name) {
+ 		convert_contact_property_to_updatexml (message, "GivenName", name->given, "contacts", NULL, NULL);
+-
+-	if (g_strcmp0 (name->additional, old_name->additional) != 0)
+ 		convert_contact_property_to_updatexml (message, "MiddleName", name->additional, "contacts", NULL, NULL);
++	} else if (!name) {
++		convert_contact_property_to_updatexml (message, "GivenName", "", "contacts", NULL, NULL);
++
++		convert_contact_property_to_updatexml (message, "MiddleName", "", "contacts", NULL, NULL);
++	} else {
++		if (g_strcmp0 (name->given, old_name->given) != 0)
++			convert_contact_property_to_updatexml (message, "GivenName", name->given, "contacts", NULL, NULL);
++		if (g_strcmp0 (name->additional, old_name->additional) != 0)
++			convert_contact_property_to_updatexml (message, "MiddleName", name->additional, "contacts", NULL, NULL);
++	}
+ 
+ 	e_contact_name_free (name);
+ 	e_contact_name_free (old_name);
+@@ -2719,7 +2727,7 @@ e_book_backend_ews_start_view (EBookBack
+ 	gboolean is_autocompletion = FALSE;
+ 	gchar *auto_comp_str = NULL;
+ 	GCancellable *cancellable;
+-	GSList *ids = NULL, *mailboxes = NULL, *l, *contacts = NULL, *c;
++	GSList *mailboxes = NULL, *l, *contacts = NULL, *c;
+ 	EwsFolderId *fid;
+ 	ESource *source;
+ 	GError *error = NULL;
+@@ -2783,7 +2791,6 @@ e_book_backend_ews_start_view (EBookBack
+ 	fid = g_new0 (EwsFolderId, 1);
+ 	fid->id = g_strdup (priv->folder_id);
+ 	fid->change_key = e_source_get_duped_property (source, "change-key");
+-	ids = g_slist_append (ids, fid);
+ 
+ 	/* We do not scan until we reach the last_item as it might be good enough to show first 100
+ 	 * items during auto-completion. Change it if needed. TODO, Personal Address-book should start using
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c.sync-with-3.8.5	2013-08-12 12:33:04.776417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews.c	2013-08-12 12:33:04.799417278 +0200
+@@ -1874,6 +1874,7 @@ ews_create_object_cb (GObject *object,
+ 	/* attachments */
+ 	n_attach = e_cal_component_get_num_attachments (create_data->comp);
+ 	if (n_attach > 0) {
++		GSList *info_attachments = NULL;
+ 		EwsAttachmentsData *attach_data = g_new0 (EwsAttachmentsData, 1);
+ 
+ 		attach_data->cbews = g_object_ref (create_data->cbews);
+@@ -1883,15 +1884,22 @@ ews_create_object_cb (GObject *object,
+ 		attach_data->cb_type = 1;
+ 
+ 		e_cal_component_get_attachment_list (create_data->comp, &attachments);
++
++		for (i = attachments; i; i = i->next) {
++			EEwsAttachmentInfo *info = e_ews_attachment_info_new (E_EWS_ATTACHMENT_INFO_TYPE_URI);
++			e_ews_attachment_info_set_uri (info, i->data);
++			info_attachments = g_slist_append (info_attachments, info);
++		}
++
+ 		e_ews_connection_create_attachments (
+ 			cnc, EWS_PRIORITY_MEDIUM,
+-			item_id, attachments,
++			item_id, info_attachments,
+ 			priv->cancellable,
+ 			ews_create_attachments_cb,
+ 			attach_data);
+ 
+-		for (i = attachments; i; i = i->next) g_free (i->data);
+-		g_slist_free (attachments);
++		g_slist_free_full (info_attachments, (GDestroyNotify) e_ews_attachment_info_free);
++		g_slist_free_full (attachments, g_free);
+ 	}
+ 
+ 	/* get exclusive access to the store */
+@@ -2669,23 +2677,39 @@ e_cal_backend_ews_modify_object (ECalBac
+ 		icalcomp = e_cal_component_get_icalcomponent (oldcomp);
+ 		icalprop = icalcomponent_get_first_property (icalcomp, ICAL_ATTACH_PROPERTY);
+ 		while (icalprop) {
+-			removed_attachments_ids = g_slist_append (removed_attachments_ids, icalproperty_get_parameter_as_string_r (icalprop, "X-EWS-ATTACHMENTID"));
++			const gchar *attachment_url = icalproperty_get_value_as_string (icalprop);
++
++			for (items = removed_attachments; items; items = items->next) {
++				if (g_strcmp0 (attachment_url, items->data) == 0) {
++					break;
++				}
++			}
++
++			/* not NULL means the attachment was found in removed attachments */
++			if (items != NULL)
++				removed_attachments_ids = g_slist_append (removed_attachments_ids, icalproperty_get_parameter_as_string_r (icalprop, "X-EWS-ATTACHMENTID"));
++
+ 			icalprop = icalcomponent_get_next_property (icalcomp, ICAL_ATTACH_PROPERTY);
+ 		}
+ 
+-		items = e_ews_connection_delete_attachments_sync (
+-			priv->cnc, EWS_PRIORITY_MEDIUM,
+-			removed_attachments_ids, cancellable, &error);
++		items = NULL;
+ 
+-		changekey = items->data;
++		if (removed_attachments_ids) {
++			if (e_ews_connection_delete_attachments_sync (
++				priv->cnc, EWS_PRIORITY_MEDIUM,
++				removed_attachments_ids, &items, cancellable, &error) && items)
++				changekey = items->data;
++		}
+ 
+-		for (i = removed_attachments_ids; i; i = i->next) free (i->data);
+-		g_slist_free (removed_attachments_ids);
++		g_slist_free_full (removed_attachments_ids, g_free);
+ 		g_slist_free (removed_attachments);
+ 	}
+ 
+ 	/*in case we have a new attachmetns the update item will be preformed in ews_create_attachments_cb*/
+ 	if (added_attachments) {
++		const gchar *old_uid = NULL;
++		gint old_uid_len = 0;
++		GSList *info_attachments = NULL;
+ 		EwsId *item_id = g_new0 (EwsId, 1);
+ 		item_id->id = itemid;
+ 		item_id->change_key = changekey;
+@@ -2700,6 +2724,31 @@ e_cal_backend_ews_modify_object (ECalBac
+ 		attach_data->itemid = itemid;
+ 		attach_data->changekey = changekey;
+ 
++		e_cal_component_get_uid (oldcomp, &old_uid);
++		if (old_uid)
++			old_uid_len = strlen (old_uid);
++
++		for (i = added_attachments; i; i = i->next) {
++			EEwsAttachmentInfo *info = e_ews_attachment_info_new (E_EWS_ATTACHMENT_INFO_TYPE_URI);
++
++			e_ews_attachment_info_set_uri (info, i->data);
++
++			if (old_uid) {
++				gchar *filename = g_filename_from_uri (i->data, NULL, NULL);
++				if (filename) {
++					const gchar *slash = strrchr (filename, G_DIR_SEPARATOR);
++					if (slash && g_str_has_prefix (slash + 1, old_uid) &&
++					    slash[1 + old_uid_len] == '-') {
++						e_ews_attachment_info_set_prefer_filename (info, slash + 1 + old_uid_len + 1);
++					}
++
++					g_free (filename);
++				}
++			}
++
++			info_attachments = g_slist_append (info_attachments, info);
++		}
++
+ 		if (context) {
+ 			convert_error_to_edc_error (&error);
+ 			e_data_cal_respond_modify_object (cal, context, error, NULL, NULL);
+@@ -2707,11 +2756,12 @@ e_cal_backend_ews_modify_object (ECalBac
+ 
+ 		e_ews_connection_create_attachments (
+ 			priv->cnc, EWS_PRIORITY_MEDIUM,
+-			item_id, added_attachments,
++			item_id, info_attachments,
+ 			cancellable,
+ 			ews_create_attachments_cb,
+ 			attach_data);
+ 
++		g_slist_free_full (info_attachments, (GDestroyNotify) e_ews_attachment_info_free);
+ 		g_slist_free (added_attachments);
+ 		g_free (item_id);
+ 
+@@ -2767,53 +2817,35 @@ typedef struct {
+ 	const gchar *change_key;
+ } EwsAcceptData;
+ 
+-static gchar *
+-e_ews_get_icalcomponent_as_mime_content (icalcomponent *vevent)
+-{
+-	icalcomponent *vcal;
+-	gchar *vcal_str;
+-
+-	vcal = icalcomponent_new (ICAL_VCALENDAR_COMPONENT);
+-	icalcomponent_add_property (vcal, icalproperty_new_version ("2.0"));
+-	icalcomponent_add_property (vcal, icalproperty_new_method (ICAL_METHOD_REQUEST));
+-	icalcomponent_add_component (vcal, icalcomponent_new_clone (vevent));
+-
+-	vcal_str = icalcomponent_as_ical_string_r ((icalcomponent *) vcal);
+-
+-	icalcomponent_free (vcal);
+-
+-	return vcal_str;
+-}
+-
+-static void
+-prepare_create_item_with_mime_content_request (ESoapMessage *msg,
+-                                               gpointer user_data)
+-{
+-	gchar *mime_content = (gchar *) user_data;
+-
+-	/* Prepare CalendarItem node in the SOAP message */
+-	e_soap_message_start_element (msg, "CalendarItem", NULL, NULL);
+-
+-	e_ews_message_write_base64_parameter (msg,"MimeContent",NULL,mime_content);
+-	// end of "CalendarItem"
+-	e_soap_message_end_element (msg);
+-}
+-
+ static void
+-e_ews_receive_objects_no_exchange_mail (ECalBackendEwsPrivate *priv,
++e_ews_receive_objects_no_exchange_mail (ECalBackendEws *cbews,
+                                         icalcomponent *subcomp,
+-                                        GSList *ids,
++                                        GSList **ids,
+                                         GCancellable *cancellable,
+                                         GError **error)
+ {
+-	gchar *mime_content = e_ews_get_icalcomponent_as_mime_content (subcomp);
++	EwsConvertData *convert_data;
++	EwsFolderId *fid;
++
++	convert_data = g_new0 (EwsConvertData, 1);
++	convert_data->cbews = g_object_ref (cbews);
++	convert_data->icalcomp = subcomp;
++
++	fid = e_ews_folder_id_new (cbews->priv->folder_id, NULL, FALSE);
++
+ 	e_ews_connection_create_items_sync (
+-		priv->cnc, EWS_PRIORITY_MEDIUM,
+-		"SendAndSaveCopy", "SendToNone", NULL,
+-		prepare_create_item_with_mime_content_request,
+-		mime_content, &ids, cancellable, error);
+-	g_free (mime_content);
+-	/*we still have to send a mail with accept to meeting organizer*/
++		cbews->priv->cnc,
++		EWS_PRIORITY_MEDIUM,
++		"SaveOnly",
++		"SendToNone",
++		fid,
++		convert_calcomp_to_xml,
++		convert_data,
++		ids,
++		cancellable,
++		error);
++
++	e_ews_folder_id_free (fid);
+ }
+ 
+ static const gchar *
+@@ -2949,7 +2981,7 @@ e_cal_backend_ews_receive_objects (ECalB
+ 		const gchar *response_type;
+ 		gchar *item_id = NULL, *change_key = NULL, *mail_id = NULL;
+ 		GSList *ids = NULL, *l;
+-		icalproperty *recurrence_id, *transp, *summary;
++		icalproperty *transp, *summary;
+ 		gchar **split_subject;
+ 		gint pass = 0;
+ 
+@@ -2972,7 +3004,7 @@ e_cal_backend_ews_receive_objects (ECalB
+ 				while (pass < 2) {
+ 					/*in case we do not have item id we will create item with mime content only*/
+ 					if (item_id == NULL)
+-						e_ews_receive_objects_no_exchange_mail (priv, subcomp, ids, cancellable, &error);
++						e_ews_receive_objects_no_exchange_mail (cbews, subcomp, &ids, cancellable, &error);
+ 					else
+ 						e_ews_connection_create_items_sync (
+ 							priv->cnc, EWS_PRIORITY_MEDIUM,
+@@ -3057,10 +3089,19 @@ e_cal_backend_ews_receive_objects (ECalB
+ 				/*We have to run sync before any other operations */
+ 				ews_start_sync (cbews);
+ 				break;
+-			case ICAL_METHOD_CANCEL:
+-				recurrence_id = icalcomponent_get_first_property (subcomp, ICAL_RECURRENCEID_PROPERTY);
+-				e_cal_backend_ews_remove_object (backend, cal, 0, cancellable, item_id, icalproperty_get_value_as_string (recurrence_id), CALOBJ_MOD_ALL);
++			case ICAL_METHOD_CANCEL: {
++				const gchar *uid = NULL;
++				gchar *rid = NULL;
++				CalObjModType mod;
++
++				e_cal_component_get_uid (comp, &uid);
++				rid = e_cal_component_get_recurid_as_string (comp);
++				mod = e_cal_component_is_instance (comp) ? CALOBJ_MOD_THIS : CALOBJ_MOD_ALL;
++
++				e_cal_backend_ews_remove_object (backend, cal, 0, cancellable, uid, rid, mod);
++				g_free (rid);
+ 				break;
++			}
+ 			case ICAL_METHOD_COUNTER:
+ 				/*this is a new time proposal mail from one of the attendees
+ 				 * if we decline the proposal, nothing have to be done
+@@ -3350,11 +3391,11 @@ ews_get_attachments (ECalBackendEws *cbe
+                      EEwsItem *item)
+ {
+ 	gboolean has_attachment = FALSE;
+-	const GSList *attachment_ids, *aid;
++	const GSList *attachment_ids, *aid, *l;
+ 	const EwsId *item_id;
+ 	ECalComponent *comp;
+ 	const gchar *uid;
+-	GSList *uris = NULL;
++	GSList *uris = NULL, *info_attachments = NULL;
+ 
+ 	e_ews_item_has_attachments (item, &has_attachment);
+ 	if (!has_attachment)
+@@ -3374,7 +3415,6 @@ ews_get_attachments (ECalBackendEws *cbe
+ 	e_cal_component_get_uid (comp, &uid);
+ 
+ 	attachment_ids = e_ews_item_get_attachments_ids (item);
+-
+ 	if (e_ews_connection_get_attachments_sync (
+ 		cbews->priv->cnc,
+ 		EWS_PRIORITY_MEDIUM,
+@@ -3382,7 +3422,7 @@ ews_get_attachments (ECalBackendEws *cbe
+ 		attachment_ids,
+ 		cbews->priv->storage_path,
+ 		TRUE,
+-		&uris,
++		&info_attachments,
+ 		NULL, NULL,
+ 		cbews->priv->cancellable,
+ 		NULL)) {
+@@ -3392,6 +3432,18 @@ ews_get_attachments (ECalBackendEws *cbe
+ 		ECalComponentId *id;
+ 		ECalComponent *cache_comp;
+ 
++		for (l = info_attachments; l; l = l->next) {
++			EEwsAttachmentInfo *info = l->data;
++
++			/* ignore non-uri attachments, because it's an exception */
++			if (e_ews_attachment_info_get_type (info) == E_EWS_ATTACHMENT_INFO_TYPE_URI) {
++				const gchar *uri = e_ews_attachment_info_get_uri (info);
++
++				if (uri)
++					uris = g_slist_append (uris, g_strdup (uri));
++			}
++		}
++
+ 		e_cal_component_set_attachment_list (comp, uris);
+ 
+ 		icalcomp = e_cal_component_get_icalcomponent (comp);
+@@ -3421,6 +3473,7 @@ ews_get_attachments (ECalBackendEws *cbe
+ 		}
+ 
+ 		g_slist_free_full (uris, g_free);
++		g_slist_free_full (info_attachments, (GDestroyNotify) e_ews_attachment_info_free);
+ 	}
+ 
+ 	PRIV_UNLOCK (cbews->priv);
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c.sync-with-3.8.5	2013-08-12 12:33:04.777417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/calendar/e-cal-backend-ews-utils.c	2013-08-12 12:33:04.798417278 +0200
+@@ -749,12 +749,11 @@ e_ews_collect_organizer (icalcomponent *
+ 	org = icalproperty_get_organizer (org_prop);
+ 	if (!org)
+ 		org = "";
+-	else {
+-		if (!g_ascii_strncasecmp (org, "MAILTO:", 7))
+-			org_email_address = (org) + 7;
+-		else
+-			org_email_address = org;
+-	}
++
++	if (g_ascii_strncasecmp (org, "MAILTO:", 7) == 0)
++		org_email_address = (org) + 7;
++	else
++		org_email_address = org;
+ 
+ 	return org_email_address;
+ }
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-folder.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-folder.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-folder.c.sync-with-3.8.5	2013-08-12 12:33:04.777417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-folder.c	2013-08-12 12:33:04.792417278 +0200
+@@ -308,7 +308,6 @@ ews_update_mgtrequest_mime_calendar_item
+ 		icalcomponent *icalcomp, *subcomp;
+ 		icalproperty *icalprop;
+ 		gchar *calstring_new, *dir;
+-		const gchar *temp;
+ 		gint fd;
+ 		gboolean success = FALSE;
+ 
+@@ -349,9 +348,8 @@ ews_update_mgtrequest_mime_calendar_item
+ 		icalcomponent_free (icalcomp);
+ 		g_object_unref (tmpstream);
+ 
+-		// Create a new file to store updated mimecontent
+-		temp = g_strrstr (mime_fname, "/");
+-		dir = g_strndup (mime_fname, temp - mime_fname);
++		/* Create a new file to store updated mimecontent */
++		dir = g_path_get_dirname (mime_fname);
+ 		mime_fname_new = g_build_filename ((const gchar *) dir, "XXXXXX", NULL);
+ 		fd = g_mkstemp (mime_fname_new);
+ 		if (fd == -1) {
+@@ -372,10 +370,8 @@ ews_update_mgtrequest_mime_calendar_item
+ 		g_remove (mime_fname);
+ 		success = TRUE;
+  exit_save:
+-		if (fd != -1) {
++		if (fd != -1)
+ 			close (fd);
+-			fd = -1;
+-		}
+ 		g_free (dir);
+ 		if (newstream)
+ 			g_object_unref (newstream);
+@@ -389,7 +385,6 @@ ews_update_mgtrequest_mime_calendar_item
+  exit_parser:
+ 	g_object_unref (mimeparser);
+ 	close (fd_old);
+-	fd_old = -1;
+ 
+ 	// must be freed in the caller
+ 	return mime_fname_new;
+@@ -413,7 +408,6 @@ camel_ews_folder_get_message (CamelFolde
+ 	gchar *mime_dir;
+ 	gchar *cache_file;
+ 	gchar *dir;
+-	const gchar *temp;
+ 	gboolean res;
+ 	gpointer progress_data;
+ 	gchar *mime_fname_new = NULL;
+@@ -498,7 +492,7 @@ camel_ews_folder_get_message (CamelFolde
+ 		e_ews_item_get_item_type (items->data) == E_EWS_ITEM_TYPE_MEETING_MESSAGE ||
+ 		e_ews_item_get_item_type (items->data) == E_EWS_ITEM_TYPE_MEETING_RESPONSE) {
+ 		GSList *items_req = NULL;
+-		const EwsId *calendar_item_accept_id;
++		const EwsId *calendar_item_accept_id = NULL;
+ 		gboolean is_calendar_UID = TRUE;
+ 
+ 		// Get AssociatedCalendarItemId with second get_items call
+@@ -521,9 +515,12 @@ camel_ews_folder_get_message (CamelFolde
+ 			}
+ 			goto exit;
+ 		}
+-		calendar_item_accept_id = e_ews_item_get_calendar_item_accept_id (items_req->data);
++
++		if (items_req != NULL)
++			calendar_item_accept_id = e_ews_item_get_calendar_item_accept_id (items_req->data);
++
+ 		/*In case of non-exchange based meetings invites the calendar backend have to create the meeting*/
+-		if (!calendar_item_accept_id) {
++		if (calendar_item_accept_id == NULL) {
+ 			calendar_item_accept_id = e_ews_item_get_id (items->data);
+ 			is_calendar_UID = FALSE;
+ 		}
+@@ -531,7 +528,7 @@ camel_ews_folder_get_message (CamelFolde
+ 		if (mime_fname_new)
+ 			mime_content = (const gchar *) mime_fname_new;
+ 
+-		if (items_req) {
++		if (items_req != NULL) {
+ 			g_object_unref (items_req->data);
+ 			g_slist_free (items_req);
+ 		}
+@@ -539,8 +536,7 @@ camel_ews_folder_get_message (CamelFolde
+ 
+ 	cache_file = ews_data_cache_get_filename (
+ 		ews_folder->cache, "cur", uid, error);
+-	temp = g_strrstr (cache_file, "/");
+-	dir = g_strndup (cache_file, temp - cache_file);
++	dir = g_path_get_dirname (cache_file);
+ 
+ 	if (g_mkdir_with_parents (dir, 0700) == -1) {
+ 		g_set_error (
+@@ -930,8 +926,6 @@ ews_move_to_junk_folder (CamelFolder *fo
+ 		return TRUE;
+ 	}
+ 
+-	ews_store = CAMEL_EWS_STORE (camel_folder_get_parent_store (folder));
+-
+ 	parent_store = camel_folder_get_parent_store (folder);
+ 	ews_folder = CAMEL_EWS_FOLDER (folder);
+ 	ews_store = CAMEL_EWS_STORE (parent_store);
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-store.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-store.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-store.c.sync-with-3.8.5	2013-08-12 12:33:04.715417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/camel/camel-ews-store.c	2013-08-12 12:33:04.790417278 +0200
+@@ -1626,13 +1626,19 @@ ews_get_folder_info_sync (CamelStore *st
+ 	}
+ 
+ 	g_mutex_lock (priv->get_finfo_lock);
+-	if (!(camel_offline_store_get_online (CAMEL_OFFLINE_STORE (store))
+-	      && EVO3_sync(camel_service_connect) ((CamelService *) store, EVO3(cancellable,) error))) {
++	if (!camel_offline_store_get_online (CAMEL_OFFLINE_STORE (store))) {
+ 		camel_ews_store_ensure_virtual_folders (ews_store);
+ 		g_mutex_unlock (priv->get_finfo_lock);
+ 		goto offline;
+ 	}
+ 
++	if (!EVO3_sync(camel_service_connect) ((CamelService *) store, EVO3(cancellable,) error)) {
++		camel_offline_store_set_online_sync (CAMEL_OFFLINE_STORE (store), FALSE, NULL, NULL);
++		camel_ews_store_ensure_virtual_folders (ews_store);
++		g_mutex_unlock (priv->get_finfo_lock);
++		return NULL;
++	}
++
+ 	old_sync_state = camel_ews_store_summary_get_string_val (ews_store->summary, "sync_state", NULL);
+ 	if (!old_sync_state)
+ 		initial_setup = TRUE;
+@@ -1663,8 +1669,6 @@ ews_get_folder_info_sync (CamelStore *st
+ 		camel_ews_store_summary_store_string_val (ews_store->summary, "sync_state", "");
+ 		camel_ews_store_summary_clear (ews_store->summary);
+ 
+-		initial_setup = TRUE;
+-
+ 		success = e_ews_connection_sync_folder_hierarchy_sync (connection, EWS_PRIORITY_MEDIUM, NULL,
+ 			&new_sync_state, &includes_last_folder, &folders_created, &folders_updated, &folders_deleted,
+ 			cancellable, &local_error);
+@@ -1993,7 +1997,7 @@ ews_rename_folder_sync (CamelStore *stor
+ 		/* Folder basename changed (i.e. UpdateFolder needed).
+ 		 * Therefore, we can only do it if the folder hasn't also
+ 		 * been moved from one parent folder to another.
+- *
++		 *
+ 		 * Strictly speaking, we could probably handle this, even
+ 		 * if there are name collisions. We could UpdateFolder to
+ 		 * a new temporary name that doesn't exist in either the
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c.sync-with-3.8.5	2013-08-12 12:33:04.779417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.c	2013-08-12 12:33:04.797417278 +0200
+@@ -568,15 +568,19 @@ sync_xxx_response_cb (ESoapParameter *su
+ 	ESoapParameter *node;
+ 	gchar *new_sync_state = NULL, *value, *last;
+ 	GSList *items_created = NULL, *items_updated = NULL, *items_deleted = NULL;
+-	gboolean includes_last_item = FALSE;
++	gboolean includes_last_item;
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (subparam, "SyncState");
+ 	new_sync_state = e_soap_parameter_get_string_value (node);
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (subparam, last_tag);
+ 	last = e_soap_parameter_get_string_value (node);
+-	if (!strcmp (last, "true"))
+-		includes_last_item = TRUE;
++	/*
++	 * Set the includes_last_item to TRUE as default.
++	 * It can avoid an infinite loop in caller, when, for some reason,
++	 * we don't receive the last_tag property from the server.
++	 */
++	includes_last_item = g_strcmp0 (last, "false") != 0;
+ 	g_free (last);
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (subparam, "Changes");
+@@ -784,15 +788,19 @@ ews_handle_root_folder_param_items (ESoa
+ 	gchar *last, *total;
+ 	gint total_items;
+ 	EEwsItem *item;
+-	gboolean includes_last_item = FALSE;
++	gboolean includes_last_item;
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (subparam, "RootFolder");
+ 	total = e_soap_parameter_get_property (node, "TotalItemsInView");
+ 	total_items = atoi (total);
+ 	g_free (total);
+ 	last = e_soap_parameter_get_property (node, "IncludesLastItemInRange");
+-	if (!strcmp (last, "true"))
+-		includes_last_item = TRUE;
++	/*
++	 * Set the includes_last_item to TRUE as default.
++	 * It can avoid an infinite loop in caller, when, for some reason,
++	 * we don't receive the last_tag property from the server.
++	 */
++	includes_last_item = g_strcmp0 (last, "false") != 0;
+ 	g_free (last);
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (node, "Items");
+@@ -926,9 +934,12 @@ ews_handle_resolution_set_param (ESoapPa
+ 
+ 	subparam = e_soap_parameter_get_first_child_by_name (subparam, "ResolutionSet");
+ 	prop = e_soap_parameter_get_property (subparam, "IncludesLastItemInRange");
+-
+-	if (prop && !strcmp (prop, "true"))
+-		includes_last_item = TRUE;
++	/*
++	 * Set the includes_last_item to TRUE as default.
++	 * It can avoid an infinite loop in caller, when, for some reason,
++	 * we don't receive the last_tag property from the server.
++	 */
++	includes_last_item = g_strcmp0 (prop, "false") != 0;
+ 	g_free (prop);
+ 
+ 	for (subparam = e_soap_parameter_get_first_child_by_name (subparam, "Resolution");
+@@ -1008,9 +1019,12 @@ ews_handle_dl_expansion_param (ESoapPara
+ 
+ 	subparam = e_soap_parameter_get_first_child_by_name (subparam, "DLExpansion");
+ 	prop = e_soap_parameter_get_property (subparam, "IncludesLastItemInRange");
+-
+-	if (prop && !strcmp (prop, "true"))
+-		includes_last_item = TRUE;
++	/*
++	 * Set the includes_last_item to TRUE as default.
++	 * It can avoid an infinite loop in caller, when, for some reason,
++	 * we don't receive the last_tag property from the server.
++	 */
++	includes_last_item = g_strcmp0 (prop, "false") != 0;
+ 	g_free (prop);
+ 
+ 	for (subparam = e_soap_parameter_get_first_child_by_name (subparam, "Mailbox");
+@@ -1433,6 +1447,152 @@ ews_delegate_info_free (EwsDelegateInfo 
+ 	g_free (info);
+ }
+ 
++EEwsAttachmentInfo *
++e_ews_attachment_info_new (EEwsAttachmentInfoType type)
++{
++	EEwsAttachmentInfo *info;
++	info = g_new0 (EEwsAttachmentInfo, 1);
++
++	info->type = type;
++	return info;
++}
++
++void
++e_ews_attachment_info_free (EEwsAttachmentInfo *info)
++{
++	if (!info)
++		return;
++
++	switch (info->type) {
++	case E_EWS_ATTACHMENT_INFO_TYPE_INLINED:
++		g_free (info->data.inlined.filename);
++		g_free (info->data.inlined.mime_type);
++		g_free (info->data.inlined.data);
++		break;
++	case E_EWS_ATTACHMENT_INFO_TYPE_URI:
++		g_free (info->data.uri);
++		break;
++	default:
++		g_warning ("Unknown EEwsAttachmentInfoType %d", info->type);
++		break;
++	}
++
++	g_free (info->prefer_filename);
++	g_free (info);
++}
++
++EEwsAttachmentInfoType
++e_ews_attachment_info_get_type (EEwsAttachmentInfo *info)
++{
++	return info->type;
++}
++
++const gchar *
++e_ews_attachment_info_get_prefer_filename (EEwsAttachmentInfo *info)
++{
++	g_return_val_if_fail (info != NULL, NULL);
++
++	return info->prefer_filename;
++}
++
++void
++e_ews_attachment_info_set_prefer_filename (EEwsAttachmentInfo *info,
++					   const gchar *prefer_filename)
++{
++	g_return_if_fail (info != NULL);
++
++	if (info->prefer_filename == prefer_filename)
++		return;
++
++	g_free (info->prefer_filename);
++	info->prefer_filename = g_strdup (prefer_filename);
++}
++
++const gchar *
++e_ews_attachment_info_get_inlined_data (EEwsAttachmentInfo *info,
++					gsize *len)
++{
++	g_return_val_if_fail (info != NULL, NULL);
++	g_return_val_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_INLINED, NULL);
++
++	*len = info->data.inlined.length;
++	return info->data.inlined.data;
++}
++
++void
++e_ews_attachment_info_set_inlined_data (EEwsAttachmentInfo *info,
++					const guchar *data,
++					gsize len)
++{
++	g_return_if_fail (info != NULL);
++	g_return_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_INLINED);
++
++	info->data.inlined.data = g_malloc (len);
++	memcpy (info->data.inlined.data, data, len);
++	info->data.inlined.length = len;
++}
++
++const gchar *
++e_ews_attachment_info_get_mime_type (EEwsAttachmentInfo *info)
++{
++	g_return_val_if_fail (info != NULL, NULL);
++	g_return_val_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_INLINED, NULL);
++
++	return info->data.inlined.mime_type;
++}
++
++void
++e_ews_attachment_info_set_mime_type (EEwsAttachmentInfo *info,
++				     const gchar *mime_type)
++{
++	g_return_if_fail (info != NULL);
++	g_return_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_INLINED);
++
++	g_free (info->data.inlined.mime_type);
++	info->data.inlined.mime_type = g_strdup (mime_type);
++}
++
++const gchar *
++e_ews_attachment_info_get_filename (EEwsAttachmentInfo *info)
++{
++	g_return_val_if_fail (info != NULL, NULL);
++	g_return_val_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_INLINED, NULL);
++
++	return info->data.inlined.filename;
++}
++
++void
++e_ews_attachment_info_set_filename (EEwsAttachmentInfo *info,
++				    const gchar *filename)
++{
++	g_return_if_fail (info != NULL);
++	g_return_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_INLINED);
++
++	g_free (info->data.inlined.filename);
++	info->data.inlined.filename = g_strdup (filename);
++}
++
++
++const gchar *
++e_ews_attachment_info_get_uri (EEwsAttachmentInfo *info)
++{
++	g_return_val_if_fail (info != NULL, NULL);
++	g_return_val_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_URI, NULL);
++
++	return info->data.uri;
++}
++
++void
++e_ews_attachment_info_set_uri (EEwsAttachmentInfo *info,
++			       const gchar *uri)
++{
++	g_return_if_fail (info != NULL);
++	g_return_if_fail (info->type == E_EWS_ATTACHMENT_INFO_TYPE_URI);
++
++	g_free (info->data.uri);
++	info->data.uri = g_strdup (uri);
++}
++
+ /* Connection APIS */
+ 
+ /**
+@@ -1978,7 +2138,6 @@ e_ews_autodiscover_ws_url (GObject *on_o
+ 	SoupURI *soup_uri = NULL;
+ 	gboolean use_secure = TRUE;
+ 	const gchar *host_url;
+-	const gchar *user;
+ 	GError *error = NULL;
+ 
+ 	g_return_if_fail (username != NULL);
+@@ -2029,10 +2188,6 @@ e_ews_autodiscover_ws_url (GObject *on_o
+ 	url3 = g_strdup_printf ("http%s://%s/autodiscover/autodiscover.xml", use_secure ? "s" : "", domain);
+ 	url4 = g_strdup_printf ("http%s://autodiscover.%s/autodiscover/autodiscover.xml", use_secure ? "s" : "", domain);
+ 
+-	user = username;
+-	if (user == NULL || *user == '\0')
+-		user = email_address;
+-
+ 	cnc = e_ews_connection_new (url1 ? url1 : url3, username, password, email_address, NULL, timeout, use_ntlm,
+ 		NULL, NULL, NULL);
+ 
+@@ -5417,55 +5572,72 @@ create_attachments_response_cb (ESoapRes
+ 	}
+ }
+ 
+-static void
++static gboolean
+ e_ews_connection_attach_file (ESoapMessage *msg,
+-                              const gchar *uri)
++                              EEwsAttachmentInfo *info,
++			      GError **error)
+ {
+-	/* TODO - handle a situation where the file isnt accessible/other problem with it */
+-	/* TODO - This is a naive implementation that just uploads the whole content into memory, ie very inefficient */
+-	struct stat st;
+-	gchar *buffer, *filepath;
+-	const gchar *filename;
+-	gint fd;
++	EEwsAttachmentInfoType type = e_ews_attachment_info_get_type (info);
++	gchar *filename = NULL, *buffer = NULL;
++	const gchar *content = NULL, *prefer_filename;
++	gsize length;
++
++	switch (type) {
++		case E_EWS_ATTACHMENT_INFO_TYPE_URI: {
++			/* TODO - handle a situation where the file isnt accessible/other problem with it */
++			/* TODO - This is a naive implementation that just uploads the whole content into */
++			/*        memory, ie very inefficient */
++			const gchar *uri;
++			gchar *filepath;
++			GError *local_error = NULL;
++
++			uri = e_ews_attachment_info_get_uri (info);
++
++			/* convert uri to actual file path */
++			filepath = g_filename_from_uri (uri, NULL, &local_error);
++			if (local_error != NULL) {
++				g_propagate_error (error, local_error);
++				return FALSE;
++			}
+ 
+-	/* convert uri to actual file path */
+-	filepath = g_filename_from_uri (uri, NULL, NULL);
++			g_file_get_contents (filepath, &buffer, &length, &local_error);
++			if (local_error != NULL) {
++				g_free (filepath);
++				g_propagate_error (error, local_error);
++				return FALSE;
++			}
+ 
+-	if (stat (filepath, &st) == -1) {
+-		g_warning ("Error while calling stat() on %s\n", filepath);
+-		return;
+-	}
++			content = buffer;
+ 
+-	fd = open (filepath, O_RDONLY);
+-	if (fd == -1) {
+-		g_warning ("Error opening %s for reading\n", filepath);
+-		return;
+-	}
++			filename = strrchr (filepath, G_DIR_SEPARATOR);
++			filename = filename ? g_strdup (++filename) : g_strdup (filepath);
+ 
+-	buffer = malloc (st.st_size);
+-	if (read (fd, buffer, st.st_size) != st.st_size) {
+-		g_warning ("Error reading %u bytes from %s\n", (guint) st.st_size, filepath);
+-		close (fd);
+-		return;
++			g_free (filepath);
++			break;
++		}
++		case E_EWS_ATTACHMENT_INFO_TYPE_INLINED:
++			content = e_ews_attachment_info_get_inlined_data (info, &length);
++			filename = g_strdup (e_ews_attachment_info_get_filename (info));
++			break;
++		default:
++			g_warning ("Unknown EwsAttachmentInfoType %d", type);
++			return FALSE;
+ 	}
+-	close (fd);
+-
+-	filename = strrchr (filepath, '/');
+-	if (filename) filename++;
+-	else filename = filepath;
+ 
+ 	e_soap_message_start_element (msg, "FileAttachment", NULL, NULL);
+ 
+-	e_ews_message_write_string_parameter (msg, "Name", NULL, filename);
+-
++	prefer_filename = e_ews_attachment_info_get_prefer_filename (info);
++	e_ews_message_write_string_parameter (msg, "Name", NULL, prefer_filename ? prefer_filename : filename);
+ 	e_soap_message_start_element (msg, "Content", NULL, NULL);
+-	e_soap_message_write_base64 (msg, buffer, st.st_size);
++	e_soap_message_write_base64 (msg, content, length);
+ 	e_soap_message_end_element (msg); /* "Content" */
+ 
+ 	e_soap_message_end_element (msg); /* "FileAttachment" */
+ 
+-	free (filepath);
+-	free (buffer);
++	g_free (filename);
++	g_free (buffer);
++
++	return TRUE;
+ }
+ 
+ void
+@@ -5481,9 +5653,18 @@ e_ews_connection_create_attachments (EEw
+ 	GSimpleAsyncResult *simple;
+ 	EwsAsyncData *async_data;
+ 	const GSList *l;
++	GError *local_error = NULL;
+ 
+ 	g_return_if_fail (cnc != NULL);
+ 
++	simple = g_simple_async_result_new (
++		G_OBJECT (cnc), callback, user_data,
++		e_ews_connection_create_attachments);
++
++	async_data = g_new0 (EwsAsyncData, 1);
++	g_simple_async_result_set_op_res_gpointer (
++		simple, async_data, (GDestroyNotify) async_data_free);
++
+ 	msg = e_ews_message_new_with_header (cnc->priv->uri, cnc->priv->impersonate_user, "CreateAttachment", NULL, NULL, EWS_EXCHANGE_2007_SP1);
+ 
+ 	e_soap_message_start_element (msg, "ParentItemId", "messages", NULL);
+@@ -5496,20 +5677,19 @@ e_ews_connection_create_attachments (EEw
+ 	e_soap_message_start_element (msg, "Attachments", "messages", NULL);
+ 
+ 	for (l = files; l != NULL; l = g_slist_next (l))
+-		e_ews_connection_attach_file (msg, l->data);
++		if (!e_ews_connection_attach_file (msg, l->data, &local_error)) {
++			if (local_error != NULL)
++				g_simple_async_result_take_error (simple, local_error);
++			g_simple_async_result_complete_in_idle (simple);
++			g_object_unref (simple);
++
++			return;
++		}
+ 
+ 	e_soap_message_end_element (msg); /* "Attachments" */
+ 
+ 	e_ews_message_write_footer (msg);
+ 
+-	simple = g_simple_async_result_new (
+-		G_OBJECT (cnc), callback, user_data,
+-		e_ews_connection_create_attachments);
+-
+-	async_data = g_new0 (EwsAsyncData, 1);
+-	g_simple_async_result_set_op_res_gpointer (
+-		simple, async_data, (GDestroyNotify) async_data_free);
+-
+ 	e_ews_connection_queue_request (
+ 		cnc, msg, create_attachments_response_cb,
+ 		pri, cancellable, simple);
+@@ -5709,6 +5889,7 @@ GSList *
+ e_ews_connection_delete_attachments_sync (EEwsConnection *cnc,
+                                           gint pri,
+                                           const GSList *ids,
++					  GSList **parents_ids,
+                                           GCancellable *cancellable,
+                                           GError **error)
+ {
+@@ -5739,7 +5920,8 @@ ews_handle_attachments_param (ESoapParam
+                               EwsAsyncData *async_data)
+ {
+ 	ESoapParameter *subparam, *attspara;
+-	gchar *uri = NULL, *attach_id = NULL;
++	EEwsAttachmentInfo *info = NULL;
++	gchar *attach_id = NULL;
+ 	EEwsItem *item;
+ 	const gchar *name;
+ 
+@@ -5751,18 +5933,17 @@ ews_handle_attachments_param (ESoapParam
+ 		if (!g_ascii_strcasecmp (name, "ItemAttachment")) {
+ 			item = e_ews_item_new_from_soap_parameter (subparam);
+ 			attach_id = g_strdup (e_ews_item_get_attachment_id (item)->id);
+-			uri = e_ews_item_dump_mime_content (item, async_data->directory);
++			info = e_ews_item_dump_mime_content (item, async_data->directory);
+ 
++		} else if (!g_ascii_strcasecmp (name, "FileAttachment")) {
++			info = e_ews_dump_file_attachment_from_soap_parameter (subparam, async_data->directory, async_data->sync_state, &attach_id);
+ 		}
+-		else if (!g_ascii_strcasecmp (name, "FileAttachment")) {
+-			uri = e_ews_dump_file_attachment_from_soap_parameter (subparam, async_data->directory, async_data->sync_state, &attach_id);
+-		}
+-		if (uri && attach_id) {
+-			async_data->items = g_slist_append (async_data->items, uri);
+-			async_data->items_created = g_slist_append (async_data->items_created, attach_id);
+-			uri = NULL;
+-			attach_id = NULL;
+-		}
++
++		if (info && attach_id)
++			async_data->items = g_slist_append (async_data->items, info);
++
++		info = NULL;
++		attach_id = NULL;
+ 	}
+ }
+ 
+@@ -7556,15 +7737,19 @@ ews_handle_root_folder_param_folders (ES
+ 	gchar *last, *total;
+ 	gint total_items;
+ 	EEwsFolder *folder;
+-	gboolean includes_last_item = FALSE;
++	gboolean includes_last_item;
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (subparam, "RootFolder");
+ 	total = e_soap_parameter_get_property (node, "TotalItemsInView");
+ 	total_items = atoi (total);
+ 	g_free (total);
+ 	last = e_soap_parameter_get_property (node, "IncludesLastItemInRange");
+-	if (!strcmp (last, "true"))
+-		includes_last_item = TRUE;
++	/*
++	 * Set the includes_last_item to TRUE as default.
++	 * It can avoid an infinite loop in caller, when, for some reason,
++	 * we don't receive the last_tag property from the server.
++	 */
++	includes_last_item = g_strcmp0 (last, "false") != 0;
+ 	g_free (last);
+ 
+ 	node = e_soap_parameter_get_first_child_by_name (node, "Folders");
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h.sync-with-3.8.5	2013-08-12 12:33:04.780417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-connection.h	2013-08-12 12:33:04.798417278 +0200
+@@ -719,6 +719,7 @@ GSList *	e_ews_connection_delete_attachm
+ 						(EEwsConnection *cnc,
+ 						 gint pri,
+ 						 const GSList *ids,
++						 GSList **parents_ids,
+ 						 GCancellable *cancellable,
+ 						 GError **error);
+ 
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.c.sync-with-3.8.5	2013-08-12 12:33:04.727417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.c	2013-08-12 12:33:04.795417278 +0200
+@@ -32,7 +32,6 @@
+ #include <glib/gprintf.h>
+ #include <libsoup/soup-misc.h>
+ #include "e-ews-item.h"
+-#include "e-ews-connection.h"
+ #include "e-ews-message.h"
+ 
+ #include "e-ews-gnome-3-8-compat.h"
+@@ -1502,40 +1501,48 @@ gchar *
+ e_ews_embed_attachment_id_in_uri (const gchar *olduri,
+                                   const gchar *attach_id)
+ {
+-	gchar *tmpdir, *tmpfilename, filename[350], dirname[350], *name;
++	gchar *tmpdir, *tmpfilename, *filename, *dirname, *name;
+ 
+ 	tmpfilename = g_filename_from_uri (olduri, NULL, NULL);
++	g_return_val_if_fail (tmpfilename != NULL, NULL);
+ 
+-	name = g_strrstr (tmpfilename, "/") + 1;
+-	tmpdir = g_strndup (tmpfilename, g_strrstr (tmpfilename, "/") - tmpfilename);
++	name = g_path_get_basename (tmpfilename);
++	tmpdir = g_path_get_dirname (tmpfilename);
+ 
+-	snprintf (dirname, 350, "%s/%s", tmpdir, attach_id);
++	dirname = g_build_filename (tmpdir, attach_id, NULL);
+ 	if (g_mkdir (dirname, 0775) == -1) {
+-		g_warning ("Failed create directory to place file in [%s]: %s\n", dirname, strerror (errno));
++		g_warning ("Failed create directory to place file in [%s]: %s\n", dirname, g_strerror (errno));
+ 	}
+ 
+-	snprintf (filename, 350, "%s/%s", dirname, name);
++	filename = g_build_filename (dirname, name, NULL);
+ 	if (g_rename (tmpfilename, filename) != 0) {
+-		g_warning ("Failed to move attachment cache file [%s -> %s]: %s\n", tmpfilename, filename, strerror (errno));
++		g_warning ("Failed to move attachment cache file [%s -> %s]: %s\n", tmpfilename, filename, g_strerror (errno));
+ 	}
+ 
+ 	g_free (tmpdir);
++	g_free (dirname);
++	g_free (name);
+ 
+-	return g_filename_to_uri (filename, NULL, NULL);
++	tmpfilename = g_filename_to_uri (filename, NULL, NULL);
++
++	g_free (filename);
++
++	return tmpfilename;
+ }
+ 
+-gchar *
++EEwsAttachmentInfo *
+ e_ews_dump_file_attachment_from_soap_parameter (ESoapParameter *param,
+                                                 const gchar *cache,
+                                                 const gchar *comp_uid,
+                                                 gchar **attach_id)
+ {
+ 	ESoapParameter *subparam;
+-	const gchar *param_name;
++	const gchar *param_name, *tmpfilename;
+ 	gchar *name = NULL, *value, *filename, *dirname;
+ 	guchar *content = NULL;
+ 	gsize data_len = 0;
+-	gchar *tmpdir, *tmpfilename;
++	gchar *tmpdir;
++	EEwsAttachmentInfo *info;
+ 
+ 	g_return_val_if_fail (param != NULL, NULL);
+ 
+@@ -1565,61 +1572,90 @@ e_ews_dump_file_attachment_from_soap_par
+ 		return NULL;
+ 	}
+ 
+-	tmpfilename = (gchar *) content;
+-	tmpdir = g_strndup (tmpfilename, g_strrstr (tmpfilename, "/") - tmpfilename);
++	if (cache && content && g_file_test ((const gchar *) content, G_FILE_TEST_IS_REGULAR | G_FILE_TEST_EXISTS)) {
++		info = e_ews_attachment_info_new (E_EWS_ATTACHMENT_INFO_TYPE_URI);
+ 
+-	dirname = g_build_filename (tmpdir, comp_uid, NULL);
+-	if (g_mkdir_with_parents (dirname, 0775) == -1) {
+-		g_warning ("Failed create directory to place file in [%s]: %s\n", dirname, strerror (errno));
+-	}
++		tmpfilename = (gchar *) content;
++		tmpdir = g_path_get_dirname (tmpfilename);
+ 
+-	filename = g_build_filename (dirname, name, NULL);
+-	if (g_rename (tmpfilename, filename) != 0) {
+-		g_warning ("Failed to move attachment cache file [%s -> %s]: %s\n", tmpfilename, filename, strerror (errno));
+-	}
++		dirname = g_build_filename (tmpdir, comp_uid, NULL);
++		if (g_mkdir_with_parents (dirname, 0775) == -1) {
++			g_warning ("Failed create directory to place file in [%s]: %s\n", dirname, g_strerror (errno));
++		}
+ 
+-	g_free (dirname);
+-	g_free (tmpdir);
+-	g_free (name);
+-	g_free (content);
++		filename = g_build_filename (dirname, name, NULL);
++		if (g_rename (tmpfilename, filename) != 0) {
++			g_warning ("Failed to move attachment cache file [%s -> %s]: %s\n",
++					tmpfilename, filename, g_strerror (errno));
++		}
+ 
+-	/* Return URI to saved file */
+-	name = g_filename_to_uri (filename, NULL, NULL);
+-	g_free (filename);
+-	return name;
++		g_free (dirname);
++		g_free (tmpdir);
++		g_free (name);
++		g_free (content);
++
++		/* Return URI to saved file */
++		e_ews_attachment_info_set_uri (info, g_filename_to_uri (filename, NULL, NULL));
++		g_free (filename);
++	} else {
++		info = e_ews_attachment_info_new (E_EWS_ATTACHMENT_INFO_TYPE_INLINED);
++		e_ews_attachment_info_set_inlined_data (info, content, data_len);
++	}
++	return info;
+ }
+ 
+-gchar *
++EEwsAttachmentInfo *
+ e_ews_item_dump_mime_content (EEwsItem *item,
+                               const gchar *cache)
+ {
++	EEwsAttachmentInfo *info;
+ 	gchar *filename, *surename, *dirname;
+-	gchar *tmpdir, *tmpfilename;
++	gchar *tmpdir, *uri;
++	const gchar *tmpfilename;
+ 
+ 	g_return_val_if_fail (item->priv->mime_content != NULL, NULL);
++	g_return_val_if_fail (g_file_test ((const gchar *) item->priv->mime_content, G_FILE_TEST_IS_REGULAR | G_FILE_TEST_EXISTS), NULL);
+ 
+ 	tmpfilename = (gchar *) item->priv->mime_content;
+-	tmpdir = g_strndup (tmpfilename, g_strrstr (tmpfilename, "/") - tmpfilename);
++	tmpdir = g_path_get_dirname (tmpfilename);
+ 
+ 	dirname = g_build_filename (tmpdir, "XXXXXX", NULL);
+-	if (!mkdtemp (dirname))
+-		g_warning ("Failed to create directory for attachment cache");
++	if (!mkdtemp (dirname)) {
++		g_warning ("Failed to create directory for attachment cache '%s': %s", dirname, g_strerror (errno));
++
++		g_free (tmpdir);
++		g_free (dirname);
++
++		return NULL;
++	}
+ 
+ 	surename = g_uri_escape_string (item->priv->subject, "", TRUE);
+ 	filename = g_build_filename (dirname, surename, NULL);
+ 
+ 	if (g_rename ((const gchar *) item->priv->mime_content, filename) != 0) {
+-		g_warning ("Failed to move attachment cache file");
++		g_warning ("Failed to move attachment cache file '%s': %s", filename, g_strerror (errno));
++
++		g_free (tmpdir);
++		g_free (dirname);
++		g_free (filename);
++		g_free (surename);
++
++		return NULL;
+ 	}
+ 
++	uri = g_filename_to_uri (filename, NULL, NULL);
++
++	info = e_ews_attachment_info_new (E_EWS_ATTACHMENT_INFO_TYPE_URI);
++	e_ews_attachment_info_set_uri (info, uri);
++
++	g_free (uri);
+ 	g_free (filename);
+ 	g_free (dirname);
+ 	g_free (tmpdir);
+-	g_free (tmpfilename);
+ 	g_free (surename);
+ 
+ 	/* Return URI to saved file */
+-	return g_filename_to_uri (filename, NULL, NULL);
++	return info;
+ }
+ 
+ const GSList *
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.h.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.h
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.h.sync-with-3.8.5	2013-08-12 12:33:04.728417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-item.h	2013-08-12 12:33:04.797417278 +0200
+@@ -114,6 +114,27 @@ typedef struct {
+ 	gchar *postal_code;
+ } EwsAddress;
+ 
++typedef struct {
++	gchar *filename;
++	gchar *mime_type;
++	gsize length;
++	gchar *data;
++} EEwsAttachmentInline;
++
++typedef enum {
++	E_EWS_ATTACHMENT_INFO_TYPE_INLINED,
++	E_EWS_ATTACHMENT_INFO_TYPE_URI
++} EEwsAttachmentInfoType;
++
++typedef struct {
++	EEwsAttachmentInfoType type;
++	union {
++		EEwsAttachmentInline inlined;
++		gchar *uri;
++	} data;
++	gchar *prefer_filename;
++} EEwsAttachmentInfo;
++
+ typedef enum {
+ 	E_EWS_PERMISSION_BIT_FREE_BUSY_DETAILED	= 0x00001000,
+ 	E_EWS_PERMISSION_BIT_FREE_BUSY_SIMPLE	= 0x00000800,
+@@ -203,13 +224,13 @@ const GSList *	e_ews_item_get_modified_o
+ gchar *		e_ews_embed_attachment_id_in_uri (const gchar *olduri, const gchar *attach_id);
+ GSList *	e_ews_item_get_attachments_ids
+ 						(EEwsItem *item);
+-gchar *
++EEwsAttachmentInfo *
+ e_ews_dump_file_attachment_from_soap_parameter (ESoapParameter *param, const gchar *cache, const gchar *comp_uid, gchar **attach_id);
+ 
+ gchar *
+ e_ews_item_ical_dump (EEwsItem *item);
+ 
+-gchar *
++EEwsAttachmentInfo *
+ e_ews_item_dump_mime_content (EEwsItem *item, const gchar *cache);
+ 
+ const GSList *	e_ews_item_get_attendees	(EEwsItem *item);
+@@ -217,6 +238,37 @@ const GSList *	e_ews_item_get_attendees	
+ const EwsId *	e_ews_item_get_calendar_item_accept_id
+ 						(EEwsItem *item);
+ 
++EEwsAttachmentInfo *
++		e_ews_attachment_info_new	(EEwsAttachmentInfoType type);
++void		e_ews_attachment_info_free	(EEwsAttachmentInfo *info);
++EEwsAttachmentInfoType
++		e_ews_attachment_info_get_type	(EEwsAttachmentInfo *info);
++const gchar *	e_ews_attachment_info_get_prefer_filename
++						(EEwsAttachmentInfo *info);
++void		e_ews_attachment_info_set_prefer_filename
++						(EEwsAttachmentInfo *info,
++						 const gchar *prefer_filename);
++const gchar *	e_ews_attachment_info_get_inlined_data
++						(EEwsAttachmentInfo *info,
++						 gsize *len);
++void		e_ews_attachment_info_set_inlined_data
++						(EEwsAttachmentInfo *info,
++						 const guchar *data,
++						 gsize len);
++const gchar *	e_ews_attachment_info_get_mime_type
++						(EEwsAttachmentInfo *info);
++void		e_ews_attachment_info_set_mime_type
++						(EEwsAttachmentInfo *info,
++						 const gchar *mime_type);
++const gchar *	e_ews_attachment_info_get_filename
++						(EEwsAttachmentInfo *info);
++void		e_ews_attachment_info_set_filename
++						(EEwsAttachmentInfo *info,
++						 const gchar *filename);
++const gchar *	e_ews_attachment_info_get_uri	(EEwsAttachmentInfo *info);
++void		e_ews_attachment_info_set_uri	(EEwsAttachmentInfo *info,
++						 const gchar *uri);
++
+ /* Contact fields */
+ const gchar *	e_ews_item_get_fileas		(EEwsItem *item);
+ const EwsCompleteName *
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-oof-settings.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-oof-settings.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-oof-settings.c.sync-with-3.8.5	2013-08-12 12:33:04.781417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-ews-oof-settings.c	2013-08-12 12:33:04.793417278 +0200
+@@ -105,8 +105,6 @@ ews_oof_settings_text_from_html (gchar *
+ 	gchar *start, *end;
+ 	gchar *ii, *jj;
+ 
+-	/* Note, this consumes the input string. */
+-
+ 	g_return_val_if_fail (html_text != NULL, NULL);
+ 
+ 	haystack_len = strlen (html_text);
+@@ -131,8 +129,6 @@ ews_oof_settings_text_from_html (gchar *
+ 	}
+ 	*jj = '\0';
+ 
+-	g_free (html_text);
+-
+ 	return plain_text;
+ }
+ 
+@@ -247,7 +243,7 @@ ews_oof_settings_get_response_cb (ESoapR
+ 	else if (g_strrstr (string, "BodyFragment") != NULL)
+ 		text = ews_oof_settings_text_from_html (string);
+ 	else
+-		text = NULL;
++		text = g_strdup (string);
+ 	e_ews_oof_settings_set_internal_reply (settings, text ? text : "");
+ 	g_free (string);
+ 	g_free (text);
+@@ -264,7 +260,7 @@ ews_oof_settings_get_response_cb (ESoapR
+ 	else if (g_strrstr (string, "BodyFragment") != NULL)
+ 		text = ews_oof_settings_text_from_html (string);
+ 	else
+-		text = NULL;
++		text = g_strdup (string);
+ 	e_ews_oof_settings_set_external_reply (settings, text ? text : "");
+ 	g_free (string);
+ 	g_free (text);
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/server/e-soap-message.c.sync-with-3.8.5 evolution-ews-gnome-3-0.gitcc16df2/src/server/e-soap-message.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/server/e-soap-message.c.sync-with-3.8.5	2013-08-12 12:33:04.731417278 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/server/e-soap-message.c	2013-08-12 12:33:04.793417278 +0200
+@@ -11,6 +11,7 @@
+ 
+ #include <string.h>
+ #include <stdio.h>
++#include <errno.h>
+ #include <libsoup/soup.h>
+ #ifdef G_OS_WIN32
+ #include <io.h>
+@@ -221,6 +222,10 @@ soap_sax_startElementNs (gpointer _ctxt,
+ 			g_free (enc);
+ 		} else
+ 			xmlSAX2Characters (ctxt, (xmlChar *) fname, strlen (fname));
++	} else {
++		gint err = errno;
++
++		g_warning ("%s: Failed to create temp file '%s': %s\n", G_STRFUNC, fname, g_strerror (err));
+ 	}
+ 	g_free (fname);
+ }

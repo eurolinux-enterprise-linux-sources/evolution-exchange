@@ -1,0 +1,84 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c.searchable-gal evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c.searchable-gal	2013-10-18 12:35:23.724598138 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/account-setup-eplugin/exchange-ews-account-setup.c	2013-10-18 12:35:23.829598138 +0200
+@@ -727,7 +727,7 @@ init_widgets (struct _oab_setting_data *
+ 	const gchar *oab_url, *marked_for_offline;
+ 	EMConfigTargetAccount *target_account;
+ 	CamelURL *url;
+-	
++
+ 	target_account = (EMConfigTargetAccount *) cbdata->config->target;
+ 	url = camel_url_new(e_account_get_string(get_modified_account (target_account), E_ACCOUNT_SOURCE_URL), NULL);
+ 
+@@ -743,7 +743,6 @@ init_widgets (struct _oab_setting_data *
+ 		selected_list = camel_url_get_param (url, "oal_selected");
+ 		if (selected_list && gtk_combo_box_get_active (GTK_COMBO_BOX (cbdata->combo_text)) == -1) {
+ 			const gchar *tmp;
+-			
+ 			tmp = strrchr (selected_list, ':');
+ 			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cbdata->combo_text), tmp+1);
+ 			
+@@ -860,6 +859,7 @@ org_gnome_ews_oab_settings (EPlugin *epl
+ 			g_signal_connect (GTK_ASSISTANT (data->config->widget), "prepare", G_CALLBACK (ews_assistant_page_changed_cb), cbdata);
+ 		if (GTK_IS_NOTEBOOK (data->config->widget))
+ 			g_signal_connect (GTK_NOTEBOOK (data->config->widget), "switch-page", G_CALLBACK (ews_page_switched_cb), cbdata);
++		init_widgets (cbdata);
+ 
+ 		/* Free the call back data here */
+ 		g_signal_connect (GTK_WIDGET (data->config->widget), "destroy", G_CALLBACK (table_deleted_cb), cbdata);
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c.searchable-gal evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c.searchable-gal	2013-10-18 12:35:23.813598138 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-ews.c	2013-10-18 12:35:23.828598138 +0200
+@@ -2032,7 +2032,11 @@ ebews_start_gal_sync (gpointer data)
+ 	if (!e_ews_connection_get_oal_detail_sync (
+ 		oab_cnc, priv->folder_id, NULL, old_etag, &full_l, &etag,
+ 		priv->cancellable, &error)) {
+-		ret = FALSE;
++		if (g_error_matches (error, SOUP_HTTP_ERROR, SOUP_STATUS_NOT_MODIFIED)) {
++			g_clear_error (&error);
++		} else {
++			ret = FALSE;
++		}
+ 		goto exit;
+ 	}
+ 
+@@ -2694,7 +2698,8 @@ fetch_from_offline (EBookBackendEws *ews
+ 
+ 	priv = ews->priv;
+ 
+-	if (priv->is_gal && !g_strcmp0 (query, "(contains \"x-evolution-any-field\" \"\")")) {
++	/* GAL with folder_id means offline GAL */
++	if (priv->is_gal && !priv->folder_id && !g_strcmp0 (query, "(contains \"x-evolution-any-field\" \"\")")) {
+ 		e_data_book_view_notify_complete (book_view, error);
+ 		g_object_unref (book_view);
+ 		return;
+@@ -3078,7 +3083,8 @@ e_book_backend_ews_get_static_capabiliti
+ 	ebews = E_BOOK_BACKEND_EWS (backend);
+ 	g_return_val_if_fail (ebews != NULL, NULL);
+ 
+-	if (ebews->priv->is_gal)
++	/* GAL with folder_id is an offline GAL */
++	if (ebews->priv->is_gal && !ebews->priv->folder_id)
+ 		return g_strdup ("net,bulk-removes,contact-lists");
+ 
+ 	/* do-initial-query is enabled for system address book also, so that we get the
+diff -up evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c.searchable-gal evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c
+--- evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c.searchable-gal	2013-10-18 12:35:23.764598138 +0200
++++ evolution-ews-gnome-3-0.gitcc16df2/src/addressbook/e-book-backend-sqlitedb.c	2013-10-18 12:35:23.826598138 +0200
+@@ -1053,12 +1053,14 @@ func_check (struct _ESExp *f,
+ 	    && argv[0]->type == ESEXP_RES_STRING
+ 	    && argv[1]->type == ESEXP_RES_STRING) {
+ 
+-		gchar *query_name = argv[0]->value.string;
++		const gchar *query_name = argv[0]->value.string;
++		const gchar *query_value = argv[1]->value.string;
+ 		gint   i;
+ 
+ 		/* Special case, when testing the special symbolic 'any field' we can
+ 		 * consider it a summary query (it's similar to a 'no query'). */
+-		if (!strcmp ("x-evolution-any-field", query_name))
++		if (g_str_equal ("x-evolution-any-field", query_name) &&
++		    query_value && !*query_value)
+ 			truth = TRUE;
+ 
+ 		for (i = 0; truth == FALSE && i < G_N_ELEMENTS (summary_fields); i++) {

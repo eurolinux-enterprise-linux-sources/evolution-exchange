@@ -1,10 +1,10 @@
-diff -up ximian-connector-2.0.2-pristine/acinclude.m4 ximian-connector-2.0.2-64bit_fix/acinclude.m4
---- ximian-connector-2.0.2-pristine/acinclude.m4	2004-10-12 19:00:06.225752438 -0400
-+++ ximian-connector-2.0.2-64bit_fix/acinclude.m4	2004-10-12 19:01:50.635944683 -0400
-@@ -34,6 +34,18 @@ AC_DEFUN([EVO_LDAP_CHECK], [
- 	AC_ARG_WITH(openldap,     [  --with-openldap=[no/yes/PREFIX]      Enable LDAP support in evolution])
- 	AC_ARG_WITH(static-ldap,  [  --with-static-ldap=[no/yes]          Link LDAP support statically into evolution ])
- 	AC_CACHE_CHECK([for OpenLDAP], ac_cv_with_openldap, ac_cv_with_openldap="${with_openldap:=$default}")
+diff -up evolution-exchange-2.29.90/m4/evo_ldap_check.m4.fix-64bit-acinclude evolution-exchange-2.29.90/m4/evo_ldap_check.m4
+--- evolution-exchange-2.29.90/m4/evo_ldap_check.m4.fix-64bit-acinclude	2010-01-12 21:47:55.000000000 +0100
++++ evolution-exchange-2.29.90/m4/evo_ldap_check.m4	2010-02-10 12:04:47.000000000 +0100
+@@ -14,6 +14,18 @@ AC_DEFUN([EVO_LDAP_CHECK],[
+ 		[AS_HELP_STRING([--with-static-ldap],
+ 		[Link LDAP support statically into evolution])])
+ 	AC_CACHE_CHECK([for OpenLDAP], [ac_cv_with_openldap], [ac_cv_with_openldap="${with_openldap:=$default}"])
 +
 +	AC_MSG_CHECKING(for multilib subdirectory)
 +	if test "$GCC" = "yes" ; then
@@ -20,7 +20,7 @@ diff -up ximian-connector-2.0.2-pristine/acinclude.m4 ximian-connector-2.0.2-64b
  	case $ac_cv_with_openldap in
  	no|"")
  		with_openldap=no
-@@ -44,7 +56,7 @@ AC_DEFUN([EVO_LDAP_CHECK], [
+@@ -24,7 +36,7 @@ AC_DEFUN([EVO_LDAP_CHECK],[
  	*)
  		with_openldap=$ac_cv_with_openldap
  		LDAP_CFLAGS="-I$ac_cv_with_openldap/include"
@@ -29,8 +29,14 @@ diff -up ximian-connector-2.0.2-pristine/acinclude.m4 ximian-connector-2.0.2-64b
  		;;
  	esac
  
-@@ -80,20 +92,20 @@ AC_DEFUN([EVO_LDAP_CHECK], [
- 		AC_CHECK_LIB(nsl, gethostbyaddr, LDAP_LIBS="$LDAP_LIBS -lnsl")
+@@ -55,25 +67,25 @@ AC_DEFUN([EVO_LDAP_CHECK],[
+ 			AC_MSG_ERROR([evolution requires OpenLDAP version >= 2])
+ 		fi
+ 
+-		AC_CHECK_LIB(resolv, res_query, [LDAP_LIBS="-lresolv"])
++		LDAP_LIBS="-lresolv"
+ 		AC_CHECK_LIB(socket, bind, [LDAP_LIBS="$LDAP_LIBS -lsocket"])
+ 		AC_CHECK_LIB(nsl, gethostbyaddr, [LDAP_LIBS="$LDAP_LIBS -lnsl"])
  		AC_CHECK_LIB(lber, ber_get_tag, [
  			if test "$with_static_ldap" = "yes"; then
 -				LDAP_LIBS="$with_openldap/lib/liblber.a $LDAP_LIBS"

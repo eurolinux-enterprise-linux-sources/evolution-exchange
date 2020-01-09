@@ -33,77 +33,200 @@
 
 #include <glib/gi18n-lib.h>
 
-#include <camel/camel-folder.h>
-#include <camel/camel-file-utils.h>
-#include <camel/camel-folder-summary.h>
-#include <camel/camel-data-cache.h>
-#include <camel/camel-string-utils.h>
-
 #include "camel-exchange-journal.h"
 #include "camel-exchange-store.h"
 #include "camel-exchange-summary.h"
+#include "camel-exchange-utils.h"
 
 #define d(x)
 
-static void camel_exchange_journal_class_init (CamelExchangeJournalClass *klass);
-static void camel_exchange_journal_init (CamelExchangeJournal *journal, CamelExchangeJournalClass *klass);
-static void camel_exchange_journal_finalize (CamelObject *object);
+G_DEFINE_TYPE (CamelExchangeJournal, camel_exchange_journal, CAMEL_TYPE_OFFLINE_JOURNAL)
 
-static void exchange_entry_free (CamelOfflineJournal *journal, CamelDListNode *entry);
-static CamelDListNode *exchange_entry_load (CamelOfflineJournal *journal, FILE *in);
-static gint exchange_entry_write (CamelOfflineJournal *journal, CamelDListNode *entry, FILE *out);
-static gint exchange_entry_play (CamelOfflineJournal *journal, CamelDListNode *entry, CamelException *ex);
-
-static CamelOfflineJournalClass *parent_class = NULL;
-
-CamelType
-camel_exchange_journal_get_type (void)
+static void
+exchange_message_info_dup_to (CamelMessageInfoBase *dest,
+                              CamelMessageInfoBase *src)
 {
-	static CamelType type = 0;
+	camel_flag_list_copy (&dest->user_flags, &src->user_flags);
+	camel_tag_list_copy (&dest->user_tags, &src->user_tags);
+	dest->date_received = src->date_received;
+	dest->date_sent = src->date_sent;
+	dest->flags = src->flags;
+	dest->size = src->size;
+}
 
-	if (!type) {
-		type = camel_type_register (camel_offline_journal_get_type (),
-					    "CamelExchangeJournal",
-					    sizeof (CamelExchangeJournal),
-					    sizeof (CamelExchangeJournalClass),
-					    (CamelObjectClassInitFunc) camel_exchange_journal_class_init,
-					    NULL,
-					    (CamelObjectInitFunc) camel_exchange_journal_init,
-					    (CamelObjectFinalizeFunc) camel_exchange_journal_finalize);
+static gint
+exchange_entry_play_append (CamelOfflineJournal *journal,
+                            CamelExchangeJournalEntry *entry,
+                            GError **error)
+{
+	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
+	CamelFolder *folder = journal->folder;
+	CamelMimeMessage *message;
+	CamelMessageInfo *info, *real;
+	CamelStream *stream;
+	gchar *uid = NULL;
+
+	/* if the message isn't in the cache, the user went behind our backs so "not our problem" */
+	if (!exchange_folder->cache || !(stream = camel_data_cache_get (exchange_folder->cache, "cache", entry->uid, NULL)))
+		goto done;
+
+	message = camel_mime_message_new ();
+	if (camel_data_wrapper_construct_from_stream ((CamelDataWrapper *) message, stream, NULL) == -1) {
+		g_object_unref (message);
+		g_object_unref (stream);
+		goto done;
 	}
 
-	return type;
+	g_object_unref (stream);
+
+	if (!(info = camel_folder_summary_uid (folder->summary, entry->uid))) {
+		/* Should have never happened, but create a new info to avoid further crashes */
+		info = camel_message_info_new (NULL);
+	}
+
+	if (!camel_folder_append_message (folder, message, info, &uid, error))
+		return -1;
+
+	real = camel_folder_summary_info_new_from_message (folder->summary, message, NULL);
+	g_object_unref (message);
+
+	if (uid != NULL && real) {
+		real->uid = camel_pstring_strdup (uid);
+		exchange_message_info_dup_to ((CamelMessageInfoBase *) real, (CamelMessageInfoBase *) info);
+		camel_folder_summary_add (folder->summary, real);
+		/* FIXME: should a folder_changed event be triggered? */
+	}
+	camel_message_info_free (info);
+	g_free (uid);
+
+ done:
+
+	camel_exchange_folder_remove_message (exchange_folder, entry->uid);
+
+	return 0;
+}
+
+static gint
+exchange_entry_play_transfer (CamelOfflineJournal *journal,
+                              CamelExchangeJournalEntry *entry,
+                              GError **error)
+{
+	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
+	CamelFolder *folder = journal->folder;
+	CamelMessageInfo *info, *real;
+	GPtrArray *xuids, *uids;
+	CamelFolder *src;
+	CamelExchangeStore *store;
+	CamelStream *stream;
+	CamelMimeMessage *message;
+	CamelStore *parent_store;
+
+	if (!exchange_folder->cache || !(stream = camel_data_cache_get (exchange_folder->cache, "cache", entry->uid, NULL)))
+		goto done;
+
+	message = camel_mime_message_new ();
+	if (camel_data_wrapper_construct_from_stream ((CamelDataWrapper *) message, stream, NULL) == -1) {
+		g_object_unref (message);
+		g_object_unref (stream);
+		goto done;
+	}
+
+	g_object_unref (stream);
+
+	if (!(info = camel_folder_summary_uid (folder->summary, entry->uid))) {
+		/* Note: this should never happen, but rather than crash lets make a new info */
+		info = camel_message_info_new (NULL);
+	}
+
+	if (!entry->folder_name) {
+		g_set_error (
+			error, CAMEL_ERROR, CAMEL_ERROR_GENERIC,
+			_("No folder name found"));
+		goto exception;
+	}
+
+	parent_store = camel_folder_get_parent_store (folder);
+	store = CAMEL_EXCHANGE_STORE (parent_store);
+
+	g_mutex_lock (store->folders_lock);
+	src = (CamelFolder *) g_hash_table_lookup (store->folders, entry->folder_name);
+	g_mutex_unlock (store->folders_lock);
+
+	if (src) {
+		gboolean success;
+		uids = g_ptr_array_sized_new (1);
+		g_ptr_array_add (uids, entry->original_uid);
+
+		success = camel_folder_transfer_messages_to (
+			src, uids, folder, &xuids,
+			entry->delete_original, error);
+		if (!success)
+			goto exception;
+
+		real = camel_folder_summary_info_new_from_message (
+			folder->summary, message, NULL);
+		g_object_unref (message);
+		real->uid = camel_pstring_strdup (
+			(gchar *)xuids->pdata[0]);
+		/* Transfer flags */
+		exchange_message_info_dup_to (
+			(CamelMessageInfoBase *) real,
+			(CamelMessageInfoBase *) info);
+		camel_folder_summary_add (folder->summary, real);
+		/* FIXME: should a folder_changed event be triggered? */
+
+		g_ptr_array_free (xuids, TRUE);
+		g_ptr_array_free (uids, TRUE);
+		/* g_object_unref (src); FIXME: should we? */
+
+	} else {
+		g_set_error (
+			error, CAMEL_ERROR, CAMEL_ERROR_GENERIC,
+			_("Folder doesn't exist"));
+		goto exception;
+	}
+
+	camel_message_info_free (info);
+done:
+	camel_exchange_folder_remove_message (exchange_folder, entry->uid);
+
+	return 0;
+
+exception:
+
+	camel_message_info_free (info);
+
+	return -1;
+}
+
+static gint
+exchange_entry_play_delete (CamelOfflineJournal *journal,
+                            CamelExchangeJournalEntry *entry,
+                            GError **error)
+{
+	CamelFolder *folder;
+	CamelStore *parent_store;
+	const gchar *full_name;
+	gboolean success;
+
+	folder = CAMEL_FOLDER (journal->folder);
+	full_name = camel_folder_get_full_name (folder);
+	parent_store = camel_folder_get_parent_store (folder);
+
+	success = camel_exchange_utils_set_message_flags (
+		CAMEL_SERVICE (parent_store), full_name,
+		entry->uid, entry->set, entry->flags, error);
+
+	return success ? 0 : -1;
 }
 
 static void
-camel_exchange_journal_class_init (CamelExchangeJournalClass *klass)
+exchange_journal_entry_free (CamelOfflineJournal *journal,
+                             CamelDListNode *entry)
 {
-	CamelOfflineJournalClass *journal_class = (CamelOfflineJournalClass *) klass;
+	CamelExchangeJournalEntry *exchange_entry;
 
-	parent_class = (CamelOfflineJournalClass *) camel_type_get_global_classfuncs (CAMEL_TYPE_OFFLINE_JOURNAL);
-
-	journal_class->entry_free = exchange_entry_free;
-	journal_class->entry_load = exchange_entry_load;
-	journal_class->entry_write = exchange_entry_write;
-	journal_class->entry_play = exchange_entry_play;
-}
-
-static void
-camel_exchange_journal_init (CamelExchangeJournal *journal, CamelExchangeJournalClass *klass)
-{
-
-}
-
-static void
-camel_exchange_journal_finalize (CamelObject *object)
-{
-
-}
-
-static void
-exchange_entry_free (CamelOfflineJournal *journal, CamelDListNode *entry)
-{
-	CamelExchangeJournalEntry *exchange_entry = (CamelExchangeJournalEntry *) entry;
+	exchange_entry = (CamelExchangeJournalEntry *) entry;
 
 	g_free (exchange_entry->uid);
 	g_free (exchange_entry->original_uid);
@@ -112,7 +235,8 @@ exchange_entry_free (CamelOfflineJournal *journal, CamelDListNode *entry)
 }
 
 static CamelDListNode *
-exchange_entry_load (CamelOfflineJournal *journal, FILE *in)
+exchange_journal_entry_load (CamelOfflineJournal *journal,
+                             FILE *in)
 {
 	CamelExchangeJournalEntry *entry;
 	gchar *tmp;
@@ -172,7 +296,9 @@ exchange_entry_load (CamelOfflineJournal *journal, FILE *in)
 }
 
 static gint
-exchange_entry_write (CamelOfflineJournal *journal, CamelDListNode *entry, FILE *out)
+exchange_journal_entry_write (CamelOfflineJournal *journal,
+                              CamelDListNode *entry,
+                              FILE *out)
 {
 	CamelExchangeJournalEntry *exchange_entry = (CamelExchangeJournalEntry *) entry;
 	const gchar *string;
@@ -217,190 +343,44 @@ exchange_entry_write (CamelOfflineJournal *journal, CamelDListNode *entry, FILE 
 	return 0;
 }
 
-static void
-exchange_message_info_dup_to (CamelMessageInfoBase *dest, CamelMessageInfoBase *src)
-{
-	camel_flag_list_copy (&dest->user_flags, &src->user_flags);
-	camel_tag_list_copy (&dest->user_tags, &src->user_tags);
-	dest->date_received = src->date_received;
-	dest->date_sent = src->date_sent;
-	dest->flags = src->flags;
-	dest->size = src->size;
-}
-
 static gint
-exchange_entry_play_delete (CamelOfflineJournal *journal, CamelExchangeJournalEntry *entry, CamelException *ex)
-{
-	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
-
-	camel_stub_send_oneway (exchange_folder->stub,
-				CAMEL_STUB_CMD_SET_MESSAGE_FLAGS,
-				CAMEL_STUB_ARG_FOLDER,
-				((CamelFolder *)exchange_folder)->full_name,
-				CAMEL_STUB_ARG_STRING,
-				entry->uid,
-				CAMEL_STUB_ARG_UINT32,
-				entry->set,
-				CAMEL_STUB_ARG_UINT32,
-				entry->flags,
-				CAMEL_STUB_ARG_END);
-
-	return 0;
-}
-
-static gint
-exchange_entry_play_append (CamelOfflineJournal *journal, CamelExchangeJournalEntry *entry, CamelException *ex)
-{
-	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
-	CamelFolder *folder = journal->folder;
-	CamelMimeMessage *message;
-	CamelMessageInfo *info, *real;
-	CamelStream *stream;
-	CamelException lex;
-	gchar *uid = NULL;
-
-	/* if the message isn't in the cache, the user went behind our backs so "not our problem" */
-	if (!exchange_folder->cache || !(stream = camel_data_cache_get (exchange_folder->cache, "cache", entry->uid, ex)))
-		goto done;
-
-	message = camel_mime_message_new ();
-	if (camel_data_wrapper_construct_from_stream ((CamelDataWrapper *) message, stream) == -1) {
-		camel_object_unref (message);
-		camel_object_unref (stream);
-		goto done;
-	}
-
-	camel_object_unref (stream);
-
-	if (!(info = camel_folder_summary_uid (folder->summary, entry->uid))) {
-		/* Should have never happened, but create a new info to avoid further crashes */
-		info = camel_message_info_new (NULL);
-	}
-
-	camel_exception_init (&lex);
-	camel_folder_append_message (folder, message, info, &uid, &lex);
-
-	if (camel_exception_is_set (&lex)) {
-		camel_exception_xfer (ex, &lex);
-		return -1;
-	}
-
-	real = camel_folder_summary_info_new_from_message (folder->summary, message);
-	camel_object_unref (message);
-
-	if (uid != NULL && real) {
-		real->uid = camel_pstring_strdup (uid);
-		exchange_message_info_dup_to ((CamelMessageInfoBase *) real, (CamelMessageInfoBase *) info);
-		camel_folder_summary_add (folder->summary, real);
-		/* FIXME: should a folder_changed event be triggered? */
-	}
-	camel_message_info_free (info);
-	g_free (uid);
-
- done:
-
-	camel_exchange_folder_remove_message (exchange_folder, entry->uid);
-
-	return 0;
-}
-
-static gint
-exchange_entry_play_transfer (CamelOfflineJournal *journal, CamelExchangeJournalEntry *entry, CamelException *ex)
-{
-	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
-	CamelFolder *folder = journal->folder;
-	CamelMessageInfo *info, *real;
-	GPtrArray *xuids, *uids;
-	CamelException lex;
-	CamelFolder *src;
-	CamelExchangeStore *store;
-	CamelStream *stream;
-	CamelMimeMessage *message;
-
-	if (!exchange_folder->cache || !(stream = camel_data_cache_get (exchange_folder->cache, "cache", entry->uid, ex)))
-		goto done;
-
-	message = camel_mime_message_new ();
-	if (camel_data_wrapper_construct_from_stream ((CamelDataWrapper *) message, stream) == -1) {
-		camel_object_unref (message);
-		camel_object_unref (stream);
-		goto done;
-	}
-
-	camel_object_unref (stream);
-
-	if (!(info = camel_folder_summary_uid (folder->summary, entry->uid))) {
-		/* Note: this should never happen, but rather than crash lets make a new info */
-		info = camel_message_info_new (NULL);
-	}
-
-	if (!entry->folder_name) {
-		camel_exception_setv (ex, CAMEL_EXCEPTION_SYSTEM, _("No folder name found\n"));
-		goto exception;
-	}
-
-	store = (CamelExchangeStore *) folder->parent_store;
-	g_mutex_lock (store->folders_lock);
-	src = (CamelFolder *) g_hash_table_lookup (store->folders, entry->folder_name);
-	g_mutex_unlock (store->folders_lock);
-
-	if (src) {
-		uids = g_ptr_array_sized_new (1);
-		g_ptr_array_add (uids, entry->original_uid);
-
-		camel_exception_init (&lex);
-		camel_folder_transfer_messages_to (src, uids, folder, &xuids, entry->delete_original, &lex);
-		if (!camel_exception_is_set (&lex)) {
-			real = camel_folder_summary_info_new_from_message (folder->summary, message);
-			camel_object_unref (message);
-			real->uid = camel_pstring_strdup ((gchar *)xuids->pdata[0]);
-			/* Transfer flags */
-			exchange_message_info_dup_to ((CamelMessageInfoBase *) real, (CamelMessageInfoBase *) info);
-			camel_folder_summary_add (folder->summary, real);
-			/* FIXME: should a folder_changed event be triggered? */
-		} else {
-			camel_exception_xfer (ex, &lex);
-			goto exception;
-		}
-
-		g_ptr_array_free (xuids, TRUE);
-		g_ptr_array_free (uids, TRUE);
-		/* camel_object_unref (src); FIXME: should we? */
-	}
-	else {
-		camel_exception_setv (ex, CAMEL_EXCEPTION_SYSTEM, _("Folder doesn't exist"));
-		goto exception;
-	}
-
-	camel_message_info_free (info);
-done:
-	camel_exchange_folder_remove_message (exchange_folder, entry->uid);
-
-	return 0;
-
-exception:
-
-	camel_message_info_free (info);
-
-	return -1;
-}
-
-static gint
-exchange_entry_play (CamelOfflineJournal *journal, CamelDListNode *entry, CamelException *ex)
+exchange_journal_entry_play (CamelOfflineJournal *journal,
+                             CamelDListNode *entry,
+                             GError **error)
 {
 	CamelExchangeJournalEntry *exchange_entry = (CamelExchangeJournalEntry *) entry;
 
 	switch (exchange_entry->type) {
 	case CAMEL_EXCHANGE_JOURNAL_ENTRY_APPEND:
-		return exchange_entry_play_append (journal, exchange_entry, ex);
+		return exchange_entry_play_append (
+			journal, exchange_entry, error);
 	case CAMEL_EXCHANGE_JOURNAL_ENTRY_TRANSFER:
-		return exchange_entry_play_transfer (journal, exchange_entry, ex);
+		return exchange_entry_play_transfer (
+			journal, exchange_entry, error);
 	case CAMEL_EXCHANGE_JOURNAL_ENTRY_DELETE:
-		return exchange_entry_play_delete (journal, exchange_entry, ex);
+		return exchange_entry_play_delete (
+			journal, exchange_entry, error);
 	default:
 		g_critical ("%s: Uncaught case (%d)", G_STRLOC, exchange_entry->type);
 		return -1;
 	}
+}
+
+static void
+camel_exchange_journal_class_init (CamelExchangeJournalClass *class)
+{
+	CamelOfflineJournalClass *offline_journal_class;
+
+	offline_journal_class = CAMEL_OFFLINE_JOURNAL_CLASS (class);
+	offline_journal_class->entry_free = exchange_journal_entry_free;
+	offline_journal_class->entry_load = exchange_journal_entry_load;
+	offline_journal_class->entry_write = exchange_journal_entry_write;
+	offline_journal_class->entry_play = exchange_journal_entry_play;
+}
+
+static void
+camel_exchange_journal_init (CamelExchangeJournal *journal)
+{
 }
 
 CamelOfflineJournal *
@@ -410,15 +390,18 @@ camel_exchange_journal_new (CamelExchangeFolder *folder, const gchar *filename)
 
 	g_return_val_if_fail (CAMEL_IS_EXCHANGE_FOLDER (folder), NULL);
 
-	journal = (CamelOfflineJournal *) camel_object_new (camel_exchange_journal_get_type ());
+	journal = g_object_new (CAMEL_TYPE_EXCHANGE_JOURNAL, NULL);
 	camel_offline_journal_construct (journal, (CamelFolder *) folder, filename);
 
 	return journal;
 }
 
 static gboolean
-update_cache (CamelExchangeJournal *exchange_journal, CamelMimeMessage *message,
-		const CamelMessageInfo *mi, gchar **updated_uid, CamelException *ex)
+update_cache (CamelExchangeJournal *exchange_journal,
+              CamelMimeMessage *message,
+              const CamelMessageInfo *mi,
+              gchar **updated_uid,
+              GError **error)
 {
 	CamelOfflineJournal *journal = (CamelOfflineJournal *) exchange_journal;
 	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
@@ -429,38 +412,46 @@ update_cache (CamelExchangeJournal *exchange_journal, CamelMimeMessage *message,
 	gchar *uid;
 
 	if (exchange_folder->cache == NULL) {
-		camel_exception_set (ex, CAMEL_EXCEPTION_SYSTEM,
-				     _("Cannot append message in offline mode: cache unavailable"));
+		g_set_error (
+			error, CAMEL_ERROR, CAMEL_ERROR_GENERIC,
+			_("Cannot append message in offline mode: "
+			  "cache unavailable"));
 		return FALSE;
 	}
 
 	nextuid = camel_folder_summary_next_uid (folder->summary);
 	uid = g_strdup_printf ("-%u", nextuid);
 
-	if (!(cache = camel_data_cache_add (exchange_folder->cache, "cache", uid, ex))) {
+	cache = camel_data_cache_add (
+		exchange_folder->cache, "cache", uid, error);
+	if (cache == NULL) {
 		folder->summary->nextuid--;
 		g_free (uid);
 		return FALSE;
 	}
 
-	if (camel_data_wrapper_write_to_stream ((CamelDataWrapper *) message, cache) == -1
-	    || camel_stream_flush (cache) == -1) {
-		camel_exception_setv (ex, CAMEL_EXCEPTION_SYSTEM,
-				      _("Cannot append message in offline mode: %s"),
-				      g_strerror (errno));
-		camel_data_cache_remove (exchange_folder->cache, "cache", uid, NULL);
+	if (camel_data_wrapper_write_to_stream (
+		(CamelDataWrapper *) message, cache, error) == -1
+	    || camel_stream_flush (cache, error) == -1) {
+		g_prefix_error (
+			error, _("Cannot append message in offline mode: "));
+		camel_data_cache_remove (
+			exchange_folder->cache, "cache", uid, NULL);
 		folder->summary->nextuid--;
-		camel_object_unref (cache);
+		g_object_unref (cache);
 		g_free (uid);
 		return FALSE;
 	}
 
-	camel_object_unref (cache);
+	g_object_unref (cache);
 
-	info = camel_folder_summary_info_new_from_message (folder->summary, message);
+	info = camel_folder_summary_info_new_from_message (
+		folder->summary, message, NULL);
 	info->uid = camel_pstring_strdup (uid);
 
-	exchange_message_info_dup_to ((CamelMessageInfoBase *) info, (CamelMessageInfoBase *) mi);
+	exchange_message_info_dup_to (
+		(CamelMessageInfoBase *) info,
+		(CamelMessageInfoBase *) mi);
 
 	camel_folder_summary_add (folder->summary, info);
 
@@ -472,16 +463,19 @@ update_cache (CamelExchangeJournal *exchange_journal, CamelMimeMessage *message,
 	return TRUE;
 }
 
-void
-camel_exchange_journal_append (CamelExchangeJournal *exchange_journal, CamelMimeMessage *message,
-			       const CamelMessageInfo *mi, gchar **appended_uid, CamelException *ex)
+gboolean
+camel_exchange_journal_append (CamelExchangeJournal *exchange_journal,
+                               CamelMimeMessage *message,
+                               const CamelMessageInfo *mi,
+                               gchar **appended_uid,
+                               GError **error)
 {
 	CamelOfflineJournal *journal = (CamelOfflineJournal *) exchange_journal;
 	CamelExchangeJournalEntry *entry;
 	gchar *uid;
 
-	if (!update_cache (exchange_journal, message, mi, &uid, ex))
-		return;
+	if (!update_cache (exchange_journal, message, mi, &uid, error))
+		return FALSE;
 
 	entry = g_new (CamelExchangeJournalEntry, 1);
 	entry->type = CAMEL_EXCHANGE_JOURNAL_ENTRY_APPEND;
@@ -492,13 +486,14 @@ camel_exchange_journal_append (CamelExchangeJournal *exchange_journal, CamelMime
 	if (appended_uid)
 		*appended_uid = g_strdup (uid);
 
+	return TRUE;
 }
 
 static gint
 find_real_source_for_message (CamelExchangeFolder *folder,
-			      const gchar **folder_name,
-			      const gchar **uid,
-			      gboolean delete_original)
+                              const gchar **folder_name,
+                              const gchar **uid,
+                              gboolean delete_original)
 {
 	CamelOfflineJournal *journal = folder->journal;
 	CamelDListNode *entry, *next;
@@ -535,11 +530,15 @@ find_real_source_for_message (CamelExchangeFolder *folder,
 	return type;
 }
 
-void
-camel_exchange_journal_transfer (CamelExchangeJournal *exchange_journal, CamelExchangeFolder *source_folder,
-				CamelMimeMessage *message, const CamelMessageInfo *mi,
-				const gchar *original_uid, gchar **transferred_uid, gboolean delete_original,
-				CamelException *ex)
+gboolean
+camel_exchange_journal_transfer (CamelExchangeJournal *exchange_journal,
+                                 CamelExchangeFolder *source_folder,
+                                 CamelMimeMessage *message,
+                                 const CamelMessageInfo *mi,
+                                 const gchar *original_uid,
+                                 gchar **transferred_uid,
+                                 gboolean delete_original,
+                                 GError **error)
 {
 	CamelOfflineJournal *journal = (CamelOfflineJournal *) exchange_journal;
 	CamelExchangeJournalEntry *entry;
@@ -547,18 +546,20 @@ camel_exchange_journal_transfer (CamelExchangeJournal *exchange_journal, CamelEx
 	const gchar *real_source_folder = NULL, *real_uid = NULL;
 	gint type;
 
-	if (!update_cache (exchange_journal, message, mi, &uid, ex))
-		return;
+	if (!update_cache (exchange_journal, message, mi, &uid, error))
+		return FALSE;
 
 	real_uid = original_uid;
-	real_source_folder = ((CamelFolder *)source_folder)->full_name;
+	real_source_folder = camel_folder_get_full_name (
+		CAMEL_FOLDER (source_folder));
 
-	type = find_real_source_for_message (source_folder, &real_source_folder,
-					     &real_uid, delete_original);
+	type = find_real_source_for_message (
+		source_folder, &real_source_folder,
+		&real_uid, delete_original);
 
-	if (delete_original) {
-		camel_exchange_folder_remove_message (source_folder, original_uid);
-	}
+	if (delete_original)
+		camel_exchange_folder_remove_message (
+			source_folder, original_uid);
 
 	entry = g_new (CamelExchangeJournalEntry, 1);
 	entry->type = type;
@@ -574,12 +575,16 @@ camel_exchange_journal_transfer (CamelExchangeJournal *exchange_journal, CamelEx
 
 	if (transferred_uid)
 		*transferred_uid = g_strdup (uid);
+
+	return TRUE;
 }
 
-void
+gboolean
 camel_exchange_journal_delete (CamelExchangeJournal *exchange_journal,
-			       const gchar *uid, guint32 flags, guint32 set,
-			       CamelException *ex)
+                               const gchar *uid,
+                               guint32 flags,
+                               guint32 set,
+                               GError **error)
 {
 	CamelOfflineJournal *journal = (CamelOfflineJournal *) exchange_journal;
 	CamelExchangeFolder *exchange_folder = (CamelExchangeFolder *) journal->folder;
@@ -595,5 +600,7 @@ camel_exchange_journal_delete (CamelExchangeJournal *exchange_journal,
 	entry->set = set;
 
 	camel_dlist_addtail (&journal->queue, (CamelDListNode *) entry);
+
+	return TRUE;
 }
 

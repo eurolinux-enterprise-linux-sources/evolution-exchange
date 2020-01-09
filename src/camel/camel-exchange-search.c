@@ -25,67 +25,44 @@
 
 #include <string.h>
 
-#include <camel/camel-offline-store.h>
-#include <camel/camel-folder-summary.h>
-
 #include "camel-exchange-search.h"
 #include "camel-exchange-folder.h"
+#include "camel-exchange-utils.h"
+
+G_DEFINE_TYPE (CamelExchangeSearch, camel_exchange_search, CAMEL_TYPE_FOLDER_SEARCH)
 
 static ESExpResult *
-exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
-			CamelFolderSearch *s);
-
-static CamelFolderSearchClass *parent_class = NULL;
-
-static void
-camel_exchange_search_class_init (CamelExchangeSearchClass *camel_exchange_search_class)
+exchange_search_body_contains (struct _ESExp *f,
+                               gint argc,
+                               struct _ESExpResult **argv,
+                               CamelFolderSearch *s)
 {
-	/* virtual method overload */
-	CamelFolderSearchClass *camel_folder_search_class =
-		CAMEL_FOLDER_SEARCH_CLASS (camel_exchange_search_class);
-
-	parent_class = (CamelFolderSearchClass *) camel_folder_search_get_type ();
-
-	/* virtual method overload */
-	camel_folder_search_class->body_contains = exchange_body_contains;
-}
-
-CamelType
-camel_exchange_search_get_type (void)
-{
-	static CamelType camel_exchange_search_type = CAMEL_INVALID_TYPE;
-
-	if (camel_exchange_search_type == CAMEL_INVALID_TYPE) {
-		camel_exchange_search_type = camel_type_register (
-			CAMEL_FOLDER_SEARCH_TYPE, "CamelExchangeSearch",
-			sizeof (CamelExchangeSearch),
-			sizeof (CamelExchangeSearchClass),
-			(CamelObjectClassInitFunc) camel_exchange_search_class_init,
-			NULL, NULL, NULL);
-	}
-
-	return camel_exchange_search_type;
-}
-
-static ESExpResult *
-exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
-			CamelFolderSearch *s)
-{
-	CamelExchangeFolder *folder = CAMEL_EXCHANGE_FOLDER (s->folder);
+	CamelFolderSearchClass *folder_search_class;
 	gchar *value = argv[0]->value.string, *real_uid;
 	const gchar *uid;
 	ESExpResult *r;
 	CamelMessageInfo *info;
+	CamelOfflineStore *offline_store;
+	CamelStore *parent_store;
 	GHashTable *uid_hash = NULL;
 	GPtrArray *found_uids;
+	const gchar *full_name;
 	gint i;
 
-	if (((CamelOfflineStore *) s->folder->parent_store)->state == CAMEL_OFFLINE_STORE_NETWORK_UNAVAIL)
-		return parent_class->body_contains (f, argc, argv, s);
+	folder_search_class = CAMEL_FOLDER_SEARCH_CLASS (
+		camel_exchange_search_parent_class);
+
+	full_name = camel_folder_get_full_name (s->folder);
+	parent_store = camel_folder_get_parent_store (s->folder);
+
+	offline_store = CAMEL_OFFLINE_STORE (parent_store);
+
+	if (offline_store->state == CAMEL_OFFLINE_STORE_NETWORK_UNAVAIL)
+		return folder_search_class->body_contains (f, argc, argv, s);
 
 	if (s->current) {
 		r = e_sexp_result_new (f, ESEXP_RES_BOOL);
-		r->value.bool = FALSE;
+		r->value.boolean = FALSE;
 	} else {
 		r = e_sexp_result_new (f, ESEXP_RES_ARRAY_PTR);
 		r->value.ptrarray = g_ptr_array_new ();
@@ -95,7 +72,7 @@ exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
 		/* optimise the match "" case - match everything */
 
 		if (s->current)
-			r->value.bool = TRUE;
+			r->value.boolean = TRUE;
 		else {
 			for (i = 0; i < s->summary->len; i++) {
 				g_ptr_array_add (r->value.ptrarray, s->summary->pdata[i]);
@@ -105,13 +82,9 @@ exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
 	}
 
 	/* FIXME: what if we have multiple string args? */
-	if (!camel_stub_send (folder->stub, NULL,
-			      CAMEL_STUB_CMD_SEARCH_FOLDER,
-			      CAMEL_STUB_ARG_FOLDER, s->folder->full_name,
-			      CAMEL_STUB_ARG_STRING, value,
-			      CAMEL_STUB_ARG_RETURN,
-			      CAMEL_STUB_ARG_STRINGARRAY, &found_uids,
-			      CAMEL_STUB_ARG_END))
+	if (!camel_exchange_utils_search (
+		CAMEL_SERVICE (parent_store),
+		full_name, value, &found_uids, NULL))
 		return r;
 
 	if (!found_uids->len) {
@@ -123,7 +96,7 @@ exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
 		uid = camel_message_info_uid (s->current);
 		for (i = 0; i < found_uids->len; i++) {
 			if (!strcmp (uid, found_uids->pdata[i]))
-				r->value.bool = TRUE;
+				r->value.boolean = TRUE;
 			g_free (found_uids->pdata[i]);
 		}
 		g_ptr_array_free (found_uids, TRUE);
@@ -157,6 +130,20 @@ exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
 	return r;
 }
 
+static void
+camel_exchange_search_class_init (CamelExchangeSearchClass *class)
+{
+	CamelFolderSearchClass *folder_search_class;
+
+	folder_search_class = CAMEL_FOLDER_SEARCH_CLASS (class);
+	folder_search_class->body_contains = exchange_search_body_contains;
+}
+
+static void
+camel_exchange_search_init (CamelExchangeSearch *exchange_search)
+{
+}
+
 /**
  * camel_exchange_search_new:
  *
@@ -167,8 +154,10 @@ exchange_body_contains (struct _ESExp *f, gint argc, struct _ESExpResult **argv,
 CamelFolderSearch *
 camel_exchange_search_new (void)
 {
-	CamelFolderSearch *new = CAMEL_FOLDER_SEARCH (camel_object_new (camel_exchange_search_get_type ()));
+	CamelFolderSearch *folder_search;
 
-	camel_folder_search_construct (new);
-	return new;
+	folder_search = g_object_new (CAMEL_TYPE_EXCHANGE_SEARCH, NULL);
+	camel_folder_search_construct (folder_search);
+
+	return folder_search;
 }
