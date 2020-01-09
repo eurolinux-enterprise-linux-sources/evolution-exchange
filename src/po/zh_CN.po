@@ -1,0 +1,989 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Funda Wang <fundawang@linux.net.cn>, 2004
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: evolution-exchange\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-01-21 13:14+0000\n"
+"PO-Revision-Date: 2008-02-23 21:10+0800\n"
+"Last-Translator: Yang Zhang <zyangmath@gmail.com>\n"
+"Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../addressbook/apps_exchange_addressbook.schemas.in.in.h:1
+msgid "Specifies the time interval to refresh the GAL Cache."
+msgstr "指定刷新 GAL 缓存的时间间隔。"
+
+#: ../addressbook/apps_exchange_addressbook.schemas.in.in.h:2
+msgid ""
+"This key specifies the number of days interval between the GAL cache "
+"refresh. Set this value to zero, if you don't want to update GAL and use the "
+"current cache forever. This will work only if you have enabled offline "
+"caching for GAL."
+msgstr ""
+"此键指定了 GAL 缓存刷新的间隔时间天数。如果您不想刷新 GAL 而想永远使用当前缓"
+"存，请将此值设定为0。这仅在您开启了 GAL 离线缓存时起作用。"
+
+#: ../addressbook/e-book-backend-exchange.c:1919
+#: ../addressbook/e-book-backend-gal.c:1804 ../storage/exchange-storage.c:135
+msgid "Searching..."
+msgstr "正在搜索..."
+
+#: ../addressbook/e-book-backend-gal.c:301
+#: ../addressbook/e-book-backend-gal.c:322
+msgid "Reconnecting to LDAP server..."
+msgstr "正在重新连接到 LDAP 服务器..."
+
+#: ../addressbook/e-book-backend-gal.c:1588
+msgid "Receiving LDAP search results..."
+msgstr "正在接收 LDAP 搜索结果..."
+
+#: ../addressbook/e-book-backend-gal.c:1833
+msgid "Error performing search"
+msgstr "执行搜索出错"
+
+#: ../calendar/e-cal-backend-exchange-calendar.c:2028
+#, c-format
+msgid ""
+"Unable to schedule resource '%s' for recurring meetings.\n"
+"You must book each meeting separately."
+msgstr ""
+"无法将资源“%s”调度为再现会议。\n"
+"您必须单独预订每次会议。"
+
+#: ../calendar/e-cal-backend-exchange-calendar.c:2046
+#, c-format
+msgid "The resource '%s' is busy during the selected time period."
+msgstr "在选中的时间段中，资源“%s”都处于忙状态。"
+
+#: ../calendar/e-cal-backend-exchange.c:391
+#: ../calendar/e-cal-backend-exchange.c:401
+msgid "Authentication failed"
+msgstr "验证失败"
+
+#: ../calendar/e-cal-backend-exchange.c:442
+msgid "Could not find the calendar"
+msgstr "无法找到日历"
+
+#: ../camel/camel-exchange-folder.c:52
+msgid "Always check for new mail in this folder"
+msgstr "总是检查此文件夹中的新邮件"
+
+#: ../camel/camel-exchange-folder.c:238
+msgid "You cannot expunge in offline mode."
+msgstr "无法在脱机模式下销毁。"
+
+#: ../camel/camel-exchange-folder.c:269
+msgid "No Subject"
+msgstr "无主题"
+
+#: ../camel/camel-exchange-folder.c:424
+msgid "This message is not available in offline mode."
+msgstr "这封信在脱机模式下不可用。"
+
+#: ../camel/camel-exchange-folder.c:681
+msgid "Moving messages"
+msgstr "移动信件"
+
+#: ../camel/camel-exchange-folder.c:682
+msgid "Copying messages"
+msgstr "复制信件"
+
+#: ../camel/camel-exchange-folder.c:1055
+#, c-format
+msgid "Could not create directory %s: %s"
+msgstr "无法创建目录 %s：%s"
+
+#: ../camel/camel-exchange-folder.c:1065
+#, c-format
+msgid "Could not load summary for %s"
+msgstr "无法装入 %s 的概览"
+
+#: ../camel/camel-exchange-folder.c:1073
+#, c-format
+msgid "Could not create cache for %s"
+msgstr "无法为 %s 创建缓存"
+
+#: ../camel/camel-exchange-folder.c:1083
+#, c-format
+msgid "Could not create journal for %s"
+msgstr "无法为 %s 创建日记"
+
+#: ../camel/camel-exchange-folder.c:1131
+msgid "Scanning for changed messages"
+msgstr "扫描已更改的信件"
+
+#: ../camel/camel-exchange-folder.c:1164
+msgid "Fetching summary information for new messages"
+msgstr "获取新信件的概览信息"
+
+#: ../camel/camel-exchange-journal.c:341
+msgid "No folder name found\n"
+msgstr "没有找到文件夹名称\n"
+
+#: ../camel/camel-exchange-journal.c:374 ../mail/mail-stub-exchange.c:2984
+#: ../mail/mail-stub-exchange.c:3028 ../mail/mail-stub-exchange.c:3063
+#: ../mail/mail-stub-exchange.c:3090 ../mail/mail-stub-exchange.c:3143
+#: ../mail/mail-stub-exchange.c:3165
+msgid "Folder doesn't exist"
+msgstr "文件夹不存在"
+
+#: ../camel/camel-exchange-journal.c:438
+msgid "Cannot append message in offline mode: cache unavailable"
+msgstr "无法在脱机模式下追加信件：缓存不可用"
+
+#: ../camel/camel-exchange-journal.c:454
+#, c-format
+msgid "Cannot append message in offline mode: %s"
+msgstr "无法在脱机模式下追加信件：%s"
+
+#: ../camel/camel-exchange-provider.c:41
+msgid "Checking for New Mail"
+msgstr "检查新邮件"
+
+#: ../camel/camel-exchange-provider.c:43
+msgid "C_heck for new messages in all folders"
+msgstr "在所有文件夹中检查新信件(_H)"
+
+#. i18n: the '_' should appear before the same letter it
+#. does in the evolution:mail-config.glade "User_name"
+#. translation (or not at all)
+#: ../camel/camel-exchange-provider.c:51
+msgid "Windows User_name:"
+msgstr "Windows 用户名(_N)："
+
+#. i18n: GAL is an Outlookism, AD is a Windowsism
+#: ../camel/camel-exchange-provider.c:56
+msgid "Global Address List / Active Directory"
+msgstr "全局地址列表/活动目录"
+
+#. i18n: "Global Catalog" is a Windowsism, but it's a
+#. technical term and may not have translations?
+#: ../camel/camel-exchange-provider.c:60
+msgid "_Global Catalog server name:"
+msgstr "全局目录服务器名(_G)："
+
+#: ../camel/camel-exchange-provider.c:62
+#, c-format
+msgid "_Limit number of GAL responses: %s"
+msgstr "限制 GAL 响应数(_L)：%s"
+
+#: ../camel/camel-exchange-provider.c:65
+msgid "Options"
+msgstr "选项"
+
+#: ../camel/camel-exchange-provider.c:67
+#, c-format
+msgid "_Password Expiry Warning period: %s"
+msgstr "密码到期警告期限(_P)：%s"
+
+#: ../camel/camel-exchange-provider.c:69
+msgid "Automatically synchroni_ze account locally"
+msgstr "自动在本地同步账户(_Z)"
+
+#. i18n: copy from evolution:camel-imap-provider.c
+#: ../camel/camel-exchange-provider.c:72
+msgid "_Apply filters to new messages in Inbox on this server"
+msgstr "将过滤器应用到此服务器收件箱中的新信件(_A)"
+
+#: ../camel/camel-exchange-provider.c:74
+msgid "Check new messages for _Junk contents"
+msgstr "检查新信件的垃圾邮件内容(_J)"
+
+#: ../camel/camel-exchange-provider.c:76
+msgid "Only check for Junk messag_es in the Inbox folder"
+msgstr "只检查收件箱文件夹中的垃圾信件(_E)"
+
+#: ../camel/camel-exchange-provider.c:86
+msgid "Microsoft Exchange"
+msgstr "Microsoft Exchange"
+
+#: ../camel/camel-exchange-provider.c:88
+msgid "For handling mail (and other data) on Microsoft Exchange servers"
+msgstr "处理 Microsoft Exchange 服务器上的邮件(和其它数据)"
+
+#. i18n: "Secure Password Authentication" is an Outlookism
+#: ../camel/camel-exchange-provider.c:104
+msgid "Secure Password"
+msgstr "安全密码"
+
+#. i18n: "NTLM" probably doesn't translate
+#: ../camel/camel-exchange-provider.c:107
+msgid ""
+"This option will connect to the Exchange server using secure password (NTLM) "
+"authentication."
+msgstr "此选项将使用安全密码(NTLM)身份验证方式连接到 Exchange 服务器。"
+
+#: ../camel/camel-exchange-provider.c:115
+msgid "Plaintext Password"
+msgstr "纯文本密码"
+
+#: ../camel/camel-exchange-provider.c:117
+msgid ""
+"This option will connect to the Exchange server using standard plaintext "
+"password authentication."
+msgstr "此选项将使用标准的纯文本密码身份验证方式连接到 Exchange 服务器。"
+
+#: ../camel/camel-exchange-store.c:312
+#, c-format
+msgid "Exchange server %s"
+msgstr "Exchange 服务器 %s"
+
+#: ../camel/camel-exchange-store.c:315
+#, c-format
+msgid "Exchange account for %s on %s"
+msgstr "%s 在 %s 上的 Exchange 账户"
+
+#: ../camel/camel-exchange-store.c:407
+msgid "Evolution Exchange backend process"
+msgstr "Evolution Exchange 后端进程"
+
+#: ../camel/camel-exchange-store.c:448
+msgid ""
+"Could not authenticate to server. (Password incorrect?)\n"
+"\n"
+msgstr ""
+"无法验证到服务器。(密码不对？)\n"
+"\n"
+
+#: ../camel/camel-exchange-store.c:490
+#, c-format
+msgid "No such folder %s"
+msgstr "没有文件夹 %s"
+
+#: ../camel/camel-exchange-store.c:567
+msgid "Cannot subscribe folder in offline mode."
+msgstr "无法在脱机模式下订阅文件夹。"
+
+#: ../camel/camel-exchange-store.c:584
+msgid "Cannot unsubscribe folder in offline mode."
+msgstr "无法在脱机模式下退订文件夹。"
+
+#: ../camel/camel-exchange-store.c:716
+msgid "Cannot get folder info in offline mode."
+msgstr "无法在脱机模式下获得文件夹信息。"
+
+#: ../camel/camel-exchange-store.c:789
+msgid "Cannot create folder in offline mode."
+msgstr "无法在脱机模式下创建文件夹。"
+
+#: ../camel/camel-exchange-store.c:816
+msgid "Cannot delete folder in offline mode."
+msgstr "无法在脱机模式下删除文件夹。"
+
+#: ../camel/camel-exchange-store.c:832
+msgid "Cannot rename folder in offline mode."
+msgstr "无法在脱机模式下重命名文件夹。"
+
+#: ../camel/camel-exchange-transport.c:111
+msgid "Exchange transport can only be used with Exchange mail source"
+msgstr "Exchange 传送只能用于 Exchange 邮件源"
+
+#: ../camel/camel-exchange-transport.c:122
+msgid "Cannot send message: one or more invalid recipients"
+msgstr "无法发送信件：一个或更多收件人无效"
+
+#: ../camel/camel-exchange-transport.c:132
+msgid "Could not find 'From' address in message"
+msgstr "无法在信件中找到“From”地址"
+
+#: ../camel/camel-stub.c:153
+#, c-format
+msgid "Could not create socket: %s"
+msgstr "无法创建套接字：%s"
+
+#: ../camel/camel-stub.c:171
+#, c-format
+msgid "Could not connect to %s: Please restart Evolution"
+msgstr "无法连接到 %s：请重新启动 Evolution"
+
+#: ../camel/camel-stub.c:176
+#, c-format
+msgid "Could not connect to %s: %s"
+msgstr "无法连接到 %s：%s"
+
+#: ../camel/camel-stub.c:206
+#, c-format
+msgid "Path too long: %s"
+msgstr "路径太长：%s"
+
+#: ../camel/camel-stub.c:232
+#, c-format
+msgid "Could not start status thread: %s"
+msgstr "无法启动状态线程：%s"
+
+#: ../camel/camel-stub.c:486
+#, c-format
+msgid "Lost connection to %s"
+msgstr "丢失到 %s 的连接"
+
+#: ../camel/camel-stub.c:490
+#, c-format
+msgid "Error communicating with %s: %s"
+msgstr "与 %s 通讯出错：%s"
+
+#: ../mail/mail-stub-exchange.c:264 ../mail/mail-stub-exchange.c:946
+msgid "No such folder"
+msgstr "没有这样的文件夹"
+
+#. FIXME: should be this, but string freeze freezes me to do so.
+#. mail_stub_return_error (stub, _("Permission denied. Could not delete certain mails."));
+#: ../mail/mail-stub-exchange.c:287 ../mail/mail-stub-exchange.c:1595
+#: ../mail/mail-stub-exchange.c:2961 ../mail/mail-stub-exchange.c:3001
+#: ../mail/mail-stub-exchange.c:3067 ../mail/mail-stub-exchange.c:3117
+#: ../mail/mail-stub-exchange.c:3180
+msgid "Permission denied"
+msgstr "权限被禁止"
+
+#: ../mail/mail-stub-exchange.c:768 ../mail/mail-stub-exchange.c:860
+msgid "Could not open folder"
+msgstr "无法打开文件夹"
+
+#: ../mail/mail-stub-exchange.c:854 ../mail/mail-stub-exchange.c:876
+msgid "Could not open folder: Permission denied"
+msgstr "无法打开文件夹：权限被禁止"
+
+#: ../mail/mail-stub-exchange.c:955
+msgid "Could not create folder."
+msgstr "无法创建文件夹。"
+
+#: ../mail/mail-stub-exchange.c:1043
+msgid "Could not open Deleted Items folder"
+msgstr "无法打开已删项目文件夹"
+
+#: ../mail/mail-stub-exchange.c:1374 ../mail/mail-stub-exchange.c:1415
+msgid "Could not get new messages"
+msgstr "无法获得新信件"
+
+#: ../mail/mail-stub-exchange.c:1591
+msgid "Could not empty Deleted Items folder"
+msgstr "无法清空已删项目文件夹"
+
+#: ../mail/mail-stub-exchange.c:1668
+msgid "Could not append message; mailbox is over quota"
+msgstr "无法追加信件；邮箱超出配额"
+
+#: ../mail/mail-stub-exchange.c:1669
+msgid "Could not append message"
+msgstr "无法追加信件"
+
+#: ../mail/mail-stub-exchange.c:2416
+msgid "No such message"
+msgstr "没有这样的信件"
+
+#: ../mail/mail-stub-exchange.c:2495
+msgid "Message has been deleted"
+msgstr "信件已被删除"
+
+#: ../mail/mail-stub-exchange.c:2497
+msgid "Error retrieving message"
+msgstr "获取信件出错"
+
+#: ../mail/mail-stub-exchange.c:2540
+msgid "Mailbox does not support full-text searching"
+msgstr "邮箱不支持全文搜索"
+
+#: ../mail/mail-stub-exchange.c:2638
+msgid "Unable to move/copy messages"
+msgstr "无法移动/复制信件"
+
+#: ../mail/mail-stub-exchange.c:2876
+msgid "No mail submission URI for this mailbox"
+msgstr "没有此邮箱的提交 URI"
+
+#: ../mail/mail-stub-exchange.c:2912
+msgid "Server won't accept mail via Exchange transport"
+msgstr "服务器无法接受通过 Exchange 传送的邮件"
+
+#: ../mail/mail-stub-exchange.c:2914
+#, c-format
+msgid ""
+"Your account does not have permission to use <%s>\n"
+"as a From address."
+msgstr ""
+"您的账户没有权限使用 <%s>\n"
+"作为 From 地址。"
+
+#: ../mail/mail-stub-exchange.c:2926
+msgid ""
+"Could not send message.\n"
+"This might mean that your account is over quota."
+msgstr ""
+"无法发送信件。\n"
+"这可能意味着您的账户已超出配额。"
+
+#: ../mail/mail-stub-exchange.c:2930
+msgid "Could not send message"
+msgstr "无法发送信件"
+
+#: ../mail/mail-stub-exchange.c:2953 ../mail/mail-stub-exchange.c:3006
+#: ../mail/mail-stub-exchange.c:3071 ../mail/mail-stub-exchange.c:3122
+#: ../mail/mail-stub-exchange.c:3186
+msgid "Generic error"
+msgstr "常规错误"
+
+#: ../mail/mail-stub-exchange.c:2957
+msgid "Folder already exists"
+msgstr "文件夹已存在"
+
+#: ../storage/GNOME_Evolution_Exchange_Storage.server.in.in.h:1
+msgid "Evolution Addressbook Exchange backend"
+msgstr "Evolution 地址簿 Exchange 后端"
+
+#: ../storage/GNOME_Evolution_Exchange_Storage.server.in.in.h:2
+msgid "Evolution Calendar Exchange backend"
+msgstr "Evolution 日历 Exchange 后端"
+
+#: ../storage/GNOME_Evolution_Exchange_Storage.server.in.in.h:3
+#: ../storage/main.c:183
+msgid "Evolution Connector for Microsoft Exchange"
+msgstr "Evolution Connector for Microsoft Exchange"
+
+#: ../storage/exchange-autoconfig-wizard.c:211
+#, c-format
+msgid ""
+"Could not connect to the Exchange server.\n"
+"Make sure the URL is correct (try \"%s\" instead of \"%s\"?) and try again."
+msgstr ""
+"无法连接到 Exchange 服务器。\n"
+"请确定 URL 正确(试着用“%s”来取代“%s”)然后再试一次。"
+
+#: ../storage/exchange-autoconfig-wizard.c:219
+msgid ""
+"Could not locate Exchange server.\n"
+"Make sure the server name is spelled correctly and try again."
+msgstr ""
+"无法定位 Exchange 服务器。\n"
+"请确定服务器名拼写正确，然后再试一次。"
+
+#: ../storage/exchange-autoconfig-wizard.c:228
+msgid ""
+"Could not authenticate to the Exchange server.\n"
+"Make sure the username and password are correct and try again."
+msgstr ""
+"无法验证到 Exchange 服务器。\n"
+"请确定用户名和密码正确，然后再试一次。"
+
+#: ../storage/exchange-autoconfig-wizard.c:235
+#, c-format
+msgid ""
+"Could not authenticate to the Exchange server.\n"
+"Make sure the username and password are correct and try again.\n"
+"\n"
+"You may need to specify the Windows domain name as part of your username "
+"(eg, \"MY-DOMAIN\\%s\")."
+msgstr ""
+"无法验证到 Exchange 服务器。\n"
+"请确定用户名和密码正确，然后再试一次。\n"
+"\n"
+"您可能需要将 Windows 域名指定为您用户名的一部分(如“MY-DOMAIN\\%s”)。"
+
+#: ../storage/exchange-autoconfig-wizard.c:247
+msgid ""
+"Could not find OWA data at the indicated URL.\n"
+"Make sure the URL is correct and try again."
+msgstr ""
+"在标明的 URL 找不到 OWA 数据。\n"
+"请确定 URL 正确，然后再试一次。"
+
+#: ../storage/exchange-autoconfig-wizard.c:254
+msgid ""
+"Evolution Connector for Microsoft Exchange requires access to certain "
+"functionality on the Exchange server that appears to be disabled or "
+"blocked.  (This is usually unintentional.)  Your Exchange administrator will "
+"need to enable this functionality in order for you to be able to use the "
+"Evolution Connector.\n"
+"\n"
+"For information to provide to your Exchange administrator, please follow the "
+"link below:"
+msgstr ""
+"Evolution Connector 需要访问 Exchange 服务器上特定的功能，但该功能似乎被禁止或屏"
+"蔽。(这一问题通常是无意间造成的。)要让您能够使用 Ximian Connector，您的 "
+"Exchange 管理员必须启用此功能。\n"
+"\n"
+"关于需要向您的 Exchange 管理员提供的信息，请查看下面的链接："
+
+#: ../storage/exchange-autoconfig-wizard.c:276
+msgid ""
+"The Exchange server URL you provided is for an Exchange 5.5 server. "
+"Evolution Connector for Microsoft Exchange supports Microsoft Exchange 2000 "
+"and 2003 only."
+msgstr ""
+"您提供的 Exchange 服务器 URL 是 Exchange 5.5 服务器。Evolution Connector 只支持 "
+"Microsoft Exchange 2000 和 2003。"
+
+#: ../storage/exchange-autoconfig-wizard.c:290
+msgid ""
+"Could not configure Exchange account because an unknown error occurred. "
+"Check the URL, username, and password, and try again."
+msgstr ""
+"无法配置 Exchange 账户，原因是发生了未知错误。请检查 URL、用户名和密码，然后"
+"再试一次。"
+
+#: ../storage/exchange-autoconfig-wizard.c:334
+#, c-format
+msgid ""
+"Could not authenticate to the Global Catalog server. You may need to go back "
+"and specify the Windows domain name as part of your username (eg, \"MY-DOMAIN"
+"\\%s\")."
+msgstr ""
+"无法验证到全局目录服务器。您可能需要返回，然后将 Windows 域名指定为您用户名的"
+"一部分(如“MY-DOMAIN\\%s”)。"
+
+#: ../storage/exchange-autoconfig-wizard.c:341
+msgid ""
+"Could not connect to specified server.\n"
+"Please check the server name and try again."
+msgstr ""
+"无法连接到指定服务器。\n"
+"请检查服务器名称，然后再试一次。"
+
+#: ../storage/exchange-autoconfig-wizard.c:378
+#: ../storage/exchange-autoconfig-wizard.c:382
+msgid "Unknown"
+msgstr "未知"
+
+#: ../storage/exchange-autoconfig-wizard.c:447
+msgid ""
+"Configuration system error.\n"
+"Unable to create new account."
+msgstr ""
+"配置系统错误。\n"
+"无法创建新账户。"
+
+#: ../storage/exchange-autoconfig-wizard.c:461
+msgid "You may only configure a single Exchange account"
+msgstr "您只能配置一个 Exchange 账户"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:1
+#: ../storage/exchange-change-password.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:2
+msgid "Configuration Failed"
+msgstr "配置失败"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:3
+msgid "Done"
+msgstr "完成"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:4
+msgid "Email Address:"
+msgstr "电子邮件地址："
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:5
+msgid "Evolution Connector for Microsoft Exchange Configuration"
+msgstr "Evolution Connector for Microsoft Exchange 配置"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:6
+msgid ""
+"Evolution Connector for Microsoft Exchange can use account information from "
+"your existing Outlook Web Access (OWA) account.\n"
+"\n"
+"Enter your OWA site address (URL), username, and password, then click "
+"\"Forward\".\n"
+msgstr ""
+"Evolution Connector 可以使用您已有 Outlook Web Access(OWA) 账户的信息。\n"
+"\n"
+"请输入您的 OWA 网站地址(URL)、用户名和密码，然后单击“下一步”。\n"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:10
+msgid ""
+"Evolution Connector for Microsoft Exchange could not find the Global Catalog "
+"replica for your site. Please enter the name of your Global Catalog server. "
+"You may need to ask your system administrator for the correct value.\n"
+msgstr ""
+"Evolution Connector 找不到您网站对应的全局目录。请输入您全局目录服务器的名称。您"
+"可能需要询问您的系统管理员有关正确值的设置。\n"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:12
+msgid ""
+"Evolution Connector for Microsoft Exchange has encountered a problem "
+"configuring your Exchange account.\n"
+msgstr "Evolution Connector 在配置您的 Exchange 账户时遇到了问题。\n"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:14
+msgid "Exchange Configuration"
+msgstr "Exchange 配置"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:15
+msgid "Full Name:"
+msgstr "全名："
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:16
+msgid "GC Server:"
+msgstr "GC 服务器："
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:17
+msgid "Make this my default account"
+msgstr "将此账户作为我的默认账户"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:18
+msgid "OWA URL:"
+msgstr "OWA URL："
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:19
+msgid "Password:"
+msgstr "密码："
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:20
+msgid "Remember this password"
+msgstr "记住此密码"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:21
+msgid "Username:"
+msgstr "用户名："
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:22
+msgid "Welcome"
+msgstr "欢迎"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:23
+msgid ""
+"Welcome to Evolution Connector for Microsoft Exchange.\n"
+"The next few screens will help you configure Evolution\n"
+"to connect to your Exchange account.\n"
+"\n"
+"Please click the \"Forward\" button to continue."
+msgstr ""
+"欢迎使用 Evolution Connector for Microsoft Exchange。\n"
+"下面的几个屏幕将帮助您配置 Evolution 连接到您的\n"
+"Exchange 账户。\n"
+"\n"
+"请单击“下一步”按钮继续。"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:28
+msgid ""
+"Your Connector account is now ready to use. Click the \"Apply\" button to "
+"save your\n"
+"settings."
+msgstr "您de Connector 账户已经可以使用了。请单击“应用”按钮保存您的设置。"
+
+#: ../storage/exchange-autoconfig-wizard.glade.h:30
+msgid ""
+"Your account information is as follows. Please correct any errors, then "
+"click \"Forward\".\n"
+msgstr "您的账户信息如下。请检查是否有错，然后单击“下一步”。\n"
+
+#. User entered a wrong existing
+#. * password. Prompt him again.
+#.
+#: ../storage/exchange-change-password.c:114
+msgid ""
+"The current password does not match the existing password for your account. "
+"Please enter the correct password"
+msgstr "当前密码与您账户的已有密码不符。请输入正确的密码。"
+
+#: ../storage/exchange-change-password.c:121
+msgid "The two passwords do not match. Please re-enter the passwords."
+msgstr "两个密码不匹配。请重新输入密码。"
+
+#: ../storage/exchange-change-password.glade.h:2
+msgid "Change Password"
+msgstr "更改密码"
+
+#: ../storage/exchange-change-password.glade.h:3
+msgid "Confirm Password:"
+msgstr "确认密码："
+
+#: ../storage/exchange-change-password.glade.h:4
+msgid "Current Password:"
+msgstr "当前密码："
+
+#: ../storage/exchange-change-password.glade.h:5
+msgid "New Password:"
+msgstr "新密码："
+
+#: ../storage/exchange-change-password.glade.h:6
+msgid "Your current password has expired. Please change your password now."
+msgstr "您的当前密码已过期。请立即更改您的密码。"
+
+#: ../storage/exchange-delegates.glade.h:1
+msgid "Author (read, create)"
+msgstr "作者(读取、创建)"
+
+#: ../storage/exchange-delegates.glade.h:2
+msgid "C_alendar:"
+msgstr "日历(_A)："
+
+#: ../storage/exchange-delegates.glade.h:3
+msgid "Co_ntacts:"
+msgstr "联系人(_N)："
+
+#: ../storage/exchange-delegates.glade.h:4
+msgid "Delegate Permissions"
+msgstr "代表权限"
+
+#: ../storage/exchange-delegates.glade.h:5
+msgid "Delegates"
+msgstr "代表"
+
+#: ../storage/exchange-delegates.glade.h:6
+msgid "Editor (read, create, edit)"
+msgstr "编辑者(读取、创建、编辑)"
+
+#: ../storage/exchange-delegates.glade.h:7
+msgid "None"
+msgstr "无"
+
+#: ../storage/exchange-delegates.glade.h:8
+msgid "Permissions for"
+msgstr "权限设置"
+
+#: ../storage/exchange-delegates.glade.h:9
+msgid "Reviewer (read-only)"
+msgstr "复核者(只读)"
+
+#: ../storage/exchange-delegates.glade.h:10
+msgid ""
+"These users will be able to send mail on your behalf\n"
+"and access your folders with the permissions you give them."
+msgstr "这些用户将能够以您的身份发送邮件并以您纸牌的权限访问您的文件夹。"
+
+#: ../storage/exchange-delegates.glade.h:12
+msgid "_Delegate can see private items"
+msgstr "代表可以看到私有项目(_D)"
+
+#: ../storage/exchange-delegates.glade.h:13
+msgid "_Edit"
+msgstr "编辑(_E)"
+
+#: ../storage/exchange-delegates.glade.h:14
+msgid "_Inbox:"
+msgstr "收件箱(_I)："
+
+#: ../storage/exchange-delegates.glade.h:15
+msgid "_Tasks:"
+msgstr "任务(_T)："
+
+#: ../storage/exchange-folder-tree.glade.h:1
+msgid "Exchange Folder Tree"
+msgstr "Exchange 文件夹树"
+
+#: ../storage/exchange-migrate.c:58
+msgid "Migrating Exchange Folders..."
+msgstr "正在升迁 Exchange 文件夹..."
+
+#: ../storage/exchange-migrate.c:66
+#, c-format
+msgid ""
+"The location and hierarchy of the Evolution exchange account folders are "
+"changed since Evolution %d.%d.%d.\n"
+"\n"
+"Please be patient while Evolution migrates your folders..."
+msgstr ""
+"Evolution Exchange 账户文件夹的位置和层次自 Evolution %d.%d.%d 之后发生了变"
+"化。\n"
+"\n"
+"请稍候，Evolution 正在升迁您的文件夹..."
+
+#: ../storage/exchange-migrate.c:99
+#, c-format
+msgid ""
+"Warning: Evolution could not migrate all the Exchange account data from the "
+"version %d.%d.%d. \n"
+"The data hasn't been deleted, but will not be seen by this version of "
+"Evolution"
+msgstr ""
+"警告：Evolution 无法从版本 %d.%d.%d 中升迁全部 Exchange 账户数据。\n"
+"数据未被删除，但是此版本的 Evolution 看不到"
+
+#: ../storage/exchange-migrate.c:130
+#, c-format
+msgid "Migrating `%s':"
+msgstr "升迁“%s”："
+
+#: ../storage/exchange-oof.glade.h:1
+msgid ""
+"<b>Currently, your status is \"Out of the Office\". </b>\n"
+"\n"
+"Would you like to change your status to \"In the Office\"? "
+msgstr ""
+"<b>目前您的状态是“离开办公室”。</b>\n"
+"\n"
+"您想要将您的状态更改为“在办公室”吗？"
+
+#: ../storage/exchange-oof.glade.h:4
+msgid "<b>Out of Office Message:</b>"
+msgstr "<b>离开办公室消息：</b>"
+
+#: ../storage/exchange-oof.glade.h:5
+msgid "<b>Status:</b>"
+msgstr "<b>状态：</b>"
+
+#: ../storage/exchange-oof.glade.h:6
+msgid ""
+"<small>The message specified below will be automatically sent to each person "
+"who sends\n"
+"mail to you while you are out of the office.</small>"
+msgstr ""
+"<small>下面指定的信息将会在您离开办公室时自动发送给每个给您发送邮件的人。</"
+"small>"
+
+#: ../storage/exchange-oof.glade.h:8
+msgid "I am currently in the office"
+msgstr "我目前在办公室"
+
+#: ../storage/exchange-oof.glade.h:9
+msgid "I am currently out of the office"
+msgstr "我目前不在办公室"
+
+#: ../storage/exchange-oof.glade.h:10
+msgid "No, Don't Change Status"
+msgstr "不，不更改状态"
+
+#: ../storage/exchange-oof.glade.h:11
+msgid "Out of Office Assistant"
+msgstr "离开办公室助手"
+
+#: ../storage/exchange-oof.glade.h:12
+msgid "Yes, Change Status"
+msgstr "是的，更改状态"
+
+#: ../storage/exchange-passwd-expiry.glade.h:1
+msgid "Password Expiry Warning..."
+msgstr "密码到期警告..."
+
+#: ../storage/exchange-passwd-expiry.glade.h:2
+msgid "Your password will expire in 7 days..."
+msgstr "您的密码即将于七天后过期..."
+
+#: ../storage/exchange-passwd-expiry.glade.h:3
+msgid "_Change Password"
+msgstr "更改密码(_C)"
+
+#: ../storage/exchange-passwd-expiry.glade.h:4
+msgid "ok_button"
+msgstr "确定(_B)"
+
+#: ../storage/exchange-permissions-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../storage/exchange-permissions-dialog.glade.h:2
+msgid "<b>Permissions</b>"
+msgstr "<b>权限</b>"
+
+#: ../storage/exchange-permissions-dialog.glade.h:3
+msgid "Cannot Delete"
+msgstr "无法删除"
+
+#: ../storage/exchange-permissions-dialog.glade.h:4
+msgid "Cannot Edit"
+msgstr "无法编辑"
+
+#: ../storage/exchange-permissions-dialog.glade.h:5
+msgid "Create items"
+msgstr "创建项目"
+
+#: ../storage/exchange-permissions-dialog.glade.h:6
+msgid "Create subfolders"
+msgstr "创建子文件夹"
+
+#: ../storage/exchange-permissions-dialog.glade.h:7
+msgid "Delete Any Items"
+msgstr "删除任何项目"
+
+#: ../storage/exchange-permissions-dialog.glade.h:8
+msgid "Delete Own Items"
+msgstr "删除所有项目"
+
+#: ../storage/exchange-permissions-dialog.glade.h:9
+msgid "Edit Any Items"
+msgstr "编辑任何项目"
+
+#: ../storage/exchange-permissions-dialog.glade.h:10
+msgid "Edit Own Items"
+msgstr "编辑所有项目"
+
+#: ../storage/exchange-permissions-dialog.glade.h:11
+msgid "Folder contact"
+msgstr "文件夹联系人"
+
+#: ../storage/exchange-permissions-dialog.glade.h:12
+msgid "Folder owner"
+msgstr "文件夹所有者"
+
+#: ../storage/exchange-permissions-dialog.glade.h:13
+msgid "Folder visible"
+msgstr "文件夹可见"
+
+#: ../storage/exchange-permissions-dialog.glade.h:14
+msgid "Read items"
+msgstr "读取项目"
+
+#: ../storage/exchange-permissions-dialog.glade.h:15
+msgid "Role: "
+msgstr "角色："
+
+#: ../storage/exchange-storage.c:338
+msgid "Connecting..."
+msgstr "正在连接..."
+
+#: ../storage/ximian-connector-setup.c:44
+msgid "Evolution Connector for Microsoft Exchange Setup Tool"
+msgstr "Evolution Connector for Microsoft Exchange 设置工具"
+
+#: ../storage/ximian-connector.xml.h:1
+msgid "Change your Exchange server password"
+msgstr "更改您的 Exchange 服务器密码"
+
+#: ../storage/ximian-connector.xml.h:2
+msgid "Folder _Size"
+msgstr "文件夹大小(_S)"
+
+#: ../storage/ximian-connector.xml.h:3
+msgid "Get the size of personal folders"
+msgstr "获得个人文件夹的大小"
+
+#: ../storage/ximian-connector.xml.h:4
+msgid "Subscribe to _Other User's Folder..."
+msgstr "订阅其他用户的文件夹(_O)..."
+
+#: ../storage/ximian-connector.xml.h:5
+msgid "Subscribe to a folder belonging to some other user on the server"
+msgstr "订阅服务器上属于其他用户的文件夹"
+
+#: ../storage/ximian-connector.xml.h:6
+msgid ""
+"Unsubscribe from a folder added with \"Subscribe to Other User's Folder\""
+msgstr "退订通过“订阅其他用户的文件夹”添加的文件夹"
+
+#: ../storage/ximian-connector.xml.h:7
+msgid "View or change your Exchange calendar delegation settings"
+msgstr "查看或更改您的 Exchange 日历代表设置"
+
+#: ../storage/ximian-connector.xml.h:8
+msgid "View or change your Out-of-Office status and autoreply message"
+msgstr "查看或更改您的离开服务器状态及自动恢复信息"
+
+#: ../storage/ximian-connector.xml.h:9
+msgid "_Change Exchange Password..."
+msgstr "更改 Exchange 密码(_C)..."
+
+#: ../storage/ximian-connector.xml.h:10
+msgid "_Delegation Assistant"
+msgstr "代表助手(_D)"
+
+#: ../storage/ximian-connector.xml.h:11
+msgid "_Out of Office Assistant"
+msgstr "离开办公室助手(_O)"
+
+#: ../storage/ximian-connector.xml.h:12
+msgid "_Unsubscribe from Other User's Folder"
+msgstr "退订其他用户的文件夹(_U)"
+
+#~ msgid "%sEnter password for %s"
+#~ msgstr "%s输入 %s 的密码"
+
+#~ msgid "Ximian Connector for Exchange"
+#~ msgstr "Ximian Connector for Exchange"
+
+#~ msgid "Ximian Connector Configuration"
+#~ msgstr "Ximian Connector 配置"

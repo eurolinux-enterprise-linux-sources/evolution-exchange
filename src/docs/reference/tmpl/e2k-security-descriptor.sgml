@@ -1,0 +1,43 @@
+<!-- ##### SECTION Title ##### -->
+E2kSecurityDescriptor
+
+<!-- ##### SECTION Short_Description ##### -->
+Windows Security Descriptor
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+Every object in the Exchange database has a security descriptor that
+controls access to it. (This includes both folders and items, but
+security descriptors for items are virtually always inherited from
+their parent folders in well-defined ways, so we don&rsquo;t bother
+thinking about them.)
+</para>
+
+<para>
+The Exchange 2000 Web Storage System has a nifty sytem for translating
+Windows security descriptors into XML and back, which unfortunately we
+cannot use, because it's buggy. So we have to generate binary format
+security descriptors, as described below.
+</para>
+
+<para>
+When considering folder permissions, it is important to remember that
+while the Exchange database <emphasis>looks</emphasis> like a file
+system when accessed via WebDAV, it does not behave like a filesystem
+internally. In particular, access to an object is controlled only by
+its <emphasis>own</emphasis> security descriptor; you do not need to
+have &ldquo;folder visible&rdquo; permission on an object&rsquo;s
+parent in order to be able to access the object.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kSid
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

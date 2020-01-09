@@ -1,0 +1,27 @@
+<!-- ##### SECTION Title ##### -->
+E2kRule
+
+<!-- ##### SECTION Short_Description ##### -->
+Exchange server-side rules
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+e2k-rule contains functions for handling Exchange server-side rules.
+</para>
+
+<note><para>
+This code is not heavily tested. It is possible that some of the
+information in this file about how server-side rules work is wrong.
+</para></note>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kRestriction, #E2kAction
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

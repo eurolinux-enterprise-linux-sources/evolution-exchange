@@ -1,0 +1,23 @@
+<!-- ##### SECTION Title ##### -->
+E2kUserDialog
+
+<!-- ##### SECTION Short_Description ##### -->
+User-selection dialog
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+#E2kUserDialog is a dialog for selecting a single user via the
+addressbook's "selectnames" interface.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

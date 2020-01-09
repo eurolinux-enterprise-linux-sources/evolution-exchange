@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="E2kContext">
+<refmeta>
+<refentrytitle role="top_of_page" id="E2kContext.top_of_page">E2kContext</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  EVOLUTION-EXCHANGE Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>E2kContext</refname>
+<refpurpose>WebDAV connection to the Exchange server</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="E2kContext.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis></synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="E2kContext.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="E2kContext.details" role="details">
+<title role="details.title">Details</title>
+
+</refsect1>
+<refsect1 id="E2kContext.see-also">
+<title>See Also</title>
+<para>
+<link linkend="E2kAutoconfig"><type>E2kAutoconfig</type></link>, <link linkend="E2kOperation"><type>E2kOperation</type></link>, <link linkend="E2kResult"><type>E2kResult</type></link>, <link linkend="E2kProperties"><type>E2kProperties</type></link>
+</para>
+<para>
+The <link linkend="ximian-connector-E2kContextPrivate">private
+E2kContext API</link>.
+</para>
+</refsect1>
+
+</refentry>

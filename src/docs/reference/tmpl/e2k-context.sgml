@@ -1,0 +1,27 @@
+<!-- ##### SECTION Title ##### -->
+E2kContext
+
+<!-- ##### SECTION Short_Description ##### -->
+WebDAV connection to the Exchange server
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kAutoconfig, #E2kOperation, #E2kResult, #E2kProperties
+</para>
+
+<para>
+The <link linkend="ximian-connector-E2kContextPrivate">private
+E2kContext API</link>.
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

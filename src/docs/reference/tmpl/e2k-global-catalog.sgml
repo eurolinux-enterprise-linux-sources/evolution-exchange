@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+E2kGlobalCatalog
+
+<!-- ##### SECTION Short_Description ##### -->
+Connection to the local Active Directory Global Catalog replica server
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+#E2kGlobalCatalog represents a connection to the local Active
+Directory Global Catalog replica. The Global Catalog is replicated at
+each site in a Windows domain, and contains a subset of Active
+Directory information for every object in the entire Active Directory
+tree. (As opposed to the regular Active Directory servers, which
+contain complete information about only the local portion of the
+tree.)
+</para>
+
+<para>
+Connector uses the global catalog for two major purposes:
+</para>
+
+<itemizedlist>
+<listitem><para>To populate the Global Address List</para></listitem>
+<listitem><para>To look up information about other users, such as what
+Exchange server their mail is on, or what their SID is.</para></listitem>
+</itemizedlist>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kAutoconfig,
+#E2kSid
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

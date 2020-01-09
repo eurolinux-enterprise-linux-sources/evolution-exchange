@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="evolution-exchange-xntlm-md4">
+<refmeta>
+<refentrytitle role="top_of_page" id="evolution-exchange-xntlm-md4.top_of_page">xntlm-md4</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  EVOLUTION-EXCHANGE Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>xntlm-md4</refname>
+<refpurpose>MD4 hash</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="evolution-exchange-xntlm-md4.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis></synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="evolution-exchange-xntlm-md4.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+This is here for use by xntlm, but can also be used by other code.
+</para>
+</refsect1>
+<refsect1 id="evolution-exchange-xntlm-md4.details" role="details">
+<title role="details.title">Details</title>
+
+</refsect1>
+
+</refentry>

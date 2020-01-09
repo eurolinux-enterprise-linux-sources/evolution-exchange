@@ -1,0 +1,399 @@
+# Process this file with autoconf to produce a configure script.
+AC_PREREQ(2.52)
+
+m4_define([eex_version], [2.28.3])
+
+AC_INIT(evolution-exchange, [eex_version], http://bugzilla.gnome.org/enter_bug.cgi?product=Evolution%20Exchange)
+AC_CONFIG_SRCDIR(storage)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+
+# Required Package Versions
+m4_define([glib_minimum_version], [2.16.0])
+m4_define([gtk_minimum_version], [2.10.0])
+m4_define([eds_minimum_version], [eex_version])
+m4_define([gconf_minimum_version], [2.0.0])             # XXX Just a Guess
+m4_define([libbonobo_minimum_version], [2.20.3])
+m4_define([libglade_minimum_version], [2.0.0])          # XXX Just a Guess
+m4_define([libgnomeui_minimum_version], [2.0.0])        # XXX Just a Guess
+m4_define([libxml_minimum_version], [2.0.0])            # XXX Just a Guess
+m4_define([libsoup_minimum_version], [2.3.0])
+
+AM_CONFIG_HEADER(config.h)
+
+# Automake 1.11 - Silent Build Rules
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+AC_ARG_WITH(e2k-debug,     [  --with-e2k-debug              Allow debugging])
+case $withval in
+no)
+	;;
+*)
+	AC_DEFINE(E2K_DEBUG, 1, [Define if you want E2K_DEBUG to be available])
+	;;
+esac
+
+dnl Update these for every new development release of evolution. These numbers
+dnl actually correspond to the next stable release number
+EVOLUTION_API_VERSION=2.28
+EDS_API_VERSION=1.2
+EDS_BASE_VERSION=2.28
+
+AC_MSG_CHECKING(Evolution version)
+EVOLUTION_VERSION=`pkg-config --modversion evolution-shell 2>/dev/null`
+if test -z "$EVOLUTION_VERSION"; then
+	AC_MSG_ERROR(Evolution development libraries not installed)
+fi
+AC_SUBST(EVOLUTION_VERSION)
+AC_MSG_RESULT($EVOLUTION_VERSION)
+
+EVOLUTION_BASE_VERSION=$EVOLUTION_API_VERSION
+AC_DEFINE_UNQUOTED(EVOLUTION_BASE_VERSION,"$EVOLUTION_BASE_VERSION",Evolution version)
+
+BASE_VERSION=$EVOLUTION_API_VERSION
+AC_DEFINE_UNQUOTED(BASE_VERSION, "$BASE_VERSION", Connector base version)
+AC_SUBST(BASE_VERSION)
+
+API_VERSION=$EDS_API_VERSION
+AC_DEFINE_UNQUOTED(API_VERSION, "$API_VERSION", Eds api version)
+AC_SUBST(API_VERSION)
+AC_SUBST(EDS_BASE_VERSION)
+
+dnl Initialize maintainer mode
+AM_MAINTAINER_MODE
+
+AC_ISC_POSIX
+AC_PROG_CC
+AC_STDC_HEADERS
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+
+dnl Initialize libtool
+AM_PROG_LIBTOOL
+
+# Compiler Warning Flags
+
+AS_COMPILER_FLAGS(WARNING_FLAGS,
+	"-DG_DISABLE_DEPRECATED
+	-DPANGO_DISABLE_DEPRECATED
+	-DGDK_DISABLE_DEPRECATED
+	-DGDK_PIXBUF_DISABLE_DEPRECATED
+	-DGTK_DISABLE_DEPRECATED
+	-DG_DISABLE_SINGLE_INCLUDES
+	-DGTK_DISABLE_SINGLE_INCLUDES
+	-Wall -Wextra
+	-Wno-missing-field-initializers
+	-Wno-sign-compare
+	-Wno-unused-parameter
+	-Wdeclaration-after-statement
+	-Werror-implicit-function-declaration
+	-Wformat-nonliteral -Wformat-security -Winit-self
+	-Wmissing-declarations -Wmissing-include-dirs
+	-Wmissing-noreturn -Wnested-externs -Wpointer-arith
+	-Wredundant-decls -Wundef -Wwrite-strings")
+AC_SUBST(WARNING_FLAGS)
+
+# Other useful compiler warnings for test builds only.
+# These may produce warnings we have no control over.
+#
+#	-Wmissing-format-attribute
+#	-Wshadow
+
+CFLAGS="$CFLAGS $WARNING_FLAGS"
+
+dnl ****
+dnl i18n
+dnl ****
+
+IT_PROG_INTLTOOL([0.35.5])
+AM_GLIB_GNU_GETTEXT
+
+GETTEXT_PACKAGE=evolution-exchange-${BASE_VERSION}
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
+
+localedir='$(prefix)/$(DATADIRNAME)/locale'
+AC_SUBST(localedir)
+
+dnl ******************************
+dnl Check for Win32
+dnl ******************************
+
+AC_MSG_CHECKING([for Win32])
+case "$host" in
+*-mingw*)
+    os_win32=yes
+    NO_UNDEFINED='-no-undefined'
+    SOCKET_LIBS='-lws2_32'
+    ;;
+*)  os_win32=no
+    NO_UNDEFINED=''
+    SOCKET_LIBS=''
+    ;;
+esac
+AC_MSG_RESULT([$os_win32])
+AM_CONDITIONAL(OS_WIN32, [test $os_win32 = yes])
+AC_SUBST(NO_UNDEFINED)
+AC_SUBST(SOCKET_LIBS)
+
+# Check for base dependencies early.
+PKG_CHECK_MODULES(GNOME_PLATFORM,
+	[glib-2.0 >= glib_minimum_version
+	 gtk+-2.0 >= gtk_minimum_version
+	 gconf-2.0 >= gconf_minimum_version
+	 libbonobo-2.0 >= libbonobo_minimum_version
+	 libglade-2.0 >= libglade_minimum_version
+	 libgnomeui-2.0 >= libgnomeui_minimum_version
+	 libxml-2.0 >= libxml_minimum_version
+	 libsoup-2.4 >= libsoup_minimum_version])
+
+PKG_CHECK_MODULES(EVOLUTION_DATA_SERVER,
+	[libebook-$EDS_API_VERSION >= eds_minimum_version
+	 libecal-$EDS_API_VERSION >= eds_minimum_version
+	 libedataserver-$EDS_API_VERSION >= eds_minimum_version
+	 libedataserverui-$EDS_API_VERSION >= eds_minimum_version
+	 libegroupwise-$EDS_API_VERSION >= eds_minimum_version
+	 libebackend-$EDS_API_VERSION >= eds_minimum_version
+	 libexchange-storage-$EDS_API_VERSION >= eds_minimum_version])
+
+dnl *************************
+dnl CFLAGS and LIBS and stuff
+dnl *************************
+
+GNOME_COMPILE_WARNINGS(maximum)
+CFLAGS="$CFLAGS $WARN_CFLAGS"
+case $CFLAGS in
+*-Wall*)
+	CFLAGS="$CFLAGS -Wno-sign-compare"
+	;;
+esac
+dnl AC_DEFINE(G_DISABLE_DEPRECATED,1,[No deprecated glib functions])
+dnl AC_DEFINE(GDK_DISABLE_DEPRECATED,1,[No deprecated gdk functions])
+dnl AC_DEFINE(GTK_DISABLE_DEPRECATED,1,[No deprecated gtk functions])
+dnl AC_DEFINE(GNOME_DISABLE_DEPRECATED,1,[No deprecated gnome functions])
+dnl AC_DEFINE(BONOBO_DISABLE_DEPRECATED,1,[No deprecated bonobo functions])
+dnl AC_DEFINE(BONOBO_UI_DISABLE_DEPRECATED,1,[No deprecated bonoboui functions])
+dnl AC_DEFINE(GCONF_DISABLE_DEPRECATED,1,[No deprecated gconf functions])
+dnl AC_DEFINE(LIBGLADE_DISABLE_DEPRECATED,1,[No deprecated libglade functions])
+
+AC_EGREP_HEADER(socklen_t, sys/socket.h, :, AC_DEFINE(socklen_t, int, [Define to "int" if socklen_t is not defined]))
+
+AM_PATH_GLIB_2_0
+AM_PATH_ORBIT2
+AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
+AM_GCONF_SOURCE_2
+
+CONNECTOR_DATADIR='$(datadir)/evolution-exchange/$(BASE_VERSION)'
+AC_SUBST(CONNECTOR_DATADIR)
+
+dnl Check that e-d-s was built with Exchange support.
+EXCHANGE_PACKAGE="`pkg-config --exists libexchange-storage-$EDS_API_VERSION`"
+if test "x$EXCHANGE_PACKAGE" != "x"; then
+	echo "
+		You probably have not built evolution-data-server with 
+		Exchange support or fix your PKG_CONFIG_PATH to point 
+		it to the proper location.
+		"
+	exit 1
+fi
+
+EVOLUTION_idldir="`pkg-config --variable=idldir evolution-shell`"
+AC_SUBST(EVOLUTION_idldir)
+
+EVOLUTION_IDL_INCLUDES="`pkg-config --variable=IDL_INCLUDES evolution-shell`"
+AC_SUBST(EVOLUTION_IDL_INCLUDES)
+
+EVOLUTION_privlibdir="`pkg-config --variable=privlibdir evolution-shell`"
+AC_SUBST(EVOLUTION_privlibdir)
+
+EVOLUTION_privlibexecdir="`pkg-config --variable=privlibexecdir evolution-shell`"
+AC_SUBST(EVOLUTION_privlibexecdir)
+
+EVOLUTION_privdatadir="`pkg-config --variable=privdatadir evolution-shell`"
+AC_SUBST(EVOLUTION_privdatadir)
+
+EVOLUTION_imagesdir="`pkg-config --variable=imagesdir evolution-shell`"
+AC_SUBST(EVOLUTION_imagesdir)
+
+CAMEL_providerdir="`pkg-config --variable=camel_providerdir camel-provider-$EDS_API_VERSION`"
+AC_SUBST(CAMEL_providerdir)
+
+
+PKG_CHECK_MODULES(ADDRESSBOOK, libedata-book-$EDS_API_VERSION camel-provider-$EDS_API_VERSION)
+AC_SUBST(ADDRESSBOOK_CFLAGS)
+
+PKG_CHECK_MODULES(CALENDAR, libedata-cal-$EDS_API_VERSION)
+AC_SUBST(CALENDAR_CFLAGS)
+AC_SUBST(CALENDAR_LIBS)
+
+PKG_CHECK_MODULES(CAMEL, camel-provider-$EDS_API_VERSION)
+AC_SUBST(CAMEL_CFLAGS)
+
+PKG_CHECK_MODULES(MAIL, libecal-$EDS_API_VERSION)
+AC_SUBST(MAIL_CFLAGS)
+
+PKG_CHECK_MODULES(EXCHANGE_STORAGE, evolution-shell evolution-plugin libedataserverui-$EDS_API_VERSION libedata-book-$EDS_API_VERSION libedata-cal-$EDS_API_VERSION libsoup-2.4 libglade-2.0 camel-provider-$EDS_API_VERSION)
+AC_SUBST(EXCHANGE_STORAGE_CFLAGS)
+AC_SUBST(EXCHANGE_STORAGE_LIBS)
+
+PKG_CHECK_MODULES(LIBEXCHANGE, libsoup-2.4 evolution-shell libedataserverui-$EDS_API_VERSION libebackend-$EDS_API_VERSION libexchange-storage-$EDS_API_VERSION)
+AC_SUBST(LIBEXCHANGE_CFLAGS)
+AC_SUBST(LIBEXCHANGE_LIBS)
+
+dnl *********************
+dnl Pilot license support
+dnl *********************
+# This does not take leap years into account, but that's not
+# important: having the build time be slightly too early is good
+# to support slight clock skew anyway.
+# 946684800 is 2000-01-01T00:00:00Z.
+# Don't change this without testing under /bin/sh on Solaris.
+abt=`eval expr \`date '+\( \( %y \* 365 \) + %j - 1 \) \* 24 \* 60 \* 60 + 946684800'\``
+case $abt in
+"")
+	echo "Warning: build time check failed. (Are you on OS X?)."
+	echo "Pilot licenses won't work."
+	abt="0"
+	;;
+esac
+AC_DEFINE_UNQUOTED(E2K_APPROX_BUILD_TIME, $abt, [Used to prevent clock-setting attacks against pilot licenses])
+
+
+AC_DEFINE(HANDLE_LIBICAL_MEMORY, 1, [Define it once memory returned by libical is free'ed properly])
+
+dnl *************
+dnl pthread check
+dnl *************
+EVO_PTHREAD_CHECK
+
+dnl *********************
+dnl OpenLDAP NTLM support
+dnl *********************
+if test "$os_win32" != yes; then
+EVO_SUNLDAP_CHECK(no)
+case $with_sunldap in
+no)
+	EVO_LDAP_CHECK(yes)
+	case $with_openldap in
+	no)
+		AC_ERROR(LDAP support is required for Connector)
+	;;
+	esac
+	;;
+esac
+
+SAVE_CFLAGS="$CFLAGS"
+SAVE_LIBS="$LIBS"
+LDAP_CFLAGS="$LDAP_CFLAGS -DLDAP_DEPRECATED"
+CFLAGS="$CFLAGS $LDAP_CFLAGS"
+LIBS="$LIBS $LDAP_LIBS"
+AC_CHECK_FUNCS(ldap_ntlm_bind)
+CFLAGS="$SAVE_CFLAGS"
+LIBS="$SAVE_LIBS"
+else # Win32
+LDAP_CFLAGS="$LDAP_CFLAGS -DLDAP_DEPRECATED"
+LDAP_LIBS="-lwldap32"
+AC_SUBST(LDAP_CFLAGS)
+AC_SUBST(LDAP_LIBS)
+AC_DEFINE(HAVE_LDAP,1,[Define if you have LDAP support])
+AM_CONDITIONAL(ENABLE_LDAP, true)
+fi # Win32
+
+AM_CONDITIONAL(SUNLDAP, test "$with_sunldap" != no)
+
+AC_MSG_CHECKING(for LDAP Paged Control)
+AC_TRY_RUN([
+#include <ldap.h>
+#include <stdlib.h>
+
+int main(int argc, char **argv)
+{
+#ifdef LDAP_CONTROL_PAGEDRESULTS	
+		exit(0);
+#else		
+		exit(1);
+#endif		
+}],[
+AC_DEFINE(HAVE_LDAP_PAGED, 1, [Supports Paged results])
+ac_cv_ldappaged=yes
+],ac_cv_ldappaged="no (GAL Caching disabled)",ac_cv_ldappaged="no (GAL Caching disabled)",[
+AC_DEFINE(HAVE_LDAP_PAGED, 1, [Supports Paged results])
+ac_cv_ldappaged=yes
+])
+AC_MSG_RESULT($ac_cv_ldappaged)
+
+dnl *******
+dnl gtk-doc
+dnl *******
+dnl Putting a space before the macro call here makes gnome-autogen not
+dnl notice it, which makes it not run gtkdocize and copy gtk-doc.make
+dnl into the top level where I don't want it.
+ GTK_DOC_CHECK([1.0])
+
+dnl **************************************************
+dnl * libdb checking - taken from EDS
+dnl **************************************************
+
+AC_ARG_WITH(libdb, AC_HELP_STRING([--with-libdb],[Prefix where libdb is installed]), dynamic_libdb=yes, dynamic_libdb=no)
+if test "x${dynamic_libdb}" = "xyes"; then
+        DB_CFLAGS="-I$withval/include"
+        DB_LIBS="-L$withval/lib -ldb"
+else
+	DB_CFLAGS="$CFLAGS -I /usr/include"
+	DB_LIBS="$LIBS -ldb"
+fi
+	
+AC_MSG_CHECKING([Berkeley DB])
+save_cflags=$CFLAGS; CFLAGS=$DB_CFLAGS
+save_libs=$LIBS; LIBS="$DB_LIBS"
+AC_LINK_IFELSE(
+        [AC_LANG_PROGRAM([[#include <db.h>]],
+                         [db_create(NULL, NULL, 0)])],
+        check_db=yes,
+        check_db=no)
+AC_MSG_RESULT($check_db)
+AM_CONDITIONAL(HAVE_LIBDB, [test $check_db = yes])
+
+if test "$check_db" = "yes"; then
+  AC_DEFINE(ENABLE_CACHE, 1,
+	    [Enabling GAL Caching])
+else
+  AC_DEFINE(ENABLE_CACHE, 0,
+	    [Disabling GAL Caching])
+  DB_CFLAGS=""
+  DB_LIBS=""
+fi
+CFLAGS=$save_cflags
+LIBS=$save_libs
+AC_SUBST(DB_CFLAGS)
+AC_SUBST(DB_LIBS)
+
+
+dnl ******************************
+dnl Makefiles
+dnl ******************************
+
+AC_OUTPUT([
+Makefile
+evolution-exchange-zip
+camel/Makefile
+mail/Makefile
+addressbook/Makefile
+calendar/Makefile
+storage/Makefile
+docs/Makefile
+docs/reference/Makefile
+po/Makefile.in
+])
+
+case $ac_cv_func_ldap_ntlm_bind in
+no)
+	echo ""
+	AC_MSG_WARN([
+No NTLM support in OpenLDAP; Plaintext password authentication will be
+used when connecting to the Global Catalog server. Consider installing
+the evo-openldap package, or building OpenLDAP with the patch in
+docs/openldap-ntlm.diff
+])
+	;;
+esac

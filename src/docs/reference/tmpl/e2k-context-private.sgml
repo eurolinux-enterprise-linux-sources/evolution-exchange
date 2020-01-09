@@ -1,0 +1,24 @@
+<!-- ##### SECTION Title ##### -->
+E2kContext (private)
+
+<!-- ##### SECTION Short_Description ##### -->
+private #E2kContext methods
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+These are the important libexchange-internal #E2kContext methods. (In
+fact, e2k_soup_message_new() and e2k_context_send_message() are
+currently also used by mail-stub-exchange.c.)
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kContext
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="evolution-exchange-e2k-restriction">
+<refmeta>
+<refentrytitle role="top_of_page" id="evolution-exchange-e2k-restriction.top_of_page">E2kRestriction</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  EVOLUTION-EXCHANGE Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>E2kRestriction</refname>
+<refpurpose>Search criteria</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="evolution-exchange-e2k-restriction.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis></synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="evolution-exchange-e2k-restriction.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="evolution-exchange-e2k-restriction.details" role="details">
+<title role="details.title">Details</title>
+
+</refsect1>
+
+</refentry>

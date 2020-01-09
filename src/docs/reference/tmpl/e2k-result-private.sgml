@@ -1,0 +1,22 @@
+<!-- ##### SECTION Title ##### -->
+E2kResult (private)
+
+<!-- ##### SECTION Short_Description ##### -->
+private #E2kResult methods
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+These are the #E2kOperation methods used internally by #E2kContext.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kResult, #E2kContext
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

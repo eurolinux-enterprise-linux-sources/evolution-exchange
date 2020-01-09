@@ -1,0 +1,24 @@
+<!-- ##### SECTION Title ##### -->
+E2kAutoconfig
+
+<!-- ##### SECTION Short_Description ##### -->
+Account autoconfiguration
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+The %E2kAutoconfig object handles trying to automatically configure a
+user&rsquo;s account without requiring the user to have to know arcane
+details about the organization of the company&rsquo;s Exchange servers.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kContext, #E2kGlobalCatalog
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

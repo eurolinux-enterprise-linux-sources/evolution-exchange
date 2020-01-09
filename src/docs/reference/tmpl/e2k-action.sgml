@@ -1,0 +1,27 @@
+<!-- ##### SECTION Title ##### -->
+E2kAction
+
+<!-- ##### SECTION Short_Description ##### -->
+Server-side rule actions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+#E2kAction represents a single action taken by a server-side rule.
+</para>
+
+<note><para>
+This code is not heavily tested. It is possible that some of the
+information in this file about how server-side rules work is wrong.
+</para></note>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+#E2kRule, #E2kRestriction
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+

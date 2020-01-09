@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Evolution Connector for Microsoft Exchange Programmer’s Reference Manual" link="index.html" author="" name="evolution-exchange">
+  <chapters>
+    <sub name="Exchange Architectural Notes" link="ch01.html">
+      <sub name="Private Item Handling" link="ximian-connector-bug-private.html"/>
+      <sub name="Bugs in Exchange's XML handling" link="ximian-connector-bug-xml.html"/>
+      <sub name="Calendar Architecture" link="ximian-connector-calendar.html"/>
+      <sub name="Mail Architecture" link="ximian-connector-mail.html"/>
+      <sub name="NTLM Authentication Overview" link="ximian-connector-ntlm.html"/>
+    </sub>
+    <sub name="Implementation of Connector Features" link="ch02.html">
+      <sub name="Account Autoconfiguration" link="ximian-connector-autoconfig.html"/>
+      <sub name="Direct Booking of Resource Calendars" link="ximian-connnector-booking.html"/>
+      <sub name="Delegation" link="ximian-connector-delegation.html"/>
+      <sub name="Favorite Public Folders" link="ximian-connector-favorites.html"/>
+      <sub name="Exchange 2003 Forms-Based Authentication" link="ximian-connector-fba.html"/>
+      <sub name="Free/Busy Searches" link="ximian-connector-freebusy.html"/>
+      <sub name="Out of Office" link="ximian-connector-oof.html"/>
+      <sub name="Other Users' Folders" link="ximian-connector-other-users.html"/>
+      <sub name="Folder Permissions" link="ximian-connector-permissions.html"/>
+      <sub name="Message Threading in Public Folders" link="ximian-connector-mail-threading.html"/>
+    </sub>
+    <sub name="libexchange public API reference" link="ch03.html">
+      <sub name="E2kAutoconfig" link="evolution-exchange-E2kAutoconfig.html"/>
+      <sub name="E2kContext" link="E2kContext.html"/>
+      <sub name="E2kGlobalCatalog" link="E2kGlobalCatalog.html"/>
+      <sub name="E2kOperation" link="evolution-exchange-E2kOperation.html"/>
+      <sub name="E2kProperties" link="evolution-exchange-E2kProperties.html"/>
+      <sub name="E2kRestriction" link="evolution-exchange-e2k-restriction.html"/>
+      <sub name="E2kResult" link="evolution-exchange-e2k-result.html"/>
+      <sub name="E2kSecurityDescriptor" link="E2kSecurityDescriptor.html"/>
+      <sub name="E2kSid" link="evolution-exchange-E2kSid.html"/>
+      <sub name="E2kUri" link="evolution-exchange-e2k-uri.html"/>
+      <sub name="E2kUserDialog" link="evolution-exchange-E2kUserDialog.html"/>
+      <sub name="e2k-http-utils" link="evolution-exchange-e2k-http-utils.html"/>
+      <sub name="e2k-kerberos" link="evolution-exchange-e2k-kerberos.html"/>
+      <sub name="e2k-utils" link="evolution-exchange-e2k-utils.html"/>
+      <sub name="e2k-xml-utils" link="evolution-exchange-e2k-xml-utils.html"/>
+      <sub name="MAPI" link="evolution-exchange-MAPI.html"/>
+    </sub>
+    <sub name="libexchange private API reference" link="ch04.html">
+      <sub name="E2kContext (private)" link="evolution-exchange-E2kContext-(private).html"/>
+      <sub name="E2kOperation (private)" link="evolution-exchange-E2kOperation-(private).html"/>
+      <sub name="E2kResult (private)" link="evolution-exchange-E2kResult-(private).html"/>
+      <sub name="test-utils" link="evolution-exchange-test-utils.html"/>
+    </sub>
+    <sub name="libxntlm API reference" link="ch05.html">
+      <sub name="xntlm" link="evolution-exchange-xntlm.html"/>
+      <sub name="xntlm-des" link="evolution-exchange-xntlm-des.html"/>
+      <sub name="xntlm-md4" link="evolution-exchange-xntlm-md4.html"/>
+    </sub>
+    <sub name="libexchange vaporware API reference" link="ch06.html">
+      <sub name="E2kAction" link="evolution-exchange-e2k-action.html"/>
+      <sub name="E2kFreebusy" link="evolution-exchange-e2k-freebusy.html"/>
+      <sub name="E2kRestriction (vaporware)" link="evolution-exchange-E2kRestriction-(vaporware).html"/>
+      <sub name="E2kRule" link="evolution-exchange-e2k-rule.html"/>
+    </sub>
+  </chapters>
+  <functions>
+    <function name="Illegal characters" link="ximian-connector-bug-xml.html#id328300"/>
+    <function name="Illegal tag names" link="ximian-connector-bug-xml.html#id347766"/>
+    <function name="The Negotiate message" link="ximian-connector-ntlm.html#id322032"/>
+    <function name="The Challenge message" link="ximian-connector-ntlm.html#id329802"/>
+    <function name="The Authenticate message" link="ximian-connector-ntlm.html#id326427"/>
+    <function name="The Initial WebDAV Connection" link="ximian-connector-autoconfig.html#id355964"/>
+    <function name="Further WebDAV Probes" link="ximian-connector-autoconfig.html#id354111"/>
+    <function name="The Global Catalog Server" link="ximian-connector-autoconfig.html#id354287"/>
+    <function name="Autoconfiguration Hints" link="ximian-connector-autoconfig.html#id354348"/>
+    <function name="Creating a Resource" link="ximian-connnector-booking.html#id356174"/>
+    <function name="Booking a Resource" link="ximian-connnector-booking.html#id327410"/>
+    <function name="Cancelation" link="ximian-connnector-booking.html#id336616"/>
+    <function name="Public Free/Busy file" link="ximian-connector-freebusy.html#id323876"/>
+    <function name="Personal Free/Busy file" link="ximian-connector-freebusy.html#id359314"/>
+    <function name="Private items" link="ximian-connector-other-users.html#id348677"/>
+    <function name="Exchange Permissions" link="ximian-connector-permissions.html#id327055"/>
+    <function name="SIDs and Security Descriptors" link="ximian-connector-permissions.html#id320272"/>
+    <function name="Order of ACEs" link="ximian-connector-permissions.html#id359733"/>
+  </functions>
+</book>
