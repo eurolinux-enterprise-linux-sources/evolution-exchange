@@ -20,7 +20,7 @@
 
 Name: evolution-exchange
 Version: 2.32.3
-Release: 17%{?dist}
+Release: 18%{?dist}
 Group: Applications/Productivity
 Summary: Evolution plugin to interact with MS Exchange Server
 License: GPLv2+
@@ -97,6 +97,9 @@ Patch115: evolution-ews-gnome-3-0.gitcc16df2-searchable-gal.patch
 # RH bug #1160279
 Patch116: evolution-ews-gnome-3-0.gitcc16df2-camel-session-global-variable.patch
 
+# RH bug 976364
+Patch117: evolution-ews-gnome-3-0.gitcc16df2-translation-updates-ews2.patch
+
 ### Dependencies ###
 
 Requires: gnutls
@@ -153,6 +156,7 @@ pushd %{evo_ews_name}
 %patch114 -p1 -b .free-busy-fetch-and-crash
 %patch115 -p1 -b .searchable-gal
 %patch116 -p1 -b .camel-session-global-variable
+%patch117 -p1 -b .translation-updates-ews2
 
 popd
 
@@ -275,6 +279,9 @@ gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/apps_exchange_a
 %{_datadir}/locale/*/*/evolution-ews.mo
 
 %changelog
+* Mon Mar 07 2016 Milan Crha <mcrha@redhat.com> - 2.32.3-18.el6
+- Add patch for RH bug #976364 (evolution-ews update translations)
+
 * Mon Jan 05 2015 Milan Crha <mcrha@redhat.com> - 2.32.3-17.el6
 - Add patch for RH bug #1160279 (evolution-ews runtime issue with Camel session global variable)
 
