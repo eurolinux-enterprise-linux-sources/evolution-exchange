@@ -1,0 +1,28 @@
+diff -up evolution-ews-gnome-3-0.gitcc16df2/configure.ac.camel-session-global-variable evolution-ews-gnome-3-0.gitcc16df2/configure.ac
+--- evolution-ews-gnome-3-0.gitcc16df2/configure.ac.camel-session-global-variable	2015-01-05 08:31:38.648126347 +0100
++++ evolution-ews-gnome-3-0.gitcc16df2/configure.ac	2015-01-05 08:31:38.690126346 +0100
+@@ -139,6 +139,7 @@ if $PKG_CONFIG --atleast-version=3.0 evo
+ 	enable_gtk3=yes
+ 	GTK_PACKAGE="gtk+-3.0"
+ 	EVO_PLUGIN_PACKAGE="evolution-plugin-3.0"
++	EVO_MAIL_PACKAGE="evolution-mail-3.0"
+ 	EVO_SHELL_PACKAGE="evolution-shell-3.0"
+ 	EDS_UI_PACKAGE="libedataserverui-3.0"
+ 	gtk_minimum_version="2.90.4"
+@@ -154,6 +155,7 @@ else
+ 	enable_gtk3=no
+ 	GTK_PACKAGE="gtk+-2.0"
+ 	EVO_PLUGIN_PACKAGE="evolution-plugin"
++	EVO_MAIL_PACKAGE="evolution-mail"
+ 	EVO_SHELL_PACKAGE="evolution-shell"
+ 	EDS_UI_PACKAGE="libedataserverui-$EDS_PACKAGE"
+ 	gtk_minimum_version="2.20.0"
+@@ -209,7 +211,7 @@ PKG_CHECK_MODULES(CAMEL, camel-provider-
+ dnl ****************************
+ dnl Check for evolution plugins 
+ dnl ****************************
+-PKG_CHECK_MODULES(EVOLUTION_PLUGIN, $EVO_PLUGIN_PACKAGE >= evo_minimum_version)
++PKG_CHECK_MODULES(EVOLUTION_PLUGIN, $EVO_PLUGIN_PACKAGE >= evo_minimum_version $EVO_MAIL_PACKAGE >= evo_minimum_version)
+ 
+ dnl ****************************
+ dnl Check for evolution shell 
