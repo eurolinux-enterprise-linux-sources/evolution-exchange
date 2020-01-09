@@ -20,7 +20,7 @@
 
 Name: evolution-exchange
 Version: 2.32.3
-Release: 18%{?dist}
+Release: 19%{?dist}
 Group: Applications/Productivity
 Summary: Evolution plugin to interact with MS Exchange Server
 License: GPLv2+
@@ -97,8 +97,11 @@ Patch115: evolution-ews-gnome-3-0.gitcc16df2-searchable-gal.patch
 # RH bug #1160279
 Patch116: evolution-ews-gnome-3-0.gitcc16df2-camel-session-global-variable.patch
 
-# RH bug 976364
+# RH bug #976364
 Patch117: evolution-ews-gnome-3-0.gitcc16df2-translation-updates-ews2.patch
+
+# RH bug #1024271
+Patch118: evolution-ews-gnome-3-0.gitcc16df2-free-busy-timezone-change.patch
 
 ### Dependencies ###
 
@@ -157,6 +160,7 @@ pushd %{evo_ews_name}
 %patch115 -p1 -b .searchable-gal
 %patch116 -p1 -b .camel-session-global-variable
 %patch117 -p1 -b .translation-updates-ews2
+%patch118 -p1 -b .free-busy-timezone-change
 
 popd
 
@@ -279,6 +283,9 @@ gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/apps_exchange_a
 %{_datadir}/locale/*/*/evolution-ews.mo
 
 %changelog
+* Wed Aug 31 2016 Milan Crha <mcrha@redhat.com> - 2.32.3-19.el6
+- Add patch for RH bug #1024271 (Free/Busy Information returns wrong time)
+
 * Mon Mar 07 2016 Milan Crha <mcrha@redhat.com> - 2.32.3-18.el6
 - Add patch for RH bug #976364 (evolution-ews update translations)
 
